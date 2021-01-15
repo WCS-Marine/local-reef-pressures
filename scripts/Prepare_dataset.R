@@ -7,6 +7,9 @@ library(tidyverse)
 library(here)
 library(matrixStats)
 
+# library(tmaptools)
+
+
 # Threat names used in allreefs as column names
 vthreats <- c("grav_NC",
               "pop_count",
@@ -16,11 +19,20 @@ vthreats <- c("grav_NC",
               "nutrient")
 
 # Read shapefiles
-countries <- read_sf(here::here("data-raw","natural-earth","cultural"),"ne_10m_admin_0_countries")
-allreefs <- read_sf(here::here("data"),"allreefs")
-bcus <- read_sf(here::here("data"),"bcus") # Used only to retrieve bcu name and id, not for threat values
+countries <- read_sf(paste0(getwd(),"/../reef-context/data-raw/natural-earth/cultural"),"ne_10m_admin_0_countries")
+allreefs <- read_sf(paste0(getwd(),"/../reef-context/data"),"allreefs")
+allreefsWGS84 <- read_sf(here::here("data"),"allreefsWGS84")
+bcus <- read_sf(paste0(getwd(),"/../reef-context/data"),"bcus") # Used only to retrieve bcu name and id, not for threat values
+zones <- read_sf("C:/Users/Marco/Desktop/Intersect_EEZ_IHO_v4_2020","Intersect_EEZ_IHO_v4_2020") # Flanders Marine Institute (2020). The intersect of the Exclusive Economic Zones and IHO sea areas, version 4. Available online at https://www.marineregions.org/.https://doi.org/10.14284/402
 
 
+# # INSPECT BOUNDING BOXES OF SUBREGIONS
+# a <- readRDS(paste0(getwd(),"/../reef-context/data/regions_bounding_boxes.rds"))
+# plot(bb_poly(a$subregion[[1]]))
+# bbpol <- lapply(a$subregion,bb_poly)
+# for (i in 1 : length(bbpol)){
+#   st_write(bbpol[[i]],paste0(getwd(),"/bboxregions"),paste0("bbox",i),driver="ESRI Shapefile")
+#   }
 
 
 
@@ -33,6 +45,16 @@ allreefs_onlyLocal <- allreefs %>% select(OBJECTID, grav_NC, pop_count, num_port
 allreefs_withBCU <- left_join(allreefs_onlyLocal, select(as.data.frame(bcus),"OBJECTID","ReefName","COUNTRY"), by="OBJECTID")
 allreefs_withBCU$is.bcu <- "non BCUs"
 allreefs_withBCU$is.bcu[!is.na(allreefs_withBCU$ReefName)] <- "BCUs"
+
+# Intersect allreefsWGS84 with the (EEZ-IHO) intersection
+a <- st_join(allreefsWGS84, zones, largest = T) # takes about 70 minutes
+
+# Join marine regions and EEZ
+# a1 <- select(a,"MRGID","MARREGION","MRGID_IHO","IHO_SEA","MRGID_EEZ","EEZ","MRGID_TER1","TERRITORY1")
+allreefs_withBCU$MRGID_IHO <- as.data.frame(a)[,c("MRGID_IHO")]
+allreefs_withBCU$IHO_SEA <- as.data.frame(a)[,c("IHO_SEA")]
+allreefs_withBCU$MRGID_TER1 <- as.data.frame(a)[,c("MRGID_TER1")]
+allreefs_withBCU$TERRITORY1 <- as.data.frame(a)[,c("TERRITORY1")]
 
 # Calculate percentiles
 allreefs_withBCU %>% mutate(grav_NC_raw = grav_NC,
@@ -108,10 +130,10 @@ allreefs_withBCU_prc_centroids$top.threat <- apply(as.matrix(threats), 1, which.
 
 # Change CRS for countries to match allreefs
 # countries <- countries[-c(173, 175),]
-countries_proj <- st_transform(countries, st_crs(allreefs))
+countries_proj <- st_transform(countries, st_crs(allreefs_withBCU_prc))
 
 # Crop countries to bbox of allreefs
-allreefs_bbox_extended <- st_bbox(allreefs)
+allreefs_bbox_extended <- st_bbox(allreefs_withBCU_prc)
 allreefs_bbox_extended[4] <- 4.5e6
 countries_eq <- st_crop(countries_proj, allreefs_bbox_extended)
 
