@@ -1,0 +1,169 @@
+# Plot map
+# Working simplified script for Sharla, based on Plot Figure 1 and 2
+# Marco Andrello
+# 15/01/2021
+
+rm(list=ls())
+
+library(tidyverse)
+library(sf)
+library(here)
+library(tmap)
+library(RColorBrewer)
+library(ggplot2)
+library(scales)
+
+load(here("scripts","DataForAnalysis.RData"))
+# Contains:
+class(allreefs_withBCU_prc_centroids); names(allreefs_withBCU_prc_centroids)
+# shapefile (sf format) of reef centroids containing all the data (threats, countries, etc)
+# Note: TERRITORY is preliminary
+# _raw indicates raw threat value; the others are percentile-transformed
+# score.l is the cumulative score
+class(countries_eq)
+# shapefile (sf format) of country borders trimmed to the coral reef distribution area
+head(threats)
+# values of threats (percentile-transformed) in data.frame format
+vthreats
+# vector of names of the 6 threats as they appear in the R objects 
+
+# Plot countries at global scale
+m <- tm_shape(countries_eq) +
+  tm_polygons(col="gray",
+              border.col="darkgray",
+              lwd=0.2)
+
+
+# Set up breaks for the colorscale of the 6 threats and the cumulative score
+breaks <- list()
+for (i in 1 : 7) breaks[[i]] <- seq(0,1,0.25)
+names(breaks) <- c(vthreats,"score.l")
+
+
+# Define margins of panel regions
+bbox_panel <- st_bbox(countries_eq)
+# Sets the longitude and latitude of the lower-left corner of the bbox of each region:
+# (Remeber the Coordinate Reference System is in meters starting from longtitude 150 degrees East and the equator,
+# so for example longitude 13e6 means 13000 km east of the 150 degree meridian and latitude 2e6 means 2000 km North of the Equator) 
+v.bbox.panel  <- matrix(c(-13e6, 1.1e6, NA, NA,    # Middle East and North Africa
+                          -13e6, -3e6,  NA, NA,    # East Africa
+                          -9e6, -1e6,   NA, NA,    # Indian Ocean
+                          -6e6, -1.3e6, NA, NA,    # Coral Triangle
+                          13e6, 2e6,    NA, NA,    # Caribbean and Bahamas
+                          -1e6, -3.5e6, NA, NA),   # Australia and Melanesia
+                        byrow=T, ncol=4)
+colnames(v.bbox.panel) <- names(bbox_panel)
+v.bbox.panel <- as.data.frame(v.bbox.panel)
+# Set the horizontal extent (longitudinal span) of the boxes:
+horiz.extent <- rep(3e6,nrow(v.bbox.panel))
+# Coral triangle and Australia and Melanesia have larger horizontal extents:
+horiz.extent[c(4,6)] <- c(6.8e6,5e6)
+# Factor shape, if 1 = square box, if <1 is rectangular box
+# All boxes are square, except Coral triangle and Caribbean and Bahamas
+fact.shape <- rep(1,6)
+fact.shape[c(4,5)] <- 0.5
+# text.size.scalebar <- rep(0.25, 7); text.size.scalebar[5] <- 0.125
+
+# We work on the cumulative impact score for simplicity
+indicator <- "score.l"
+indicator_title <- "Cumulative impact score"
+
+# Set up scale, colors and legend elements
+# (I took this from your code Sharla)
+if(indicator == "num_ports") {
+  indicator_breaks <- breaks[[indicator]]
+  legend_labels <- as.character(0:2)
+  legend_style <- "fixed"
+} else {
+  indicator_breaks <- breaks[[indicator]]
+  breaks_midpoint <- ceiling(length(indicator_breaks)/2)
+  breaks_midpoint_value <- indicator_breaks[[breaks_midpoint]]
+  blank_breaks <- rep("", breaks_midpoint - 2)
+  legend_labels <- c(min(indicator_breaks), blank_breaks, breaks_midpoint_value, blank_breaks, max(indicator_breaks))
+  legend_style <- "cont"
+}
+indicator_breaks
+legend_labels
+
+
+# Plot the global map of the cumulative impact score
+m.global.cumulative <- m +
+  tmap::tm_shape(allreefs_withBCU_prc_centroids) +
+  tm_squares(size = 1,
+             col = indicator,
+             palette = brewer.pal(length(indicator_breaks), "OrRd"),
+             shape = 15,
+             scale = 0.01,
+             style = legend_style,
+             breaks = indicator_breaks,
+             title.col = indicator_title,
+             labels = legend_labels,
+             showNA = FALSE) +
+  tmap::tm_legend(show = FALSE)
+
+# png("cumulative_global.png",width = 18.5, height = 5, units = "cm", res = 600)
+# m.global.cumulative
+# dev.off()
+
+# Plot the six regional panels
+panel.list.cumulative <- grid::gList()
+for (i in 1 : nrow(v.bbox.panel)) {
+  
+  # Define bbox of panel region: here is where horiz.extent and fact.shape come into play
+  bbox_panel[1] <- v.bbox.panel$xmin[i]
+  bbox_panel[2] <- v.bbox.panel$ymin[i]
+  bbox_panel[3] <- bbox_panel[1] + horiz.extent[i]
+  bbox_panel[4] <- bbox_panel[2] + (bbox_panel[3] - bbox_panel[1])*fact.shape[i]
+
+  # First plot the country borders
+  m.p <- tm_shape(countries_eq, bbox = bbox_panel) +
+  tm_polygons(col="gray",
+              border.col="darkgray",
+              lwd=0.2) +
+  # Then the reef pixels
+  tm_shape(allreefs_withBCU_prc_centroids, bbox = bbox_panel) +
+    tm_squares(size = 1,
+               col = indicator,
+               palette = brewer.pal(length(indicator_breaks), "OrRd"),
+               shape = 15,
+               scale = 0.05*fact.shape[i],
+               style = legend_style,
+               breaks = indicator_breaks) +
+    tmap::tm_legend(show = F)
+
+  panel.list.cumulative[[i]] <- m.p
+}
+
+# Example, to see the first panel
+# It takes VERY long time to be plotted (about one minute), which makes testing multi.panel techniques uneasy
+# I tried reducng the horizonal extent of the panel but does not improve much.
+# Maybe it takes long because the tm_shape function has to apply the bbox?
+# Maybe try to reduce the dataset ex: allreefs_withBCU_prc_centroids[c(1000:1010),]
+panel.list.cumulative[[1]]
+
+# # Print regional maps of cumulative score on files
+# for (i in 1 : 6) {
+#   cat("plotting",i,"\n")
+#   png(paste0("cumulative_panel",i,".png"), width = 4.3, height = 4.3, units = "cm", res = 600)
+#   print(panel.list.cumulative[[i]])
+#   dev.off()
+# }
+
+# Plot the legend
+reefs_for_legend <- allreefs_withBCU_prc_centroids[c(1000:1010),] # Reduced dataset to speed up the plotting of the legend
+breaks_logscale <- seq(0,1,0.25)
+leg <- tmap::tm_shape(reefs_for_legend) +
+  tm_squares(size = 1,
+             col = indicator,
+             palette = brewer.pal(length(indicator_breaks), "OrRd"),
+             style = legend_style,
+             breaks = indicator_breaks,
+             title.col = indicator_title,
+             labels = legend_labels,
+             showNA = FALSE,
+             legend.col.is.portrait = F) +
+  tmap::tm_layout(legend.only = T, legend.position =c("center","center"))
+# png("cumulative_legend.png", width = 4.3, height = 4.3, units = "cm", res = 600)
+# print(leg)
+# dev.off()
+
