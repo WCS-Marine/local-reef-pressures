@@ -101,12 +101,9 @@ m.global.cumulative <- m +
              showNA = FALSE) +
   tmap::tm_legend(show = FALSE)
 
-# png("cumulative_global.png",width = 18.5, height = 5, units = "cm", res = 600)
-# m.global.cumulative
-# dev.off()
+tmap_save(m.global.cumulative, filename = here::here("plots/cumulative_global.png"), width = 18.5, height = 5, units = "cm", dpi = 600)
 
 # Plot the six regional panels
-panel.list.cumulative <- grid::gList()
 for (i in 1 : nrow(v.bbox.panel)) {
   
   # Define bbox of panel region: here is where horiz.extent and fact.shape come into play
@@ -130,8 +127,8 @@ for (i in 1 : nrow(v.bbox.panel)) {
                style = legend_style,
                breaks = indicator_breaks) +
     tmap::tm_legend(show = F)
-
-  panel.list.cumulative[[i]] <- m.p
+  
+  tmap_save(m.p, filename = here::here(glue::glue("plots/cumulative_panel_{i}.png")), width = 4.3, height = 4.3, units = "cm", dpi = 600)
 }
 
 # Example, to see the first panel
@@ -163,7 +160,5 @@ leg <- tmap::tm_shape(reefs_for_legend) +
              showNA = FALSE,
              legend.col.is.portrait = F) +
   tmap::tm_layout(legend.only = T, legend.position =c("center","center"))
-# png("cumulative_legend.png", width = 4.3, height = 4.3, units = "cm", res = 600)
-# print(leg)
-# dev.off()
 
+tmap_save(leg, filename = here::here(glue::glue("plots/legend.png")), width = 4.3, height = 2, units = "cm", dpi = 600)
