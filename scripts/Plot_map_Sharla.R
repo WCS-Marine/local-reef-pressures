@@ -101,7 +101,7 @@ m.global.cumulative <- m +
              showNA = FALSE) +
   tmap::tm_legend(show = FALSE)
 
-tmap_save(m.global.cumulative, filename = here::here("plots/cumulative_global.png"), width = 18.5, height = 5, units = "cm", dpi = 600)
+tmap_save(m.global.cumulative, filename = here::here("plots/cumulative_global.png"), width = 18.5, height = 4, units = "cm", dpi = 600)
 
 # Plot the six regional panels
 for (i in 1 : nrow(v.bbox.panel)) {
@@ -162,3 +162,38 @@ leg <- tmap::tm_shape(reefs_for_legend) +
   tmap::tm_layout(legend.only = T, legend.position =c("center","center"))
 
 tmap_save(leg, filename = here::here(glue::glue("plots/legend.png")), width = 4.3, height = 2, units = "cm", dpi = 600)
+
+# Construct plot using magick
+
+library(magick)
+plot_global <- image_read(here::here("plots/cumulative_global.png"))
+for (i in 1:6) {
+  assign(glue::glue("plot_{i}"), image_read(here::here(glue::glue("plots/cumulative_panel_{i}.png"))))
+}
+legend <- image_read(here::here("plots/legend.png"))
+
+panel_width <- image_info(plot_1)[["width"]]
+panel_height <- image_info(plot_1)[["height"]]
+global_height <- image_info(plot_global)[["height"]]
+legend_height <- image_info(legend)[["height"]]
+
+plot_width <- panel_width * 3
+plot_height <- panel_width * 2 + global_height + legend_height
+
+plot_image <- image_blank(width = plot_width, height = plot_height, color = "white")
+
+# Add the first 3 panels
+
+for (i in 1:3) {
+  plot_image <- image_composite(plot_image, get(glue::glue("plot_{i}")), offset = glue::glue("+{panel_width * (i-1)}+0"))
+}
+
+# Add the global plot
+
+plot_image <- image_composite(plot_image, plot_global, offset = glue::glue("+0+{panel_height}"))
+
+# Add the last 3 panels
+
+for (i in 4:6) {
+  plot_image <- image_composite(plot_image, get(glue::glue("plot_{i}")), offset = glue::glue("+{panel_width * (i-4)}+{global_height + panel_height}"))
+}
