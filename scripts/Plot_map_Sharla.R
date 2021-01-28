@@ -26,6 +26,10 @@ head(threats)
 # values of threats (percentile-transformed) in data.frame format
 vthreats
 # vector of names of the 6 threats as they appear in the R objects 
+load(here("scripts","PolygonsDataset.RData"))
+allreefs_withBCU_prc$score.l <- allreefs_withBCU_prc_centroids$score.l
+allreefs_withBCU_prc$top.threat <- allreefs_withBCU_prc_centroids$top.threat 
+rm(allreefs_withBCU_prc_centroids)
 
 # Plot countries at global scale
 m <- tm_shape(countries_eq) +
@@ -53,7 +57,7 @@ v.bbox.panel <- tribble(
   -9e6, -1e6, NA, NA, "Indian Ocean",
   -6e6, -1.3e6, NA, NA, "Coral Triangle",
   13e6, 2e6, NA, NA, "Caribbean and Bahamas",
-  -1e6, -3.5e6, NA, NA, "Australia and Melanes"
+  -1e6, -3.5e6, NA, NA, "Australia and Melanesia"
 )
 # Set the horizontal extent (longitudinal span) of the boxes:
 horiz.extent <- rep(3e6,nrow(v.bbox.panel))
@@ -66,6 +70,13 @@ horiz.extent[c(4,6)] <- c(6.8e6,5e6)
 v.bbox.panel <- v.bbox.panel %>%
   mutate(factor_shape = ifelse(name %in% c("Coral Triangle", "Caribbean and Bahamas"), 0.5, 1))
 # text.size.scalebar <- rep(0.25, 7); text.size.scalebar[5] <- 0.125
+
+v.bbox.panel$titles <- c("Middle East and North Africa",
+"        East Africa         ",
+"       Indian Ocean         ",
+"      Coral Triangle        ",
+"   Caribbean and Bahamas    ",
+"  Australia and Melanesia   ")
 
 # We work on the cumulative impact score for simplicity
 indicator <- "score.l"
@@ -91,25 +102,23 @@ legend_labels
 
 # Plot the global map of the cumulative impact score
 m.global.cumulative <- m +
-  tmap::tm_shape(allreefs_withBCU_prc_centroids) +
-  tm_squares(size = 1,
-             col = indicator,
-             palette = brewer.pal(length(indicator_breaks), "OrRd"),
-             shape = 15,
-             scale = 0.01,
-             style = legend_style,
-             breaks = indicator_breaks,
-             title.col = indicator_title,
-             labels = legend_labels,
-             showNA = FALSE) +
+  tmap::tm_shape(allreefs_withBCU_prc) +
+  tm_fill(col = indicator,
+          palette = brewer.pal(length(indicator_breaks), "OrRd"),
+          style = legend_style,
+          breaks = indicator_breaks,
+          title.col = indicator_title,
+          labels = legend_labels,
+          showNA = FALSE) +
   tmap::tm_legend(show = FALSE)
 
 # Set the full plot width here, and then each smaller panel's height is 1/4 of that, and their width is either 1/4 (square panels) or 1/2 (rectangular panels)
 full_width <- 18.25
-tmap_save(m.global.cumulative, filename = here::here("plots/cumulative_global.png"), width = full_width, height = 4, units = "cm", dpi = 600)
+tmap_save(m.global.cumulative, filename = here::here("plots/cumulative_global.pdf"), width = full_width, height = 4, units = "cm") #, dpi = 600)
 
 # Plot the six regional panels
 for (i in 1 : nrow(v.bbox.panel)) {
+  cat("Plotting panel",i,"\n")
   factor_shape <- v.bbox.panel$factor_shape[i]
   
   # Define bbox of panel region: here is where horiz.extent and fact.shape come into play
@@ -117,36 +126,31 @@ for (i in 1 : nrow(v.bbox.panel)) {
   bbox_panel[2] <- v.bbox.panel$ymin[i]
   bbox_panel[3] <- bbox_panel[1] + horiz.extent[i]
   bbox_panel[4] <- bbox_panel[2] + (bbox_panel[3] - bbox_panel[1])*factor_shape
-
-  # First plot the country borders
-  m.p <- tm_shape(countries_eq, bbox = bbox_panel) +
-  tm_polygons(col="gray",
-              border.col="darkgray",
-              lwd=0.2) +
-  # Then the reef pixels
-  tm_shape(allreefs_withBCU_prc_centroids, bbox = bbox_panel) +
-    tm_squares(size = 1,
-               col = indicator,
-               palette = brewer.pal(length(indicator_breaks), "OrRd"),
-               shape = 15,
-               scale = 0.05*factor_shape,
-               style = legend_style,
-               breaks = indicator_breaks) +
-    tmap::tm_legend(show = F)
   
-  tmap_save(m.p, filename = here::here(glue::glue("plots/cumulative_panel_{v.bbox.panel$name[i]}.png")), width = ifelse(factor_shape == 1, full_width/4, full_width/2), height = full_width/4, units = "cm", dpi = 600)
+  # Cropping the shapefiles (MUCH more efficient than calling bbox in tm_shape)
+  countries_eq_panel <- st_crop(countries_eq, bbox_panel)
+  allreefs_withBCU_prc_panel <- st_crop(allreefs_withBCU_prc, bbox_panel)
+  
+  # First plot the country borders
+  m.p <- tm_shape(countries_eq_panel) +
+    tm_polygons(col="gray",
+                border.col="darkgray",
+                lwd=0.2) +
+  # Then the reef pixels
+    tm_shape(allreefs_withBCU_prc_panel) +
+    tm_fill(col = indicator,
+            palette = brewer.pal(length(indicator_breaks), "OrRd"),
+            style = legend_style,
+            breaks = indicator_breaks) +
+    tmap::tm_legend(show = F)
+    # tmap::tm_credits(v.bbox.panel$titles[i], size=2, position=c("center","top"))
+    # tmap::tm_layout(v.bbox.panel$titles[i])
+    # m.p
+  tmap_save(m.p, filename = here::here(glue::glue("plots/cumulative_panel_{v.bbox.panel$name[i]}.pdf")), width = ifelse(factor_shape == 1, full_width/4, full_width/2), height = full_width/4, units = "cm", dpi = 600)
 }
 
-# # Print regional maps of cumulative score on files
-# for (i in 1 : 6) {
-#   cat("plotting",i,"\n")
-#   png(paste0("cumulative_panel",i,".png"), width = 4.3, height = 4.3, units = "cm", res = 600)
-#   print(panel.list.cumulative[[i]])
-#   dev.off()
-# }
-
 # Plot the legend
-reefs_for_legend <- allreefs_withBCU_prc_centroids[c(1000:1010),] # Reduced dataset to speed up the plotting of the legend
+reefs_for_legend <- allreefs_withBCU_prc[c(1000:1010),] # Reduced dataset to speed up the plotting of the legend
 breaks_logscale <- seq(0,1,0.25)
 leg <- tmap::tm_shape(reefs_for_legend) +
   tm_squares(size = 1,
@@ -160,21 +164,20 @@ leg <- tmap::tm_shape(reefs_for_legend) +
              legend.col.is.portrait = F) +
   tmap::tm_layout(legend.only = T, legend.position =c("center","center"))
 
-tmap_save(leg, filename = here::here(glue::glue("plots/legend.png")), width = 4.3, height = 2, units = "cm", dpi = 600)
+tmap_save(leg, filename = here::here(glue::glue("plots/legend.pdf")), width = 4.3, height = 2, units = "cm")#, dpi = 600)
 
 # Construct plot using magick
 
 library(magick)
-plot_global <- image_read(here::here("plots/cumulative_global.png"))
+plot_global <- image_read_pdf(here::here("plots/cumulative_global.pdf"),density=600)
 
 # Read panels in, in order intended, and save them to a list
-
 panels <- c(
   "Middle East and North Africa",
   "Indian Ocean",
   "Coral Triangle",
   "East Africa",
-  "Australia and Melanes",
+  "Australia and Melanesia",
   "Caribbean and Bahamas"
 )
 
@@ -182,15 +185,17 @@ panel_list <- vector("list", length = length(panels))
 names(panel_list) <- panels
 
 for(i in names(panel_list)) {
-  panel_list[[i]] <- image_read(here::here(glue::glue("plots/cumulative_panel_{i}.png")))
+  panel_list[[i]] <- image_read_pdf(here::here(glue::glue("plots/cumulative_panel_{i}.pdf")),density=600)
+  panel_list[[i]] <- image_annotate(panel_list[[i]],i,
+                                    gravity="North", size=8, location=c("+0+30"))
 }
+# panel_list[[1]]
 
-legend <- image_read(here::here("plots/legend.png"))
+legend <- image_read_pdf(here::here("plots/legend.pdf"),density=600)
 
 # Create a blank image
 # Height is 2 * panels + global panel + legend
 # Width is global panel
-
 panel_height <- image_info(panel_list[[1]])[["height"]]
 global_height <- image_info(plot_global)[["height"]]
 global_width <- image_info(plot_global)[["width"]]
@@ -203,7 +208,6 @@ plot_height <- global_height + 2 * panel_height + legend_height
 plot_image <- image_blank(width = plot_width, height = plot_height, color = "white")
 
 # Add the first 3 panels
-
 # Start with 0 width offset
 width_offset <- 0
 for (i in 1:3) {
@@ -213,11 +217,9 @@ for (i in 1:3) {
 }
 
 # Add the global plot
-
 plot_image <- image_composite(plot_image, plot_global, offset = glue::glue("+0+{image_info(panel_list[[i]])[['height']]}"))
 
 # Add the last 3 panels
-
 # Start with 0 width offset
 width_offset <- 0
 for (i in 4:6) {
@@ -228,11 +230,13 @@ for (i in 4:6) {
 }
 
 # Add the legend
-
 legend_height_offset <- plot_height - legend_height
 legend_width_offset <- plot_width / 2 - legend_width / 2
 plot_image <- image_composite(plot_image, legend, offset = glue::glue("+{legend_width_offset}+{legend_height_offset}"))
 
-image_write(plot_image, here::here("plots/final_plot.png"))
+image_write(plot_image, here::here("plots/final_plot_600_names.png"))
+
+
+
 
                 
