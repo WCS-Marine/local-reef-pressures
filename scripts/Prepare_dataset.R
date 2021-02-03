@@ -125,6 +125,13 @@ allreefs_withBCU_prc_centroids$top.threat <- apply(as.matrix(threats), 1, which.
 # dd <- cbind.data.frame(d)
 # allreefs_withBCU.norm_centroids <- dplyr::bind_cols(allreefs_withBCU.norm_centroids,dd)
 
+# We will use polygons to make the Maps, so
+allreefs_withBCU_prc$top.threat <- allreefs_withBCU_prc_centroids$top.threat
+allreefs_withBCU_prc$score.l <- allreefs_withBCU_prc_centroids$score.l
+allreefs_withRegion <- read_sf(paste0(getwd(),"/data"),"allreefs_withRegion")
+allreefs_withBCU_prc$Region <- allreefs_withRegion$REEFTHR
+allreefs_withBCU_prc_centroids$Region <- allreefs_withRegion$REEFTHR
+rm(allreefs_withRegion)
 
 # PREPARE COUNTRY SHAPEFILE
 
@@ -141,7 +148,8 @@ countries_eq <- st_crop(countries_proj, allreefs_bbox_extended)
 
 # SAVE
 
-save(allreefs_withBCU_prc_centroids,
+save(allreefs_withBCU_prc,
+     allreefs_withBCU_prc_centroids,
      countries_eq,
      threats,
      vthreats,
