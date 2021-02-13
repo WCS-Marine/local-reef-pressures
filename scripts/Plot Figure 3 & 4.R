@@ -10,21 +10,31 @@ library(grid)
 
 load(here("scripts","DataForAnalysis.RData"))
 
-# Read region names
-bcus_regions <- readRDS(here::here("scripts", "bcus_regions.rds"))
-regions <- bcus_regions[[1]]
-for (i in 2 : 83) regions <- rbind(regions,bcus_regions[[i]])
-names(regions)[1] <- "ReefName"
+# # Read region names
+# bcus_regions <- readRDS(here::here("scripts", "bcus_regions.rds"))
+# regions <- bcus_regions[[1]]
+# for (i in 2 : 83) regions <- rbind(regions,bcus_regions[[i]])
+# names(regions)[1] <- "ReefName"
 
+# GRAPHICAL PARAMETERS
+# Set theme
+theme_set(theme_minimal(10))
+theme_update(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 7),
+             axis.title = element_blank(),
+             legend.text = element_text(size=7),
+             legend.key.size = unit(.5, "cm"),
+             legend.position = "bottom",
+             plot.margin = margin(0.2,0.2,0.2,0.2,"cm"),
+             axis.title.y = element_text(margin=margin(0,0.2,0,0,"cm")))
 
 # Global medians
 glob.median <- vector()
 for (i in 1 : length(vthreats)) {
   indicator <- vthreats[i]
-  glob.median[i] <- median(as.data.frame(allreefs_withBCU_prc_centroids)[,indicator],na.rm=T)
+  glob.median[i] <- median(as.data.frame(allreefs_withBCU_prc)[,indicator],na.rm=T)
 }
 names(glob.median) <- vthreats
-glob.median[7] <- median(allreefs_withBCU_prc_centroids$score.l)
+glob.median[7] <- median(allreefs_withBCU_prc$score.l)
 
 # ## Check that the median percentile is the same as the percentile of median values
 # data.bcu <- filter(allreefs_withBCU_prc_centroids, ReefName == "Northern Papua")
@@ -42,13 +52,13 @@ glob.median[7] <- median(allreefs_withBCU_prc_centroids$score.l)
 
 
 # Retain only BCUs
-data <- allreefs_withBCU_prc_centroids
+data <- allreefs_withBCU_prc
 data <- data[data$is.bcu == "BCUs",]
 
 
 # Median per BCU
 data %>%
-  select(grav_NC, pop_count, num_ports, reef_value, sediment, nutrient, score.l, ReefName, COUNTRY, is.bcu) %>%
+  select(grav_NC, pop_count, num_ports, reef_value, sediment, nutrient, score.l, ReefName, Region) %>%
   group_by(ReefName) %>%
   summarise(fishing = median(grav_NC,na.rm=T),
             coast_dev = median(pop_count,na.rm=T),
@@ -56,8 +66,10 @@ data %>%
             tourism = median(reef_value,na.rm=T),
             sediments = median(sediment,na.rm=T),
             nutrients = median(nutrient,na.rm=T),
-            cumulative = median(score.l,na.rm=T)) ->
+            cumulative = median(score.l,na.rm=T),
+            Region = unique(Region)) ->
   ehe
+ehe$Region <- factor(ehe$Region)
 
 # Calculate top threat
 v.threats.new <- c("fishing","coast_dev","industr_dev","tourism","sediments","nutrients")
@@ -73,46 +85,36 @@ for(i in  1: 83) {
   second.threat[i] <- names(which.max(ehe.i[-ehe$top.threat[i]]))
 }
 ehe$second.threat <- second.threat
-top_threats_table <- as.data.frame(ehe)[,c(1:7,10:12)]
-save(top_threats_table, file="TopThreat_RawValuePrc_BCUMedians_10_04.RData")
-write.csv(top_threats_table, file="TopThreat_RawValuePrc_BCUMedians_10_04.csv")
+top_threats_table <- as.data.frame(ehe)[,c(1:9,11:13)]
+save(top_threats_table, file="TopThreat_RawValuePrc_BCUMedians_2021_02_10.RData")
+write.csv(top_threats_table, file="TopThreat_RawValuePrc_BCUMedians_2021_02_10.csv")
 v.threats.new[7] <- "cumulative"
-# ehe$top.impact <- ehe[,c(v.threats[ehe$top.threat])]
 
-# Join subregion and arrange BCU by subregion
-ehe <- left_join(ehe, regions, by="ReefName")
-ehe$subregion <- factor(ehe$subregion)
-ehe.arranged <- ehe %>% arrange(subregion) %>% mutate(x.order=c(1:83))
-subregion.names <-
-  c("Australia\nNew Zealand",
-    "Caribbean\nAtlantic",
-    "Melanesia",
-    "Micronesia\nPolynesia",
-    "Red Sea\nPersian Gulf",
-    "Southeast Asia",
-    "Western\nIndian Ocean")
-subregion.xmin <- c(1,10,20,24,29,38,70)
-subregion.xmax <- c(9,19,23,28,37,69,83)
-subregion.ymin <- 0.9
-subregion.ymax <- 1.1
+# Chi-square : observed top threats (in BCUs) vs expected (in all reefs)
+exp.tt <- table(allreefs_withBCU_prc$top.threat)
+obs.tt <- table(factor(top_threats_table$top.threat,levels=c(1:6)))
+chisq.test(rbind(exp.tt, obs.tt))
+# chisq.test(obs.tt, p = exp.tt/sum(exp.tt))
+# chisq.test(obs.tt, p = exp.tt, rescale.p = T)
+# chisq.test(obs.tt, p = exp.tt, rescale.p = T, simulate.p.value = T)
 
-# GRAPHICAL PARAMETERS
-# Set theme
-theme_set(theme_minimal(10))
-theme_update(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 7),
-             axis.title = element_blank(),
-             legend.text = element_text(size=7),
-             legend.key.size = unit(.5, "cm"),
-             legend.position = "bottom")
 
-# Vertical lines to separate subregions
-sep.subregion <- cumsum(as.vector(table(ehe.arranged$subregion))) + 0.5
-sep.subregion <- sep.subregion[1:6]
+# Arrange BCU by subregion
+ehe.arranged <- ehe %>% arrange(Region) %>% mutate(x.order=c(1:83))
+region.ymin <- rep(0.9, length(levels(ehe.arranged$Region)))
+region.ymax <- rep(1.1, length(levels(ehe.arranged$Region)))
+region.ymin[seq(1,9,2)] <- 0.9 - 0.1
+region.ymax[seq(1,9,2)] <- 1.1 - 0.1
+region.names <- levels(ehe.arranged$Region)
+region.names[7] <- "Middle East\nand North Africa"
+
+# Vertical lines to separate regions
+sep.region <- cumsum(as.vector(table(ehe.arranged$Region))) + 0.5
+sep.region <- sep.region[1:8]
 
 # Colours identify threats
 # (Same colours used in Figure 1 (map of top threat for all coral reef cells))
-col.threats <- brewer.pal(6,"Set1")
-col.threats <- col.threats[c(1,5,6,4,2,3)]
+col.threats <- brewer.pal(6,"Set2")
 colors <- c("Fishing" = col.threats[1],
             "Coastal\ndevelopment" = col.threats[2],
             "Industr_dev" = col.threats[3],
@@ -134,17 +136,17 @@ a <- ggplot(ehe.arranged,aes(x=reorder(ReefName,x.order))) +
   scale_y_continuous(limits=c(0,1)) +
   scale_color_manual(values = colors) +
   labs(x = "",
-       y = "Impact",
+       y = "Percentile",
        color = "Threat") +
-  geom_vline(xintercept = sep.subregion, linetype="dashed", size = 0.25, show.legend=F)
-for (i.subregion in 1 : 7) {
+  geom_vline(xintercept = sep.region, linetype="dashed", size = 0.25, show.legend=F)
+for (i.region in 1 : 9) {
   a <- a +
     annotation_custom(
-      grob = textGrob(label = subregion.names[i.subregion], hjust = 0.5, gp = gpar(cex = 0.5)),
-      ymin = subregion.ymin,
-      ymax = subregion.ymax,
-      xmin = subregion.xmin[i.subregion],
-      xmax = subregion.xmax[i.subregion])
+      grob = textGrob(label = region.names[i.region], hjust = 0.5, gp = gpar(cex = 0.5)),
+      ymin = region.ymin[i.region],
+      ymax = region.ymax[i.region],
+      xmin = region.xmin[i.region],
+      xmax = region.xmax[i.region])
 }
 print(a)
 dev.off()
@@ -156,35 +158,35 @@ a <- ggplot(ehe.arranged,aes(x=reorder(ReefName,x.order))) +
   geom_col(aes(y=cumulative)) +
   scale_y_continuous(limits=c(0,1)) +
   labs(x = "",
-       y = "Impact") +
-  geom_vline(xintercept = sep.subregion, linetype="dotted", size = 0.25, show.legend=F) +
+       y = "Cumulative impact score") +
+  geom_vline(xintercept = sep.region, linetype="dotted", size = 0.25, show.legend=F) +
   geom_hline(aes(yintercept = glob.median[7]), linetype="dashed", size = 0.25, show.legend=F)
-for (i.subregion in 1 : 7) {
+for (i.region in 1 : 9) {
   a <- a +
     annotation_custom(
-      grob = textGrob(label = subregion.names[i.subregion], hjust = 0.5, gp = gpar(cex = 0.5)),
-      ymin = subregion.ymin,
-      ymax = subregion.ymax,
-      xmin = subregion.xmin[i.subregion],
-      xmax = subregion.xmax[i.subregion])
+      grob = textGrob(label = region.names[i.region], hjust = 0.5, gp = gpar(cex = 0.5)),
+      ymin = region.ymin[i.region],
+      ymax = region.ymax[i.region],
+      xmin = region.xmin[i.region],
+      xmax = region.xmax[i.region])
 }
 print(a)
 dev.off()
 
-# Boxplot of impact by subregion
-theme_update(plot.title = element_text(hjust = 0.5, size = 10))
+# Boxplot of MEDIAN BCU percentiles by region
+theme_update(plot.title = element_text(hjust = 0.5, size = 10),
+             plot.margin = margin(0.2,0.2,0.2,0.2,"cm"))
 title.text <- c("Fishing","Coastal\ndevelopment","Industrial\ndevelopment","Tourism","Sediments","Nutrients","Cumulative")
 for (i in 1 : length(v.threats.new)) {
   if (i == 3) next
   indicator <- v.threats.new[i]
-  png(paste0("Boxplot_",indicator,".png"), width=3, height=10, units="cm", res=300)
-  # theme_update(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 7,
-  #                                         color = "black"))
-  a <- ggplot(ehe,aes_string("subregion",indicator)) +
+  png(paste0("Boxplot_",indicator,".png"), width=4, height=10, units="cm", res=300)
+  a <- 
+    ggplot(ehe, aes(x=reorder(Region,!!sym(indicator),na.rm=T),y=!!sym(indicator))) +
     geom_boxplot(fill=colors[i], size=0.1, outlier.size = 0.1, show.legend=F) +
     geom_hline(aes(yintercept = glob.median[i]), linetype="dashed", size = 0.25, show.legend=F) +
     scale_y_continuous(limits=c(0,1)) +
-    labs(title=title.text[i])
+    labs(title=title.text[i], y="")
   print(a)
   dev.off()
 
