@@ -140,3 +140,4 @@ save(allreefs_withBCU_prc,
 # allreefs_withBCU_prc %>% relocate(c(Region, IHO_SEA, TERRITORY), .after = top_threat) -> allreefs_withBCU_prc
 # allreefs_withBCU_prc %>% relocate(geometry, .after = nutrient_raw) -> allreefs_withBCU_prc
 # st_write(allreefs_withBCU_prc, dsn = paste0(getwd(),"/data/allreefs.gpkg"), driver="GPKG")
+save(allreefs_withBCU_prc, file=paste0(getwd(),"/data/allreefs.RData"))
