@@ -26,16 +26,6 @@ bcus <- read_sf(paste0(getwd(),"/../reef-context/data"),"bcus") # Used only to r
 zones <- read_sf("C:/Users/Marco/Desktop/Intersect_EEZ_IHO_v4_2020","Intersect_EEZ_IHO_v4_2020") # Flanders Marine Institute (2020). The intersect of the Exclusive Economic Zones and IHO sea areas, version 4. Available online at https://www.marineregions.org/.https://doi.org/10.14284/402
 
 
-# # INSPECT BOUNDING BOXES OF SUBREGIONS
-# a <- readRDS(paste0(getwd(),"/../reef-context/data/regions_bounding_boxes.rds"))
-# plot(bb_poly(a$subregion[[1]]))
-# bbpol <- lapply(a$subregion,bb_poly)
-# for (i in 1 : length(bbpol)){
-#   st_write(bbpol[[i]],paste0(getwd(),"/bboxregions"),paste0("bbox",i),driver="ESRI Shapefile")
-#   }
-
-
-
 # PREPARE ALLREEFS DATASET
 
 # Remove unnecessary columns
@@ -105,25 +95,8 @@ score.e <-         rowMeans(threats,
                             na.rm = T) # Unweighted mean for comparison
 allreefs_withBCU_prc_centroids$score.l <- score.l
 
-# Calculate top threat and tertiles
+# Calculate top threat
 allreefs_withBCU_prc_centroids$top.threat <- apply(as.matrix(threats), 1, which.max)
-# d <- list()
-# for (i in 1 : 6) {
-#   tertiles <- quantile(threats[,i], seq(0,1,1/3), na.rm=T)
-#   # "cut" requires unique breaks. This adjusts the breaks without changing the results:
-#   if(i == 3 | i == 4) tertiles <- c(0,0.01,0.02,1)
-#   if(i == 5 | i == 6) tertiles[1:2] <- c(0,1e-12)
-#   d[[i]] <- cut(threats[,i],
-#                 tertiles,
-#                 include.lowest=T,
-#                 labels=c(1,2,3))
-# }
-# # To inspect low values
-# # sort(threats[(threats[,i] > 0),i])
-# names(d) <- paste0(vthreats,"_tertile")
-# # Bind the columns with the tertiles together, then with the dataframe of allreefs_centroids
-# dd <- cbind.data.frame(d)
-# allreefs_withBCU.norm_centroids <- dplyr::bind_cols(allreefs_withBCU.norm_centroids,dd)
 
 # We will use polygons to make the Maps, so
 allreefs_withBCU_prc$top.threat <- allreefs_withBCU_prc_centroids$top.threat
@@ -144,8 +117,6 @@ allreefs_bbox_extended <- st_bbox(allreefs_withBCU_prc)
 allreefs_bbox_extended[4] <- 4.5e6
 countries_eq <- st_crop(countries_proj, allreefs_bbox_extended)
 
-
-
 # SAVE
 
 save(allreefs_withBCU_prc,
@@ -154,3 +125,18 @@ save(allreefs_withBCU_prc,
      threats,
      vthreats,
      file="DataForAnalysis.RData")
+
+# # Write final shapefiles
+# load(here("scripts","DataForAnalysis.RData"))
+# names(allreefs_withBCU_prc)
+# names(allreefs_withBCU_prc)[15] <- "TERRITORY"
+# names(allreefs_withBCU_prc)[22] <- "top_threat"
+# names(allreefs_withBCU_prc)[23] <- "cumul_score"
+# allreefs_withBCU_prc$MRGID_TER1 <- NULL
+# allreefs_withBCU_prc$MRGID_IHO <- NULL
+# allreefs_withBCU_prc %>% relocate(c(cumul_score, top_threat), .after = nutrient) -> allreefs_withBCU_prc
+# allreefs_withBCU_prc %>% relocate(is.bcu, .before = ReefName) -> allreefs_withBCU_prc
+# names(allreefs_withBCU_prc)[12] <- "BCU_name"
+# allreefs_withBCU_prc %>% relocate(c(Region, IHO_SEA, TERRITORY), .after = top_threat) -> allreefs_withBCU_prc
+# allreefs_withBCU_prc %>% relocate(geometry, .after = nutrient_raw) -> allreefs_withBCU_prc
+# st_write(allreefs_withBCU_prc, dsn = paste0(getwd(),"/data/allreefs.gpkg"), driver="GPKG")
