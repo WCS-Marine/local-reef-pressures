@@ -175,17 +175,18 @@ dev.off()
 
 # Boxplot of MEDIAN BCU percentiles by region
 theme_update(plot.title = element_text(hjust = 0.5, size = 10),
-             plot.margin = margin(0.2,0.2,0.2,0.2,"cm"))
+             plot.margin = margin(0.2,0.2,0.2,0.2,"cm"),
+             axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 7))
 title.text <- c("Fishing","Coastal\ndevelopment","Industrial\ndevelopment","Tourism","Sediments","Nutrients","Cumulative")
 for (i in 1 : length(v.threats.new)) {
   if (i == 3) next
   indicator <- v.threats.new[i]
-  png(paste0("Boxplot_",indicator,".png"), width=4, height=10, units="cm", res=300)
+  png(paste0("Boxplot_",indicator,".png"), width=10, height=4, units="cm", res=300)
   a <- 
-    ggplot(ehe, aes(x=reorder(Region,!!sym(indicator),na.rm=T),y=!!sym(indicator))) +
+    ggplot(ehe, aes(y=reorder(Region,!!sym(indicator),FUN=median,na.rm=T),x=!!sym(indicator))) +
     geom_boxplot(fill=colors[i], size=0.1, outlier.size = 0.1, show.legend=F) +
-    geom_hline(aes(yintercept = glob.median[i]), linetype="dashed", size = 0.25, show.legend=F) +
-    scale_y_continuous(limits=c(0,1)) +
+    geom_vline(aes(xintercept = glob.median[i]), linetype="dashed", size = 0.25, show.legend=F) +
+    scale_x_continuous(limits=c(0,1)) +
     labs(title=title.text[i], y="")
   print(a)
   dev.off()
