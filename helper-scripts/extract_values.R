@@ -63,7 +63,7 @@ extract_values <- function(data, allreefs, max.radius=5000) {
 # "pop_count", Coastal Development: Human Population
 # "num_ports", Industrial Development: Ports
 # "reef_value", Tourism: Reef Value
-  out.data <- matrix(NA, nrow=nrow(nn$nn.idx), ncol = 12)
+  out.data <- matrix(NA, nrow=nrow(nn$nn.idx), ncol = 13)
   colnames(out.data) <- c("score",
                           "scorecn",
                           "scorecy",
@@ -75,7 +75,8 @@ extract_values <- function(data, allreefs, max.radius=5000) {
                           "nutrient",
                           "pop_count",
                           "num_ports",
-                          "reef_value")
+                          "reef_value", 
+                          "cumul_score")
   out.data <- as.data.frame(out.data)
 
   # Loop on points to fill values into output dataframe
@@ -93,7 +94,8 @@ extract_values <- function(data, allreefs, max.radius=5000) {
                                              "nutrient",
                                              "pop_count",
                                              "num_ports",
-                                             "reef_value")])
+                                             "reef_value", 
+                                             "cumul_score")])
   }
   out.data <- cbind(data,out.data)
   return(out.data)
