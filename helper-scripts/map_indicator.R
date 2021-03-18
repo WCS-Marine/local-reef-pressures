@@ -58,7 +58,8 @@ map_indicator <- function(bcu, tile, indicator = NA, indicator_title = indicator
       main.title.size = 0.75,
       frame = FALSE,
       inner.margins = c(0, 0, 0, 0)
-    )
+    ) + 
+    tmap::tmap_options(output.dpi = 96)
 }
 
 legend_titles <- list(
@@ -129,3 +130,72 @@ breaks <- list(
   sediment = c(0, 10^(1:4)),
   nutrient = c(0, 10^(-2:5))
 )
+
+
+layout_indicator_maps <- function(bcu, tile_indicator, bcu_ext) {
+  size <- 600
+  width_in <- size / 300
+  height_in <- width_in * 0.3
+  
+  indicator_with_title <- dplyr::tribble(
+    ~indicator, ~title,
+    "grav_NC", "Fishing:\nMarket Pressure",
+    "sediment", "Pollution:\nSedimentation",
+    "nutrient", "Pollution:\nNutrients",
+    "pop_count", "Coastal Development:\nHuman Population",
+    "num_ports", "Industrial Development:\nPorts",
+    "reef_value", "Tourism:\nReef Value"
+  )
+  
+  tmap_dir <- tempdir()
+  
+  purrr::walk2(
+    indicator_with_title[["indicator"]], indicator_with_title[["title"]],
+    function(indicator, title) {
+      map_res <- map_indicator(bcu, tile_indicator, indicator, title, bcu_ext)
+      tmap::tmap_save(map_res, glue::glue("{tmap_dir}/{indicator}.png"), width = size, height = size, dpi = 300)
+      
+      legend_res <- generate_map_legend(indicator)
+      ggsave(glue::glue("{tmap_dir}/{indicator}_legend.png"), legend_res, width = width_in, height = height_in, units = "in")
+    }
+  )
+  
+  tmaps <- indicator_with_title[["indicator"]] %>%
+    purrr::map(~ magick::image_read(glue::glue("{tmap_dir}/{.x}.png")))
+  names(tmaps) <- indicator_with_title[["indicator"]]
+  
+  legends <- indicator_with_title[["indicator"]] %>%
+    purrr::map(~ magick::image_read(glue::glue("{tmap_dir}/{.x}_legend.png")))
+  names(legends) <- indicator_with_title[["indicator"]]
+  
+  panel_size <- magick::image_info(tmaps[[1]])[["height"]]
+  legend_height <- magick::image_info(legends[[1]])[["height"]]
+  
+  plot_image <- magick::image_blank(width = panel_size * 3, height = panel_size * 2 + legend_height * 2, color = "white")
+  
+  width_offset <- 0
+  height_offset <- panel_size
+  
+  for (i in 1:3) {
+    plot_image <- magick::image_composite(plot_image, tmaps[[i]], offset = glue::glue("+{width_offset}+0"))
+    plot_image <- magick::image_composite(plot_image, legends[[i]], offset = glue::glue("+{width_offset}+{height_offset}"))
+    # Then increment the offset by the width of the panel, so the next panel can use it
+    width_offset <- width_offset + panel_size
+  }
+  
+  # Add the last 3 panels
+  
+  width_offset <- 0
+  height_offset <- panel_size + legend_height
+  for (i in 4:6) {
+    plot_image <- magick::image_composite(plot_image, tmaps[[i]], offset = glue::glue("+{width_offset}+{height_offset}"))
+    plot_image <- magick::image_composite(plot_image, legends[[i]], offset = glue::glue("+{width_offset}+{height_offset + panel_size}"))
+    width_offset <- width_offset + panel_size
+  }
+  
+  final_file <- glue::glue("{tmap_dir}/indicators_map.png")
+  
+  magick::image_write(plot_image, final_file, quality = 72)
+  
+  return(final_file)
+}
