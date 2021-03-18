@@ -11,7 +11,7 @@ bcus_prefs <- readRDS(here::here("data", "report-cards", "bcus_prefs.rds"))
 # Filter for BCUs, rename BCU_name to bcu, and keep raw columns only
 bcus <- allreefs %>%
   filter(is.bcu == "BCUs") %>%
-  rename(bcu = BCU_name)
+  select(bcu = BCU_name, num_ports = num_ports_raw, grav_NC = grav_NC_raw, pop_count = pop_count_raw, reef_value = reef_value_raw, sediment = sediment_raw, nutrient = nutrient_raw, score, scoreth, scorepfc, scorecy, scoretr, scorecn, geom)
 
 rm(allreefs)
 
