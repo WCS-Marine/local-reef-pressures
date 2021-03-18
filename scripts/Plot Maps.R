@@ -12,9 +12,10 @@ library(RColorBrewer)
 library(magick)
 
 load(here("scripts","DataForAnalysis.RData"))
+load(here("data","allreefs.RData"))
 
 threat_names <- c("Fishing","Coastal dev","Industrial dev",
-                  "Tourism","Sediments","Nutrients", "Cumulative impact score" )
+                  "Tourism","Sediments","Nitrogen", "Cumulative impact score" )
 panels <- c(
   "Middle East and North Africa",
   "Indian Ocean",
@@ -68,16 +69,16 @@ v.bbox.panel <- v.bbox.panel %>%
 #############################################################################################
 #  FIGURE 1: TOP THREAT
 #############################################################################################
-allreefs_withBCU_prc$top.threat <- factor(allreefs_withBCU_prc$top.threat)
+allreefs$top_threat <- factor(allreefs$top_threat)
 
 # Top threat, global map
 m_global_topthreats <-  m +
-  tm_shape(allreefs_withBCU_prc) +
-  tm_fill(col = "top.threat",
+  tm_shape(allreefs) +
+  tm_fill(col = "top_threat",
           palette = "Set2") + 
   tmap::tm_legend(show = FALSE)
 full_width <- 18.25
-tmap_save(m_global_topthreats, filename = here::here(glue::glue("plots/topthreat_global_Set2.pdf")), width = full_width, height = 4, units = "cm")
+tmap_save(m_global_topthreats, filename = here::here(glue::glue("plots/topthreat_global.pdf")), width = full_width, height = 4, units = "cm")
 
 
 # Plot the six regional panels
@@ -91,27 +92,27 @@ for (i in 1 : nrow(v.bbox.panel)) {
   bbox_panel[4] <- bbox_panel[2] + (bbox_panel[3] - bbox_panel[1])*factor_shape
   # Cropping the shapefiles (MUCH more efficient than calling bbox in tm_shape)
   countries_eq_panel <- st_crop(countries_eq, bbox_panel)
-  allreefs_withBCU_prc_panel <- st_crop(allreefs_withBCU_prc, bbox_panel)
+  allreefs_panel <- st_crop(allreefs, bbox_panel)
   # First plot the country borders
   m.p <- tm_shape(countries_eq_panel) +
     tm_polygons(col="gray",
                 border.col="darkgray",
                 lwd=0.2) +
     # Then the reef pixels
-    tm_shape(allreefs_withBCU_prc_panel) +
-    tm_fill(col = "top.threat",
+    tm_shape(allreefs_panel) +
+    tm_fill(col = "top_threat",
             palette = "Set2") +
     tmap::tm_legend(show = F)
-  tmap_save(m.p, filename = here::here(glue::glue("plots/topthreat_panel_{v.bbox.panel$name[i]}.pdf")), width = ifelse(factor_shape == 1, full_width/4, full_width/2), height = full_width/4, units = "cm", dpi = 600)
+  tmap_save(m.p, filename = here::here(glue::glue("plots/topthreat_panel_{v.bbox.panel$name[i]}_2.pdf")), width = ifelse(factor_shape == 1, full_width/4, full_width/2), height = full_width/4, units = "cm", dpi = 600)
 }
 
 # Plot the legend
-reefs_for_legend <- filter(allreefs_withBCU_prc, ReefName == "Tanzania/Kenya") # Just a random BCU
-reefs_for_legend$top.threat.name <- threat_names[reefs_for_legend$top.threat]
-reefs_for_legend$top.threat.name <- factor(reefs_for_legend$top.threat.name, levels=threat_names)
+reefs_for_legend <- filter(allreefs, BCU_name == "Tanzania/Kenya") # Just a random BCU
+reefs_for_legend$top_threat_name <- threat_names[reefs_for_legend$top_threat]
+reefs_for_legend$top_threat_name <- factor(reefs_for_legend$top_threat_name, levels=threat_names[1:6])
 top_threats_legend <-
   tm_shape(reefs_for_legend) +
-  tm_fill(col = "top.threat.name",
+  tm_fill(col = "top_threat_name",
           palette = "Set2",
           title = "Threat",
           legend.is.portrait = F) + 
@@ -127,8 +128,6 @@ tmap_save(top_threats_legend, filename = here::here(glue::glue("plots/topthreat_
 plot_global <- image_read_pdf(here::here("plots/topthreat_global.pdf"),density=600)
 
 # Read panels in, in order intended, and save them to a list
-
-
 panel_list <- vector("list", length = length(panels))
 names(panel_list) <- panels
 
@@ -182,7 +181,7 @@ legend_height_offset <- plot_height - legend_height
 legend_width_offset <- plot_width / 2 - legend_width / 2
 plot_image <- image_composite(plot_image, legend, offset = glue::glue("+{legend_width_offset}+{legend_height_offset}"))
 
-image_write(plot_image, here::here("plots/final_plot_topthreat.png"))
+image_write(plot_image, here::here("plots/final_plot_topthreat_2.png"))
 
 
 #############################################################################################
@@ -213,7 +212,7 @@ for (i.threat in 1 : 7) {
   }
   # global map 
   m.global <- m +
-    tmap::tm_shape(allreefs_withBCU_prc) +
+    tmap::tm_shape(allreefs) +
     tm_fill(col = indicator,
             palette = brewer.pal(length(indicator_breaks), "OrRd"),
             style = legend_style,
@@ -238,7 +237,7 @@ for (i.threat in 1 : 7) {
     
     # Cropping the shapefiles (MUCH more efficient than calling bbox in tm_shape)
     countries_eq_panel <- st_crop(countries_eq, bbox_panel)
-    allreefs_withBCU_prc_panel <- st_crop(allreefs_withBCU_prc, bbox_panel)
+    allreefs_panel <- st_crop(allreefs, bbox_panel)
     
     # First plot the country borders
     m.p <- tm_shape(countries_eq_panel) +
@@ -246,7 +245,7 @@ for (i.threat in 1 : 7) {
                   border.col="darkgray",
                   lwd=0.2) +
       # Then the reef pixels
-      tm_shape(allreefs_withBCU_prc_panel) +
+      tm_shape(allreefs_panel) +
       tm_fill(col = indicator,
               palette = brewer.pal(length(indicator_breaks), "OrRd"),
               style = legend_style,
@@ -256,7 +255,7 @@ for (i.threat in 1 : 7) {
   }
   
   # Plot the legend
-  reefs_for_legend <- allreefs_withBCU_prc[c(1000:1010),] # Reduced dataset to speed up the plotting of the legend
+  reefs_for_legend <- allreefs[c(1000:1010),] # Reduced dataset to speed up the plotting of the legend
   # if (i.threat == 3) reefs_for_legend$num_ports[1] <- 1 # (percentile scale: max)
   leg <- tmap::tm_shape(reefs_for_legend) +
     tm_fill(size = 1,

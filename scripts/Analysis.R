@@ -14,7 +14,7 @@ load(here("data","allreefs.RData"))
 
 
 threat_names <- c("Fishing","Coastal dev","Industrial dev",
-                  "Tourism","Sediments","Nutrients", "Cumulative impact score" )
+                  "Tourism","Sediments","Nitrogen", "Cumulative impact score" )
 
 # Colors: colorblind friendly palette
 col_threats <- brewer.pal(6,"Set2")
@@ -23,11 +23,11 @@ colors <- c("Fishing" = col_threats[1],
             "Industr_dev" = col_threats[3],
             "Tourism" = col_threats[4],
             "Sediments" = col_threats[5],
-            "Nutrients" = col_threats[6],
+            "Nitrogen" = col_threats[6],
             "Cumulative" = "darkgrey")
 # Titles
 title.text <- c("Fishing","Coastal\ndevelopment","Industrial\ndevelopment",
-                "Tourism","Sediments","Nutrients","Cumulative")
+                "Tourism","Sediments","Nitrogen","Cumulative")
 
 data <- allreefs
 
@@ -63,7 +63,7 @@ for (i in  1 : 7) {
 }
 # Composed in powerpoint and saved as Figure S7
 
-# Top threats
+# Figure8. Top threats
 theme_update(axis.text.y = element_text(hjust = 1, vjust = 0.5, size = 7))
 table(data$top_threat)
 table(data$top_threat) / sum(table(data$top_threat))
@@ -86,14 +86,13 @@ ta$Freq.rel <- ta$Freq / ta$n.reef
 
 # Percent of reef cells where fishing is a top threat, for each region
 ta[ta$top_threat=="Fishing",c("Region","Freq.rel")]
-
 # Percent of reef cells where water pollution (nutrients + sediments) is a top threat, for each region
 data.frame(Region = levels(ta$Region),
            water.pollution = as.numeric(ta$Freq.rel[ta$threat==5]+ta$Freq.rel[ta$threat==6])
 )
 
 
-# Threat intensity
+# Figure S9. Threat intensity when top-ranked
 # Build a dataframe where each reef pixel has the value of the threat that is top-ranked
 a <- data.frame(
   value = as_tibble(data) %>% filter(top_threat == 1) %>% select(!!sym(vthreats[1])) %>% as_vector(),
@@ -107,10 +106,8 @@ for (i in 2 : 6) {
              )
   )
 }
-
 # Boxplots of the threat values that are top ranked
 theme_update(axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 7))
-
 png(paste0("plots/Figure S9.png"), width=10, height=5, units="cm", res=300)
 a.plot <- ggplot(a,aes_string(x="value",y="threat",fill="threat")) +
   geom_boxplot(size=0.1, outlier.size = 0.1, show.legend = F) + 
@@ -121,11 +118,9 @@ print(a.plot)
 dev.off()
 tapply(a$value, a$threat, summary)
 
-# Compare  top threats in BCUs vs non-BCUs
+# Figure S10. Compare  top threats in BCUs vs non-BCUs
 theme_update(axis.text.y = element_text(hjust = 1, vjust = 0.5, size = 7),
              axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 7))
-
-
 # Frequency of top-ranked threats
 ta.bcu <- as.data.frame(table(data$is.bcu,
                           data$top_threat,
@@ -146,7 +141,7 @@ chisq.test(rbind(nonBCU.tt, BCU.tt))
 # chisq.test(obs.tt, p = exp.tt, rescale.p = T)
 # chisq.test(obs.tt, p = exp.tt, rescale.p = T, simulate.p.value = T)
 
-# Distribution of threat percentiles
+# Figure 5. Distribution of threat percentiles
 data1 <- as.data.frame(data)[,c("is.bcu",vthreats)]
 data2 <- rep_n_stack(data1, to.stack=vthreats, stack.names=c("indicator","value"))
 data2$indicator <- factor(data2$indicator, levels=vthreats) # reorder levels
