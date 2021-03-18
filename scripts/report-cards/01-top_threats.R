@@ -69,7 +69,7 @@ bcus_all_reefs_medians <- bcus_medians %>%
     num_ports = "Industrial Development: Ports",
     reef_value = "Tourism: Reef Value",
     sediment = "Pollution: Sedimentation",
-    nutrient = "Pollution: Nutrients",
+    nutrient = "Pollution: Nitrogen",
     score = "Climate: Composite Score",
     scoreth = "Climate: Thermal History",
     scorepfc = "Climate: Thermal Future",

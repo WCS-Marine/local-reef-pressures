@@ -144,7 +144,7 @@ layout_indicator_maps <- function(bcu, tile_indicator, bcu_ext) {
     ~indicator, ~title,
     "grav_NC", "Fishing:\nMarket Pressure",
     "sediment", "Pollution:\nSedimentation",
-    "nutrient", "Pollution:\nNutrients",
+    "nutrient", "Pollution:\nNitrogen",
     "pop_count", "Coastal Development:\nHuman Population",
     "num_ports", "Industrial Development:\nPorts",
     "reef_value", "Tourism:\nReef Value"

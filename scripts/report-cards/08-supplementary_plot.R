@@ -8,3 +8,8 @@ bcu <- "Northern Papua"
 p <- plot_threat_ranking_percentiles(bcus_percentiles[[bcu]], top_threats[[bcu]])
 
 ggsave("supplementary_methods_beeswarm_plot.png", p, width = 7, height = 4, dpi = 300)
+
+p_no_caption <- p +
+  theme(plot.caption = element_blank())
+
+ggsave("supplementary_methods_beeswarm_plot_no_caption.png", p_no_caption, width = 7, height = 4, dpi = 300)
