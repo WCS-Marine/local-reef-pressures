@@ -40,7 +40,7 @@ generate_report_cards <- function(bcu = "all", open = TRUE, quiet = FALSE) {
 #' generate_single_report_card("Eel - NGBR")
 generate_single_report_card <- function(bcu, open = TRUE, quiet = FALSE, standalone = TRUE) {
 
-  fs::dir_create(here::here("report-cards"))
+  fs::dir_create(here::here("BCU report cards"))
 
   if (length(bcu) > 1) {
     stop("This function can only generate a report card for a single BCU.\nPlease use `generate_report_cards` to generate for multiple BCUs.")
@@ -56,7 +56,7 @@ generate_single_report_card <- function(bcu, open = TRUE, quiet = FALSE, standal
   bcu_name <- stringr::str_replace_all(bcu_name, "/| ", "-")
   bcu_name <- stringr::str_replace_all(bcu_name, "---", "-")
   bcu_country <- stringr::str_replace_all(bcu_country, " ", "-")
-  out_file <- here::here("report-cards", glue::glue("{bcu_country}_{bcu_name}.pdf"))
+  out_file <- here::here("BCU report cards", glue::glue("{bcu_country}_{bcu_name}.pdf"))
 
   rmarkdown::render(
     input = here::here("scripts", "report-cards", "99-report_card_template.Rmd"),
