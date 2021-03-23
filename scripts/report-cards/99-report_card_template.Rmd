@@ -44,7 +44,7 @@ bcu_wcs_map <- bcus_wcs_maps %>%
 
 # `r bcu_name`
 
-```{r, out.height = "3in", eval = length(bcu_wcs_map) == 1}
+```{r, out.height = "2.9in", eval = length(bcu_wcs_map) == 1}
 knitr::include_graphics(here::here("data", "report-cards", "wcs-maps", glue("{bcu_wcs_map}.jpg")))
 ```
 
