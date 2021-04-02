@@ -94,6 +94,10 @@ score.l <- rowWeightedMeans(as.matrix(threats),
 score.e <-         rowMeans(threats,
                             na.rm = T) # Unweighted mean for comparison
 allreefs_withBCU_prc_centroids$score.l <- score.l
+plot(score.l, score.e)
+hist(score.l)
+hist(score.e)
+cor.test(score.l, score.e, method="spearman")
 
 # Calculate top threat
 allreefs_withBCU_prc_centroids$top.threat <- apply(as.matrix(threats), 1, which.max)

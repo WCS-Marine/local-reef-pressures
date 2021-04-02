@@ -114,7 +114,7 @@ top_threats_legend <-
   tm_shape(reefs_for_legend) +
   tm_fill(col = "top_threat_name",
           palette = "Set2",
-          title = "Threat",
+          title = "Pressure",
           legend.is.portrait = F) + 
   tm_layout(legend.only = T,
             legend.position=c("center","center"),
