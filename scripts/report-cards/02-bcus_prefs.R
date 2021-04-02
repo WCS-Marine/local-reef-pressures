@@ -5,10 +5,10 @@ library(dplyr)
 library(readr)
 
 bcus_prefs <- read_csv(here::here("data", "report-cards", "raw", "bcus_prefs.csv"))
-top_threats <- readRDS(here::here("data", "report-cards", "bcus_top_threats.rds"))
+top_pressures <- readRDS(here::here("data", "report-cards", "bcus_top_pressures.rds"))
 
 # Add CRS
-bcus_prefs <- top_threats %>%
+bcus_prefs <- top_pressures %>%
   bind_rows() %>%
   distinct(bcu) %>%
   left_join(bcus_prefs, by = "bcu") %>%

@@ -1,4 +1,4 @@
-# Calculate all reefs medians, BCU medians, percentiles, and rank top threats
+# Calculate all reefs medians, BCU medians, percentiles, and rank top pressures
 
 library(sf)
 library(dplyr)
@@ -145,7 +145,7 @@ median_percentile <- bcus_percentiles %>%
   dplyr::group_by(bcu, indicator) %>%
   dplyr::summarise(percentile = median(percentile, na.rm = TRUE), .groups = "drop")
 
-# Rank top threats based on median percentile, excluding Climate indicators and number of ports
+# Rank top pressures based on median percentile, excluding Climate indicators and number of ports
 # To break any ties (e.g. multiple with percentile is 0), use the mean and favor larger mean values
 # Just so it doesn't look weird in the report cards
 bcus_means <- bcus %>%
@@ -162,7 +162,7 @@ bcus_means <- bcus %>%
   ) %>%
   mutate(indicator = str_remove_all(indicator, "_raw"))
 
-top_threats_indicators <- median_percentile %>%
+top_pressures_indicators <- median_percentile %>%
   left_join(bcus_means, by = c("bcu", "indicator")) %>%
   filter(!str_detect(indicator, "score") & indicator != "num_ports") %>%
   dplyr::group_by(bcu) %>%
@@ -172,15 +172,15 @@ top_threats_indicators <- median_percentile %>%
   dplyr::select(bcu, indicator, rank)
 
 # Combine
-top_threats <- bcus_all_reefs_medians %>%
+top_pressures <- bcus_all_reefs_medians %>%
   left_join(median_percentile, by = c("bcu", "indicator")) %>%
-  left_join(top_threats_indicators, by = c("bcu", "indicator"))
+  left_join(top_pressures_indicators, by = c("bcu", "indicator"))
 
 # Split into list
-top_threats <- top_threats %>%
+top_pressures <- top_pressures %>%
   split(.$bcu)
 
-saveRDS(top_threats, here::here("data", "report-cards", "bcus_top_threats.rds"))
+saveRDS(top_pressures, here::here("data", "report-cards", "bcus_top_pressures.rds"))
 
 bcus_percentiles <- bcus_percentiles %>%
   split(.$bcu)

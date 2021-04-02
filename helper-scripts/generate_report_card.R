@@ -1,4 +1,4 @@
-#' Generate Reef Threats report cards
+#' Generate Reef Pressures report cards
 #'
 #' @param bcu BCU(s) to generate report cards for. Defaults to "all", to generate for all BCUs.
 #' @param open Whether to open the PDF once the report card is generated. Defaults to TRUE.
@@ -26,7 +26,7 @@ generate_report_cards <- function(bcu = "all", open = TRUE, quiet = FALSE) {
 
 }
 
-#' Generate a single reef threats report card
+#' Generate a single reef pressures report card
 #'
 #' @param bcu A single BCU to generate report cards for
 #' @param open Whether to open the PDF once the report card is generated. Defaults to TRUE

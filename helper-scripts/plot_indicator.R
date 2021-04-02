@@ -2,7 +2,7 @@
 #'
 #' Produce a ggplot2 plot of a BCU's indicator values, along with the global median for that indicator and the medians of other BCUs in that subregion.
 #'
-#' @param bcus_top_threats Top threats for all BCUs, from \code{data/bcus_top_threats.rds}
+#' @param bcus_top_pressures Top pressures for all BCUs, from \code{data/bcus_top_pressures.rds}
 #' @param bcu_name Name of the BCU being plotted
 #' @param indicator Indicator being plotted
 #' @param bcus_regions Data containing which regions BCUs belong to, from \code{data/bcus_regions.rds}
@@ -11,16 +11,16 @@
 #' @export
 #'
 #' @examples
-#' bcus_top_threats <- readRDS(here::here("data", "bcus_top_threats.rds"))
+#' bcus_top_pressures <- readRDS(here::here("data", "bcus_top_pressures.rds"))
 #' bcus_regions <- readRDS(here::here("data", "bcus_regions.rds"))
 #'
-#' plot_indicator_dumbbell(bcus_top_threats, bcus_regions, "Aceh", "grav_NC")
-plot_indicator_dumbbell <- function(bcus_top_threats, bcus_regions, bcu_name, indicator) {
+#' plot_indicator_dumbbell(bcus_top_pressures, bcus_regions, "Aceh", "grav_NC")
+plot_indicator_dumbbell <- function(bcus_top_pressures, bcus_regions, bcu_name, indicator) {
 
-  bcus_top_threats <- dplyr::bind_rows(bcus_top_threats)
+  bcus_top_pressures <- dplyr::bind_rows(bcus_top_pressures)
   bcus_regions <- dplyr::bind_rows(bcus_regions)
 
-  indicator_data <- bcus_top_threats %>%
+  indicator_data <- bcus_top_pressures %>%
     dplyr::filter(indicator == !!indicator)
 
   indicator_median <- unique(indicator_data[["median"]])
