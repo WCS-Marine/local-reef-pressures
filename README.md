@@ -1,4 +1,4 @@
-# local-reef-threats
+# local-reef-pressures
 A global mapping analysis of 6 local reef potential pressure layers
 
 Results from this analysis are available as a scientific article still under revision, but accessible as a pre-print at:
