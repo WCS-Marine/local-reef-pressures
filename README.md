@@ -20,7 +20,8 @@ Folder report cards: contains data to produce the individual report cards, one f
 
 
 Folder: helper-scrips
-Conytains some scripts to generate the report cards and extract the data from the data layers giving point coordinates
+Conytains some scripts to generate the report cards and extract the data from the data layers giving point coordinates. In particular:
+- extract_values.R. Function to extract pressure values for a set of coordinates provided by the user. This is useful if you want to know the values of the six pressures for new sites.
 
 
 Folder: plots
@@ -29,6 +30,8 @@ Contains working files to produce the final plots of the article. The figures ap
 
 Folder: scripts
 Contains all the scripts needed to reproduce the results and the figures of the article.
+
+Read_layers.R.  Reads the original data layers, performs the spatial processing and saves the results in the /data/allreefs layer. You do not need to run this script if you are only interested in the final results or if you want to extract values for new sites.
 
 Analysis.R. Code to perform all the analysis of the article and to draw Figure 5 (barplot and dotplot of pressures in each BCU) and most Supplementary Figures
 
