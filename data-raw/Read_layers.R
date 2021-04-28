@@ -9,8 +9,8 @@ library(here)
 library(spatial.tools)
 library(sf)
 
-source(here::here("scripts","gPolyByIntersect2.R"))
-source(here::here("scripts","IntersectByTile.R"))
+source(here::here("R","gPolyByIntersect2.R"))
+source(here::here("R","IntersectByTile.R"))
 
 # Using Mercator CRS centered on meridian 150E
 EPSG <- make_EPSG()
@@ -34,11 +34,6 @@ allreefs_buffer <- gBuffer(allreefs, byid = T, width = 5000)
 
 
 # 1. FISHING: MARKET GRAVITY
-# The original data layer by Cinner et al (2018, PNAS) is available at:
-# dx.doi.org/10.4225/28/5a0e7b1b3cc0e
-# Download the file "PNASGlobalGravity.rar" and save to `data-raw/fishing`
-# Question for Marco: the file I download is called "Total Gravity of Coral Reefs 1.0" - where is 2.0?
-
 grav <- readOGR(here::here("data-raw", "fishing"), "Global Gravity of Coral Reefs 2.0")
 # Grav_NC is market gravity
 grav <- spTransform(grav, CRS(new_proj))
@@ -57,10 +52,8 @@ allreefs$grav_NC <- grav_NC
 # 2. COASTAL DEVELOPMENT: POPULATION COUNT
 # The original data layer is available from the CIESIN website
 # https://doi.org/10.7927/H4PN93PB
-# Download the file and save to `data-raw/coastal-development`
 # Note that downloading the data requires registration
-# Question for Marco: what should a user select for Temporal, FileFormat, and Resolution?
-
+# Select "Single Year" for Temporal, "GeoTIFF" for FileFormat, "2.5 minutes" for Resolution, then tick "Year 2020"
 a <- raster(here::here("data-raw", "coastal-development", "gpw_v4_population_count_adjusted_to_2015_unwpp_country_totals_rev11_2020_2pt5_min.tif"))
 p <- rasterToPoints(a, spatial = T)
 names(p) <- "values"
@@ -75,9 +68,6 @@ allreefs$pop_count <- pop_count
 # The original data layer is available at
 # https://goo.gl/Yu8xxt
 # and can be downloaded as kml.
-# Download the file and save to `data-raw/industrial-pressure`
-# Question for Marco: The data is already in the repo, should we just give the source rather than telling them to download it?
-
 ports <- read_sf(here::here("data-raw", "industrial-pressure", "World Ports.kml"))
 ports <- as_Spatial(ports)
 ports <- spTransform(ports, CRS(new_proj))
@@ -87,9 +77,8 @@ allreefs$num_ports <- colSums(is)
 
 
 ### 4. TOURISM: REEF VALUE
-# Read reef value
-# Question for Marco: What is the source of this data?
-
+# The original data layer was available upon request by emailing oceanwealth@tnc.org (See the following link under FAQs)
+# https://oceanwealth.org/resources/atlas-of-ocean-wealth/
 a <- raster(here::here("data-raw", "tourism", "reef_value.tif"))
 p <- rasterToPoints(a, spatial = T)
 names(p) <- "values"
@@ -100,7 +89,10 @@ reef_value <- IntersectByTile(allreefs, p, step=1e6)
 allreefs$reef_value <- reef_value
 
 
-### 5. WATER POLLUTION: SEDIMENTS
+# 5. WATER POLLUTION: SEDIMENTS
+# This layer was produced in this work
+# (code to produce it from raw data will be uploaded later, when Amelia Wenger comes back from maternity leave)
+
 # First unzip the sed_plume_avg.zip file in local-reef-pressures\data-raw\sediments into the same folder
 unzip(here("data-raw", "sediments", "sed_plume_avg.zip"), exdir = here("data-raw", "sediments"))
 
@@ -116,7 +108,10 @@ length(which(sed==0)) / length(allreefs)
 allreefs$sediment <- sed
 
 
-### 6. WATER POLLUTION: NITROGEN
+# 6. WATER POLLUTION: NITROGEN
+# This layer was produced in this work
+# (code to produce it from raw data will be uploaded later, when Amelia Wenger comes back from maternity leave)
+
 # First unzip the nit_plume_avg.zip file in local-reef-pressures\data-raw\nitrogen into the same folder
 unzip(here("data-raw", "nitrogen", "nit_plume_avg.zip"), exdir = here("data-raw", "nitrogen"))
 
