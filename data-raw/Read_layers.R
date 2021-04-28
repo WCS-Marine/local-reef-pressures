@@ -8,6 +8,7 @@ library(here)
 # devtools::install_github("cran/spatial.tools") 
 library(spatial.tools)
 library(sf)
+library(matrixStats)
 
 source(here::here("R","gPolyByIntersect2.R"))
 source(here::here("R","IntersectByTile.R"))
@@ -125,7 +126,83 @@ nut <- extract(a.ton, allreefs_centroids_Mol)
 hist(nut,plot=F) # Some very high values!
 allreefs$nutrient <- nut
 
-# Save data
+# PREPARE FINAL DATASET
+
+vthreats <- c("grav_NC",
+              "pop_count",
+              "num_ports",
+              "reef_value",
+              "sediment",
+              "nutrient")
+
+# Remove unnecessary column: reef percentage
+allreefs@data$reefpct <- NULL
+
+# Convert it to sf
+allreefs <- st_as_sf(allreefs)
+
+# Join bcus
+bcus <- read_sf(here::here("data"),"bcus") # Used only to retrieve bcu name and id, not for threat values
+allreefs_withBCU <- left_join(allreefs, select(as.data.frame(bcus),"OBJECTID","ReefName"), by="OBJECTID")
+allreefs_withBCU$is.bcu <- "non BCUs"
+allreefs_withBCU$is.bcu[!is.na(allreefs_withBCU$ReefName)] <- "BCUs"
+allreefs_withBCU <- mutate(allreefs_withBCU, BCU_name=ReefName)
+allreefs_withBCU$ReefName <- NULL
+rm(bcus)
+
+# Calculate percentiles
+allreefs_withBCU %>% mutate(grav_NC_raw = grav_NC,
+                            pop_count_raw = pop_count,
+                            num_ports_raw = num_ports,
+                            reef_value_raw = reef_value,
+                            sediment_raw = sediment,
+                            nutrient_raw = nutrient) -> allreefs_withBCU_prc
+
+calc.percentiles <- function(data.in, indicator) {
+  y <- ecdf(data.in[[indicator]])(data.in[[indicator]])
+  id.0 <- which(data.in[[indicator]] == 0)
+  y[id.0] <- 0
+  y
+}
+for (indicator in vthreats) {
+  allreefs_withBCU_prc[[indicator]] <- calc.percentiles(allreefs_withBCU_prc, paste0(indicator,"_raw"))
+}
+
+# Store normalized values into dataframe "threats"
+threats <- as.data.frame(allreefs_withBCU_prc)[,vthreats]
+
+# Calculate cumulative score
+# Using "perceived threat level" from Wear 2016 Mar Pol, on a scale from 0 to 6
+# 4.3 # Overfishing: gravity
+# 4.3 # Coastal development; pop_count, num_ports, reef value
+# 3.8 # Watershed pollution; sediment, nutrient
+# 3.7 # Thermal stress;
+# 3.2 # Marine pollution;
+# 3.0 # Ocean acidification;
+# Thus for us:
+vweights <- c(4.3, 4.3 ,4.3, 4.3, 3.8, 3.8)
+names(vweights) <- vthreats
+cumul_score <- rowWeightedMeans(as.matrix(threats), w = vweights, na.rm = T) # Weighted mean
+cumul_score_uw <- rowMeans(threats, na.rm = T) # Unweighted mean for comparison
+plot(cumul_score, cumul_score_uw)
+hist(cumul_score)
+hist(cumul_score_uw)
+cor.test(cumul_score, cumul_score_uw, method="spearman")
+allreefs_withBCU_prc$cumul_score <- cumul_score
+rm(cumul_score_uw)
+
+# Calculate top threat
+allreefs_withBCU_prc$top_threat <- apply(as.matrix(threats), 1, which.max)
+
+# Add region
+load(here::here("data-raw","regions","allreefs_withRegion.RData"))
+allreefs_withBCU_prc$Region <- allreefs_withRegion$Region
+rm(allreefs_withRegion)
+
+# Save final dataset
+allreefs <- allreefs_withBCU_prc
 writeOGR(allreefs, here::here("data"), "allreefs", "ESRI Shapefile", overwrite = TRUE)
 save(allreefs, file=here::here("data","allreefs.RData"))
+rm(allreefs_withBCU, allreefs_withBCU_prc)
+
 
