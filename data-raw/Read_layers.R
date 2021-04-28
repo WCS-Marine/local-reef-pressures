@@ -199,10 +199,14 @@ load(here::here("data-raw","regions","allreefs_withRegion.RData"))
 allreefs_withBCU_prc$Region <- allreefs_withRegion$Region
 rm(allreefs_withRegion)
 
-# Save final dataset
+# Change name
 allreefs <- allreefs_withBCU_prc
-writeOGR(allreefs, here::here("data"), "allreefs", "ESRI Shapefile", overwrite = TRUE)
-save(allreefs, file=here::here("data","allreefs.RData"))
 rm(allreefs_withBCU, allreefs_withBCU_prc)
+
+# Save final dataset
+save(allreefs, file=here::here("data","allreefs.RData"))
+writeOGR(allreefs, here::here("data"), "allreefs", "ESRI Shapefile")
+st_write(allreefs, dsn = paste0(getwd(),"/data/allreefs.gpkg"), driver="GPKG")
+
 
 
