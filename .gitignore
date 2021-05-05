@@ -3,6 +3,7 @@
 .RData
 .Ruserdata
 /plots
+/store_plots
 /bboxregions
 .qgz
 .gpkg
