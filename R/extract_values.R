@@ -3,7 +3,7 @@
 #' @param data Dataframe containing the coordinates of the points to extract values for. It must be a four-column dataframe.
 #' The 1st and 2nd columns are ignored by the function; they can contain the region name and the site name, for example.
 #' Longitude must be on the 3rd column and latitude on the 4th column.
-#' @param allreefs Object of type sp::SpatialPolygonsDataFrame containing polygons for all reefs with values for all indicators.
+#' @param allreefs Object of type sp::SpatialPolygonsDataFrame or sf::sf containing polygons for all reefs with values for all indicators.
 #' @param max.radius Maximum radius (in meters) to search for nearest polygons. See details.
 #'
 #' @return A dataframe. The first four columns are the same as in \code{data}, and the following columns contain the values of the indicators
@@ -16,15 +16,27 @@
 #' Increasing \code{max.radius} can extend the search to reef polygons located farther away.
 #'
 #' @examples
-#' # Read data
-#' data <- read.csv("coral-thresholds-lat-longs.csv")
-#' # Open allreefs data
-#' allreefs <- rgdal::readOGR(here::here("data"),"allreefs")
+#' # Create dataframe of sampling points
+#' data <- data.frame(country=NA,
+#'                    name=NA,
+#'                    lon = c(47.7, 48, 48.2),
+#'                    lat = c(-13.9,-13.5, -13.3)
+#' )
+#' # Load allreefs data
+#' data(allreefs)
 #' # Extract the values of the indicators
-#' indicators <- extract_values(data, allreefs, max.radius = 20000)
+#' extract_values(data, allreefs)
 
 extract_values <- function(data, allreefs, max.radius=5000) {
 
+  # If allreefs is sf, convert it to SpatialPolygonsDataFrame
+  if (is(allreefs, "sf")) {
+    cat("Converting allreefs to SpatialPolygonsDataFrame...")
+    allreefs <- as_Spatial(allreefs)
+    cat("done\n")
+  }
+  if (!is(allreefs, "SpatialPolygonsDataFrame")) stop("allreefs must be of class sf or SpatialPolygonsDataFrame")
+  
   # Read CRS for allreefs
   prj4 <- sp::proj4string(allreefs)
 

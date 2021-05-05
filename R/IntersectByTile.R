@@ -2,7 +2,7 @@
 # Marco Andrello
 # 26/03/2020
 IntersectByTile <- function(reefcells, points, step=1e6) {
-  # reefcells is a SpatialPolygonsDataFrame: the reef cells (or their buffers)
+  # reefcells is a SpatialPolygonsDataFrame: the reef cells (or their buffers); must have an OBJECTID
   # points is a SpatialPointsDataFrame: the points with the values (ex: population counts or reef value)
   #        The field of interest in points must be called "values"
 
@@ -10,14 +10,19 @@ IntersectByTile <- function(reefcells, points, step=1e6) {
   # points <- p
   # step <- 1e6
 
+  if ( !any(names(reefcells) == "OBJECTID") ) stop("reefcells must have an OBJECTID column")
+  
   # Initialize output
   output <- rep(0, dim(reefcells)[1])
+
   # Define the bundaries of the tiles
   # we'll go from -20,000,000 to +20,000,000 (Easting) and from -4,000,000 to 4,000,000 (Northing)
   seq.easting <- seq(-20e6,20e6,step)
   seq.northing <- seq(-4e6,4e6,step)
+  
   # Initialize tile
   tile <- bbox(reefcells)
+  
   # Loop on tiles
   for (i.x in 1 : (length(seq.easting)-1)) {
     for (i.y in 1 : (length(seq.northing)-1)) {
@@ -33,6 +38,7 @@ IntersectByTile <- function(reefcells, points, step=1e6) {
                                           reefcells,
                                           centroid=T)
       if (is.null(reefcells_tile)) next
+      
       # Points contained in this tile
       points_tile <- gBoundingPoints(points,
                                      bbox(reefcells_tile))

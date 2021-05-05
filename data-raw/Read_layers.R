@@ -16,6 +16,7 @@ library(spatial.tools)
 library(sf)
 library(matrixStats)
 library(tidyverse)
+library(corrgram)
 
 source(here::here("R","gPolyByIntersect2.R"))
 source(here::here("R","IntersectByTile.R"))
@@ -29,7 +30,7 @@ new_proj <- EPSG$prj4[id]
 allreefs <- rgdal::readOGR(here::here("data-raw", "50-reefs"),"allreefs")
 
 # If needed, reproject allreefs into the new projection
-# allreefs <- rgdal::spTransform(allreefs, sp::CRS(new_proj))
+# allreefs <- spTransform(allreefs, sp::CRS(new_proj))
 
 # Create a buffer of 5000 m around each reef cell
 allreefs_buffer <- rgeos::gBuffer(allreefs, byid = T, width = 5000)
@@ -37,8 +38,8 @@ allreefs_buffer <- rgeos::gBuffer(allreefs, byid = T, width = 5000)
 
 #(I think saving it in ESRI Shapefile changes the proj4string a bit - hence the warning in IntersectByTile -but the substantial CRS is the same)
 # Reconverting to the new_proj does not solve the problem
-# allreefs <- rgdal::spTransform(allreefs, sp::CRS(new_proj))
-# allreefs_buffer <- rgdal::spTransform(allreefs_buffer, sp::CRS(new_proj))
+# allreefs <- spTransform(allreefs, sp::CRS(new_proj))
+# allreefs_buffer <- spTransform(allreefs_buffer, sp::CRS(new_proj))
 
 
 
@@ -46,7 +47,7 @@ allreefs_buffer <- rgeos::gBuffer(allreefs, byid = T, width = 5000)
 grav <- rgdal::readOGR(here::here("data-raw", "fishing"), "Global Gravity of Coral Reefs 2.0") # Field Grav_NC is market gravity
 
 # Transform the market gravity layer into the project CRS 
-grav <- rgdal::spTransform(grav, CRS(new_proj))
+grav <- spTransform(grav, CRS(new_proj))
 
 # Intersect the allreefs layer with the gravity layer
 # Do it with the st_intersects function of the sf package, which is more efficient at memory usage
@@ -84,7 +85,7 @@ p <- raster::rasterToPoints(a, spatial = T)
 names(p) <- "values"
 
 # Transform the population count layer into the project CRS 
-p <- rgdal::spTransform(p, sp::CRS(new_proj))
+p <- spTransform(p, sp::CRS(new_proj))
 rm(a)
 
 # Calculate population count by tile (doing it on the entire SpatialPolygons might crash)
@@ -107,7 +108,7 @@ ports <- sf::read_sf(here::here("data-raw", "industrial-pressure", "World Ports.
 ports <- sf::as_Spatial(ports)
 
 # Transform the ports layer into the project CRS 
-ports <- rgdal::spTransform(ports, sp::CRS(new_proj))
+ports <- spTransform(ports, sp::CRS(new_proj))
 
 # Intersect the ports layer with the allreef_buffers layers
 # We are using the allreefs_buffer layer instead of the allreefs layer
@@ -130,7 +131,7 @@ p <- raster::rasterToPoints(a, spatial = T)
 names(p) <- "values"
 
 # Transform the tourism layer into the project CRS 
-p <- rgdal::spTransform(p, sp::CRS(new_proj))
+p <- spTransform(p, sp::CRS(new_proj))
 rm(a)
 
 # Calculate reef value by tile (doing it on the entire SpatialPolygons might crash)
@@ -152,7 +153,7 @@ a <- raster::raster(here("data-raw","sediments","sed_plume_avg.tif"))
 
 # Calculate the centroids of the reef cells and reproject them in the same CRS of the raster (Mollweide)
 allreefs_centroids <- rgeos::gCentroid(allreefs, byid=T)
-allreefs_centroids_Mol <- rgdal::spTransform(allreefs_centroids, sp::CRS(proj4string(a)))
+allreefs_centroids_Mol <- spTransform(allreefs_centroids, sp::CRS(proj4string(a)))
 
 # Read (extract) the values of the sediment layer corresponding to the centroids of the reef cells
 # And store it into the sed vector
@@ -185,7 +186,7 @@ a.ton <- a / 1000 # Converting kg to tons
 # You do not need to run the two following lines if you have already done it for the sediment layer,
 # Because the sediment and the nitrogen layers are in the same CRS (Mollweide)
 # allreefs_centroids <- rgeos::gCentroid(allreefs, byid=T)
-# allreefs_centroids_Mol <- rgdal::spTransform(allreefs_centroids, sp::CRS(proj4string(a.ton)))
+# allreefs_centroids_Mol <- spTransform(allreefs_centroids, sp::CRS(proj4string(a.ton)))
 
 # Read (extract) the values of the nitrogen layer corresponding to the centroids of the reef cells
 # And store it into the nit vector
@@ -221,8 +222,8 @@ allreefs@data$reefpct <- NULL
 allreefs <- sf::st_as_sf(allreefs)
 
 # Join bcus
-bcus <- sf::read_sf(here::here("data"),"bcus") # Used only to retrieve bcu name and id, not for threat values
-allreefs_withBCU <- dplyr::left_join(allreefs, select(as.data.frame(bcus),"OBJECTID","ReefName"), by="OBJECTID")
+load(here::here("data-raw","50-reefs","bcus.RData"))
+allreefs_withBCU <- left_join(allreefs, bcus, by="OBJECTID")
 
 # Make a column saying whether the reef cell is in a BCU or not
 allreefs_withBCU$is.bcu <- "non BCUs"
@@ -305,5 +306,69 @@ rgdal::writeOGR(as_Spatial(allreefs), here::here("data"), "allreefs", "ESRI Shap
 sf::st_write(allreefs, dsn = paste0(getwd(),"/data/allreefs.gpkg"), driver="GPKG")
 
 
+
+# SENSITIVITY ANALYSIS OF THE COASTAL DEVELOPMENT LAYER TO BUFFER SIZE
+# Keep only useful columns and Reconvert allreefs back to SpatialPolygonsDataFrame
+allreefs %>% select("OBJECTID","pop_count_raw") %>% as_Spatial() -> allreefs_sp
+
+# Reload population count layer, convert raster object to point shapefile
+a <- raster::raster(here::here("data-raw", "coastal-development", "gpw_v4_population_count_adjusted_to_2015_unwpp_country_totals_rev11_2020_2pt5_min.tif"))
+p <- raster::rasterToPoints(a, spatial = T)
+names(p) <- "values"
+
+# and convert it into the project CRS (Mercator centered on meridian 150E)
+EPSG <- rgdal::make_EPSG()
+id <- which(EPSG$code == 3832)
+new_proj <- EPSG$prj4[id]
+p <- spTransform(p, sp::CRS(new_proj))
+rm(a)
+
+# Define alternative buffer sizes (1 to 100 km)
+a_buffer_1 <- gBuffer(allreefs_sp, byid = T, width = 1000)
+a_buffer_10 <- gBuffer(allreefs_sp, byid = T, width = 10000)
+a_buffer_15 <- gBuffer(allreefs_sp, byid = T, width = 15000)
+a_buffer_20 <- gBuffer(allreefs_sp, byid = T, width = 20000)
+a_buffer_50 <- gBuffer(allreefs_sp, byid = T, width = 50000)
+a_buffer_100 <- gBuffer(allreefs_sp, byid = T, width = 100000)
+
+# Calculate pop count by tile (doing it on the entire SpatialPolygons might crash)
+allreefs_sp$pop_count_1 <- IntersectByTile(a_buffer_1, p, step=1e6)
+allreefs_sp$pop_count_10 <- IntersectByTile(a_buffer_10, p, step=1e6)
+allreefs_sp$pop_count_15 <- IntersectByTile(a_buffer_15, p, step=1e6)
+allreefs_sp$pop_count_20 <- IntersectByTile(a_buffer_20, p, step=1e6)
+allreefs_sp$pop_count_50 <- IntersectByTile(a_buffer_50, p, step=1e6)
+allreefs_sp$pop_count_100 <- IntersectByTile(a_buffer_100, p, step=1e6)
+
+# Rename the raw column to 5km, and extract the useful columns 
+pop_count_raw <-
+  mutate(allreefs_sp@data,
+         pop_count_5 = pop_count_raw) %>%
+  select(pop_count_1,
+         pop_count_5,
+         pop_count_10,
+         pop_count_15,
+         pop_count_20,
+         pop_count_50,
+         pop_count_100)
+
+# Define a new dataframe that will contain the percentile values
+pop_count <- pop_count_raw
+
+# Calculate percentiles
+for (i in 1 : 7) {
+  y <- ecdf(pop_count_raw[,i])(pop_count_raw[,i])
+  id.0 <- which(pop_count_raw[,i] == 0)
+  y[id.0] <- 0
+  pop_count[,i] <- y
+}
+
+# Change names
+names(pop_count) <- c("1 km","5 km","10 km","15 km","20 km","50 km","100 km")
+
+# Calculate Spearman correlations and draw the correlogram
+corrgram(pop_count, lower.panel=NULL,
+         upper.panel=panel.cor,
+         cor.method="spearman")
+# Then saved as Figure S12
 
 

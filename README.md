@@ -15,11 +15,11 @@ Contains the individual report cards (pdf), one for each of the 83 Bioclimatic U
 
 Contains the original data layers.
 
-`data-raw/read_layers.R` reads the original data layers, performs the spatial processing and saves the results in the `data/allreefs` layer. You do not need to run this script if you are only interested in the final results or if you want to extract values for new sites.
+`data-raw/Read_layers.R` reads the original data layers, performs the spatial processing and saves the results in the `data/allreefs` layer. You do not need to run this script if you are only interested in the final results or if you want to extract values for new sites.
 
 ### `data/`
 
-Contains the final GIS layers of the 6 local reef pressures and the global climatic scores of Beyer et al. (2018), in three different formats: ESRI Shapefile (`.shp`, to open with ArcGIS), `.GPKG` (to open with QGis) and `.RData` (with R).
+Contains the final GIS layers of the 6 local reef pressures and the global climatic scores of Beyer et al. (2018), in three different formats: ESRI Shapefile (`.shp`, to open with ArcGIS), `.GPKG` (to open with QGis) and `.RData` (with R). Type `data(allreefs)` to load the dataset.
 
 `key.xlsx` contains correspondence between field names of the RData and GPKG files, on one hand, the the ESRI file, on the other hand
 
@@ -44,11 +44,11 @@ Contains all the scripts needed to reproduce the results and the figures of the 
 
 `Analysis BCU medians.R`. Code to plot Figure S10 (Regional comparisons of median pressure of BCU) and Figure 5 (median pressure for each BCU) of the article
 
+`Other_analyses.R`. Not used in the article
+
 `Plot Figure 6.R`. Not used in the article
 
 `Plot Maps.R`. Code to plot Figure 1 (map of top pressures), Figure 2 (map of cumulative impact score) and Figures S1 to S6 (map of individual pressures) of the article
-
-`Sensitivity_buffer_size.R`. Code for sensitivity analysis of the buffer size of the coastal development layer
 
 `analysis/report-cards/` contains the code to produce the report cards, which are saved in ``BCU Report cards/`.
 
@@ -91,12 +91,13 @@ Run `analysis/Analysis.R`
 Run `analysis/Analysis BCU medians.R`
 
 #### Supplementary Figure 11
-This Figure was made with QGis and annotated in Power POint, there is no R code to produce it
+This Figure was made with QGis and annotated in Power Point, there is no R code to produce it
 
 #### Supplementary Figure 12
-
+Run `data-raw/Read_layers.R`
 
 ### Getting the list of BCUs with their top and second-top pressure
 Run `analysis/Analysis BCU medians.R`.
 
 ### Extracting pressure values for a given set of sites
+Use the function `extract_values.R` on a list of points with longitude and latitude. See ?extract.values for help.
