@@ -59,7 +59,7 @@ Contains all the scripts needed to reproduce the results and the figures of the 
 
 Run `data-raw/read_layers.R` to create the final GIS layers in `data/` from the six original layers stored in `data-raw/`. Beware that treatment of the raster layers (coastal development and tourism) takes a long time to run.
 
-### Reproducing the Figures and the results appearing in the paper
+### 2.2 Reproducing the Figures and the results appearing in the paper
 #### Figure 1
 Run `analysis/Plot Maps.R` (first part)
 
@@ -96,8 +96,8 @@ This Figure was made with QGis and annotated in Power Point, there is no R code 
 #### Supplementary Figure 12
 Run `data-raw/Read_layers.R`
 
-### 2.2 Getting the list of BCUs with their top and second-top pressure
+### 2.3 Getting the list of BCUs with their top and second-top pressure
 Run `analysis/Analysis BCU medians.R`.
 
-### 2.3 Extracting pressure values for a given set of sites
+### 2.4 Extracting pressure values for a given set of sites
 Use the function `extract_values.R` on a list of points with longitude and latitude. See ?extract.values for help.
