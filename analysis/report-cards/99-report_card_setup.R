@@ -10,11 +10,11 @@ library(stringr)
 library(ggbeeswarm)
 library(glue, warn.conflicts = FALSE)
 
-source(here::here("helper-scripts", "map_indicator.R"))
-source(here::here("helper-scripts", "plot_indicator.R"))
-source(here::here("helper-scripts", "square_bbox.R"))
-source(here::here("helper-scripts", "recode_bcus.R"))
-source(here::here("helper-scripts", "plot_pressure_ranking_percentiles.R"))
+source(here::here("R", "map_indicator.R"))
+source(here::here("R", "plot_indicator.R"))
+source(here::here("R", "square_bbox.R"))
+source(here::here("R", "recode_bcus.R"))
+source(here::here("R", "plot_pressure_ranking_percentiles.R"))
 
 theme_set(theme_minimal(10))
 

@@ -1,7 +1,8 @@
 # Generate percentile plot for supplementary methods
 library(ggplot2)
+library(ggpubr)
 
-source(here::here("scripts", "report-cards", "99-report_card_setup.R"))
+source(here::here("analysis", "report-cards", "99-report_card_setup.R"))
 
 bcu <- "Northern Papua"
 

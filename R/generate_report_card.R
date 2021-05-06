@@ -19,7 +19,7 @@ generate_report_cards <- function(bcu = "all", open = TRUE, quiet = FALSE) {
 
   multiple_bcus <- length(bcu) > 1
   if (multiple_bcus) {
-    source(here::here("scripts", "report-cards", "99-report_card_setup.R"))
+    source(here::here("analysis", "report-cards", "99-report_card_setup.R"))
   }
 
   purrr::walk(bcu, generate_single_report_card, open, quiet, standalone = !multiple_bcus)
@@ -59,7 +59,7 @@ generate_single_report_card <- function(bcu, open = TRUE, quiet = FALSE, standal
   out_file <- here::here("BCU report cards", glue::glue("{bcu_country}_{bcu_name}.pdf"))
 
   rmarkdown::render(
-    input = here::here("scripts", "report-cards", "99-report_card_template.Rmd"),
+    input = here::here("analysis", "report-cards", "99-report_card_template.Rmd"),
     output_file = out_file,
     params = list(reef = bcu,
                   standalone = TRUE),

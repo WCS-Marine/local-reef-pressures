@@ -20,7 +20,7 @@ options(scipen = 999)
 ```
 
 ```{r data, eval = params$standalone}
-source(here::here("scripts", "report-cards", "99-report_card_setup.R"))
+source(here::here("analysis", "report-cards", "99-report_card_setup.R"))
 ```
 
 ```{r bcu-data}
