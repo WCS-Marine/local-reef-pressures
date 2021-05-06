@@ -11,6 +11,7 @@ library(here)
 library(tmap)
 library(RColorBrewer)
 library(magick)
+library(pdftools)
 
 load(here::here("data","allreefs.RData"))
 
@@ -130,7 +131,7 @@ for (i in 1 : nrow(v.bbox.panel)) {
     tmap::tm_legend(show = F)
   
   # Save the panel map
-  tmap::tmap_save(m.p, filename = here::here(glue::glue("plots/topthreat_panel_{v.bbox.panel$name[i]}_2.pdf")), width = ifelse(factor_shape == 1, full_width/4, full_width/2), height = full_width/4, units = "cm", dpi = 600)
+  tmap::tmap_save(m.p, filename = here::here(glue::glue("plots/topthreat_panel_{v.bbox.panel$name[i]}.pdf")), width = ifelse(factor_shape == 1, full_width/4, full_width/2), height = full_width/4, units = "cm", dpi = 600)
 }
 rm(allreefs_panel, countries_eq_panel,m.p)
 
@@ -167,7 +168,7 @@ for(i in names(panel_list)) {
   # Read panels in, in order intended, and save them in the list
   panel_list[[i]] <- magick::image_read_pdf(here::here(glue::glue("plots/topthreat_panel_{i}.pdf")),density=600)
   
-  # Add name of the reion in the panel map
+  # Add name of the region in the panel map
   panel_list[[i]] <- magick::image_annotate(panel_list[[i]],i,
                                     gravity="North", size=9, location=c("+0+30"))
 }
