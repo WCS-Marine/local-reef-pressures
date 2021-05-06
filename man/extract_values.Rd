@@ -11,7 +11,7 @@ extract_values(data, allreefs, max.radius = 5000)
 The 1st and 2nd columns are ignored by the function; they can contain the region name and the site name, for example.
 Longitude must be on the 3rd column and latitude on the 4th column.}
 
-\item{allreefs}{Object of type sp::SpatialPolygonsDataFrame containing polygons for all reefs with values for all indicators.}
+\item{allreefs}{Object of type sp::SpatialPolygonsDataFrame or sf::sf containing polygons for all reefs with values for all indicators.}
 
 \item{max.radius}{Maximum radius (in meters) to search for nearest polygons. See details.}
 }
@@ -30,10 +30,14 @@ If no reef polygon centroid is found within a circle of radius \code{max.radius}
 Increasing \code{max.radius} can extend the search to reef polygons located farther away.
 }
 \examples{
-# Read data
-data <- read.csv("coral-thresholds-lat-longs.csv")
-# Open allreefs data
-allreefs <- rgdal::readOGR(here::here("data"),"allreefs")
+# Create dataframe of sampling points
+data <- data.frame(country=NA,
+                   name=NA,
+                   lon = c(47.7, 48, 48.2),
+                   lat = c(-13.9,-13.5, -13.3)
+)
+# Load allreefs data
+data(allreefs)
 # Extract the values of the indicators
-indicators <- extract_values(data, allreefs, max.radius = 20000)
+extract_values(data, allreefs)
 }
