@@ -98,6 +98,7 @@ m_global_topthreats <-  m +
   tmap::tm_legend(show = FALSE)
 
 # Save the global map
+fs::dir_create(here::here("plots")) # Create plots folder if it doesn't exist
 tmap::tmap_save(m_global_topthreats, filename = here::here(glue::glue("plots/topthreat_global.pdf")), width = full_width, height = 4, units = "cm")
 rm(m_global_topthreats)
 
@@ -230,6 +231,8 @@ file.remove(paste0("plots/",dir(here::here("plots"))))
 #############################################################################################
 #  FIGURE 2 (CUMULATIVE SCORE) AND SUPPLEMENTARY FIGURES 1 to 6 (INDIVIDUAL PRESSURES)
 #############################################################################################
+
+fs::dir_create(here::here("plots")) # Create plots folder if it doesn't exist
 
 # Loop on the six pressures + cumulative score
 for (i.threat in 1 : 7) {
@@ -383,9 +386,4 @@ for (i.threat in 1 : 7) {
   # Remove working files (empty "plots" folder)
   file.remove(paste0("plots/",dir(here::here("plots"))))
 }
-
-
-
-
-
 

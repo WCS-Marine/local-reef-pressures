@@ -33,9 +33,6 @@ Contains some scripts to generate the report cards and extract the data from the
 
 - `extract_values.R`. Function to extract pressure values for a set of coordinates provided by the user. This is useful if you want to know the values of the six pressures for new sites.
 
-### `plots/`
-Empty folder, it is used to store working files to produce the final plots of the article. 
-
 ### `analysis/`
 
 Contains all the scripts needed to reproduce the results and the figures of the article.
@@ -50,7 +47,7 @@ Contains all the scripts needed to reproduce the results and the figures of the 
 
 `Plot Maps.R`. Code to plot Figure 1 (map of top pressures), Figure 2 (map of cumulative impact score) and Figures S1 to S6 (map of individual pressures) of the article
 
-`analysis/report-cards/` contains the code to produce the report cards, which are saved in ``BCU Report cards/`.
+`analysis/report-cards/` contains the code to produce the report cards, which are saved in `BCU Report cards/`.
 
 
 ## 2. How to use the content of this repository
