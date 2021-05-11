@@ -41,10 +41,6 @@ Contains all the scripts needed to reproduce the results and the figures of the 
 
 `Analysis BCU medians.R`. Code to plot Figure S10 (Regional comparisons of median pressure of BCU) and Figure 5 (median pressure for each BCU) of the article
 
-`Other_analyses.R`. Not used in the article
-
-`Plot Figure 6.R`. Not used in the article
-
 `Plot Maps.R`. Code to plot Figure 1 (map of top pressures), Figure 2 (map of cumulative impact score) and Figures S1 to S6 (map of individual pressures) of the article
 
 `analysis/report-cards/` contains the code to produce the report cards, which are saved in `BCU Report cards/`.
