@@ -15,7 +15,6 @@
 #'
 #' plot_pressure_ranking_percentiles(bcu_percentiles, bcu_top_pressures)
 plot_pressure_ranking_percentiles <- function(bcu_percentiles, bcu_top_pressures) {
-
   bcu_top_pressures <- bcu_top_pressures %>%
     dplyr::filter(!stringr::str_detect(indicator_label, "Climate:"), indicator != "num_ports") %>%
     dplyr::mutate(indicator_label = stringr::str_replace(indicator_label, ": ", ":\n"))
@@ -34,17 +33,21 @@ plot_pressure_ranking_percentiles <- function(bcu_percentiles, bcu_top_pressures
       low = low_blue, mid = mid_yellow, high = high_red,
       midpoint = 0.5, limits = c(0, 1)
     ) +
-    ggplot2::labs(x = NULL, y = "Pressure Percentile",
-         title = "Pressures ranked from highest to lowest; BCU average and pixels compared to all reef pixels",
-         subtitle = "A value in the 50th percentile means that the BCU's average is higher than 50% of the world's coral reefs values",
-         caption = "(Number of ports excluded from ranking due to consistently low values)") +
+    ggplot2::labs(
+      x = NULL, y = "Pressure Percentile",
+      title = "Pressures ranked from highest to lowest; BCU average and pixels compared to all reef pixels",
+      subtitle = "A value in the 50th percentile means that the BCU's average is higher than 50% of the world's coral reefs values",
+      caption = "(Number of ports excluded from ranking due to consistently low values)"
+    ) +
     ggplot2::scale_y_continuous(limits = c(0, 1), labels = scales::percent) +
     ggplot2::scale_fill_gradient2(
       low = low_blue, mid = mid_yellow, high = high_red,
       midpoint = 0.5, limits = c(0, 1)
     ) +
     ggplot2::theme_minimal() +
-    ggplot2::theme(legend.position = "none", plot.title.position = "plot",
-          plot.title = ggplot2::element_text(size = 11),
-          plot.subtitle = ggplot2::element_text(size = 9))
+    ggplot2::theme(
+      legend.position = "none", plot.title.position = "plot",
+      plot.title = ggplot2::element_text(size = 11),
+      plot.subtitle = ggplot2::element_text(size = 9)
+    )
 }

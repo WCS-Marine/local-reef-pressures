@@ -31,10 +31,11 @@ Increasing \code{max.radius} can extend the search to reef polygons located fart
 }
 \examples{
 # Create dataframe of sampling points
-data <- data.frame(country=NA,
-                   name=NA,
-                   lon = c(47.7, 48, 48.2),
-                   lat = c(-13.9,-13.5, -13.3)
+data <- data.frame(
+  country = NA,
+  name = NA,
+  lon = c(47.7, 48, 48.2),
+  lat = c(-13.9, -13.5, -13.3)
 )
 # Load allreefs data
 data(allreefs)

@@ -7,7 +7,6 @@
 #' @return A set of pdf report cards saved in \code{report-cards/}
 #' @export
 generate_report_cards <- function(bcu = "all", open = TRUE, quiet = FALSE) {
-
   bcus <- readRDS(here::here("data", "report-cards", "bcus_list.rds"))
   bcus <- names(bcus)
 
@@ -23,7 +22,6 @@ generate_report_cards <- function(bcu = "all", open = TRUE, quiet = FALSE) {
   }
 
   purrr::walk(bcu, generate_single_report_card, open, quiet, standalone = !multiple_bcus)
-
 }
 
 #' Generate a single reef pressures report card
@@ -39,7 +37,6 @@ generate_report_cards <- function(bcu = "all", open = TRUE, quiet = FALSE) {
 #' @examples
 #' generate_single_report_card("Eel - NGBR")
 generate_single_report_card <- function(bcu, open = TRUE, quiet = FALSE, standalone = TRUE) {
-
   fs::dir_create(here::here("BCU report cards"))
 
   if (length(bcu) > 1) {
@@ -61,8 +58,10 @@ generate_single_report_card <- function(bcu, open = TRUE, quiet = FALSE, standal
   rmarkdown::render(
     input = here::here("analysis", "report-cards", "99-report_card_template.Rmd"),
     output_file = out_file,
-    params = list(reef = bcu,
-                  standalone = TRUE),
+    params = list(
+      reef = bcu,
+      standalone = TRUE
+    ),
     quiet = TRUE
   )
 

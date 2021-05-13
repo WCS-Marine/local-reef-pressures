@@ -22,8 +22,9 @@ bcus_tiles_indicator <- map2(bcus[which(!names(bcus) %in% c("Vanua Balavu - NE F
 
 fiji_tiles_indicator <- list(
   `Vanua Balavu - NE Fiji` = get_left_right_tiles(bcus, "Vanua Balavu - NE Fiji", bcus_ext[["Vanua Balavu - NE Fiji"]]),
-  `Vatu-i-Ra` = get_left_right_tiles(bcus, "Vatu-i-Ra", bcus_ext[["Vatu-i-Ra"]]))
+  `Vatu-i-Ra` = get_left_right_tiles(bcus, "Vatu-i-Ra", bcus_ext[["Vatu-i-Ra"]])
+)
 
 bcus_tiles_indicator <- append(bcus_tiles_indicator, fiji_tiles_indicator)
 
-saveRDS(bcus_tiles_indicator, here::here("data", "report-cards",  "bcus_tiles_indicator.rds"))
+saveRDS(bcus_tiles_indicator, here::here("data", "report-cards", "bcus_tiles_indicator.rds"))

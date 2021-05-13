@@ -17,99 +17,106 @@
 #'
 #' @examples
 #' # Create dataframe of sampling points
-#' data <- data.frame(country=NA,
-#'                    name=NA,
-#'                    lon = c(47.7, 48, 48.2),
-#'                    lat = c(-13.9,-13.5, -13.3)
+#' data <- data.frame(
+#'   country = NA,
+#'   name = NA,
+#'   lon = c(47.7, 48, 48.2),
+#'   lat = c(-13.9, -13.5, -13.3)
 #' )
 #' # Load allreefs data
 #' data(allreefs)
 #' # Extract the values of the indicators
 #' extract_values(data, allreefs)
-
-extract_values <- function(data, allreefs, max.radius=5000) {
+extract_values <- function(data, allreefs, max.radius = 5000) {
 
   # If allreefs is sf, convert it to SpatialPolygonsDataFrame
   if (is(allreefs, "sf")) {
     cat("Converting allreefs to SpatialPolygonsDataFrame...")
-    allreefs <- as_Spatial(allreefs)
+    allreefs <- sf::as_Spatial(allreefs)
     cat("done\n")
   }
   if (!is(allreefs, "SpatialPolygonsDataFrame")) stop("allreefs must be of class sf or SpatialPolygonsDataFrame")
-  
+
   # Read CRS for allreefs
   prj4 <- sp::proj4string(allreefs)
 
-  cat("CRS for allreefs is\n",prj4,"\n")
+  cat("CRS for allreefs is\n", prj4, "\n")
 
   # Convert points to spatialPoints. Assuming input data are in WGS84 (EPSG: 4326)
-  points <- sp::SpatialPoints(data[,c(3,4)],
-                               proj4string=sp::CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs "))
+  points <- sp::SpatialPoints(data[, c(3, 4)],
+    proj4string = sp::CRS("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs ")
+  )
 
 
   # Change CRS for points
-  points_prj4 <- sp::spTransform(points,sp::CRS(prj4))
+  points_prj4 <- sp::spTransform(points, sp::CRS(prj4))
 
   # Extract allreefs centroids
-  allreefs_centroids <- rgeos::gCentroid(allreefs, byid=T)
+  allreefs_centroids <- rgeos::gCentroid(allreefs, byid = T)
 
   # Find nearest neighboring allreefs for each point
   nn <- RANN::nn2(sp::coordinates(allreefs_centroids),
-                  sp::coordinates(points_prj4),
-                  k=1,
-                  searchtype = "radius",
-                  radius = max.radius)
+    sp::coordinates(points_prj4),
+    k = 1,
+    searchtype = "radius",
+    radius = max.radius
+  )
 
 
   # Initializing output dataframe
-# LEGEND:
-# "score", Climate: composite score
-# "scorecn", Climate: connectivity
-# "scorecy", Climate: Cyclone Risk
-# "scorepfc", Climate: Thermal future
-# "scoreth", Climate: Thermal history
-# "scoretr", Climate: Recent stress
-# "grav_NC", Fishing: Market Pressure
-# "sediment", Pollution: Sedimentation
-# "nutrient", Pollution: Nutrients
-# "pop_count", Coastal Development: Human Population
-# "num_ports", Industrial Development: Ports
-# "reef_value", Tourism: Reef Value
-  out.data <- matrix(NA, nrow=nrow(nn$nn.idx), ncol = 13)
-  colnames(out.data) <- c("score",
-                          "scorecn",
-                          "scorecy",
-                          "scorepfc",
-                          "scoreth",
-                          "scoretr",
-                          "grav_NC",
-                          "sediment",
-                          "nutrient",
-                          "pop_count",
-                          "num_ports",
-                          "reef_value", 
-                          "cumul_score")
+  # LEGEND:
+  # "score", Climate: composite score
+  # "scorecn", Climate: connectivity
+  # "scorecy", Climate: Cyclone Risk
+  # "scorepfc", Climate: Thermal future
+  # "scoreth", Climate: Thermal history
+  # "scoretr", Climate: Recent stress
+  # "grav_NC", Fishing: Market Pressure
+  # "sediment", Pollution: Sedimentation
+  # "nutrient", Pollution: Nutrients
+  # "pop_count", Coastal Development: Human Population
+  # "num_ports", Industrial Development: Ports
+  # "reef_value", Tourism: Reef Value
+  out.data <- matrix(NA, nrow = nrow(nn$nn.idx), ncol = 13)
+  colnames(out.data) <- c(
+    "score",
+    "scorecn",
+    "scorecy",
+    "scorepfc",
+    "scoreth",
+    "scoretr",
+    "grav_NC",
+    "sediment",
+    "nutrient",
+    "pop_count",
+    "num_ports",
+    "reef_value",
+    "cumul_score"
+  )
   out.data <- as.data.frame(out.data)
 
   # Loop on points to fill values into output dataframe
-  for (i in 1 : nrow(nn$nn.idx)) {
-    if (nn$nn.idx[i,1] == 0) next
-    out.data[i, ] <- as.list(allreefs@data[nn$nn.idx[i,1],
-                                           c("score",
-                                             "scorecn",
-                                             "scorecy",
-                                             "scorepfc",
-                                             "scoreth",
-                                             "scoretr",
-                                             "grav_NC",
-                                             "sediment",
-                                             "nutrient",
-                                             "pop_count",
-                                             "num_ports",
-                                             "reef_value", 
-                                             "cumul_score")])
+  for (i in 1:nrow(nn$nn.idx)) {
+    if (nn$nn.idx[i, 1] == 0) next
+    out.data[i, ] <- as.list(allreefs@data[
+      nn$nn.idx[i, 1],
+      c(
+        "score",
+        "scorecn",
+        "scorecy",
+        "scorepfc",
+        "scoreth",
+        "scoretr",
+        "grav_NC",
+        "sediment",
+        "nutrient",
+        "pop_count",
+        "num_ports",
+        "reef_value",
+        "cumul_score"
+      )
+    ])
   }
-  out.data <- cbind(data,out.data)
+  out.data <- cbind(data, out.data)
   return(out.data)
 }
-

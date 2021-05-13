@@ -15,8 +15,10 @@ bcus_prefs <- top_pressures %>%
   mutate(
     crs = case_when(
       bcu %in% c("Great Barrier Reef Central", "Mason - NGBR", "Eel - NGBR", "WhitsundayReef 1 - SGBR", "WhitsundayReef 2-SGBR", "Torres Strait") ~ 4326,
-      bcu %in% c("Tahiti", "Tuamotus Central", "Tuamotus Northern", "Tuamotus Southern",
-                 "Vanua Balavu - NE Fiji", "Vatu-i-Ra", "Solomon Islands", "Milne Bay") ~ 3460,
+      bcu %in% c(
+        "Tahiti", "Tuamotus Central", "Tuamotus Northern", "Tuamotus Southern",
+        "Vanua Balavu - NE Fiji", "Vatu-i-Ra", "Solomon Islands", "Milne Bay"
+      ) ~ 3460,
       TRUE ~ 3832
     ),
     zoom = case_when(

@@ -16,7 +16,6 @@
 #'
 #' plot_indicator_dumbbell(bcus_top_pressures, bcus_regions, "Aceh", "grav_NC")
 plot_indicator_dumbbell <- function(bcus_top_pressures, bcus_regions, bcu_name, indicator) {
-
   bcus_top_pressures <- dplyr::bind_rows(bcus_top_pressures)
   bcus_regions <- dplyr::bind_rows(bcus_regions)
 
@@ -42,7 +41,8 @@ plot_indicator_dumbbell <- function(bcus_top_pressures, bcus_regions, bcu_name, 
       subregion == region,
       bcu != bcu_name
     ) %>%
-    dplyr::mutate(subregion = ifelse(subregion == "Australia and New Zealand", "Australia", subregion),
+    dplyr::mutate(
+      subregion = ifelse(subregion == "Australia and New Zealand", "Australia", subregion),
       indicator_label = stringr::str_replace(indicator_label, ": ", ":\n"),
       meaning = paste("Other", subregion, "BCU Averages")
     )

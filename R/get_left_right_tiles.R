@@ -22,7 +22,7 @@ get_left_right_tiles <- function(bcus, bcu_name, bcu_ext, tile_type = "bing", zo
   bcu <- sf::as_Spatial(bcu)
   prj <- "+proj=longlat +datum=WGS84 +no_defs"
 
-  bb.meters <- as.data.frame(t(square_bbox(bcu, ext = bcu_ext*1.5, output = "matrix")))
+  bb.meters <- as.data.frame(t(square_bbox(bcu, ext = bcu_ext * 1.5, output = "matrix")))
   colnames(bb.meters) <- c("lon", "lat")
   sp::coordinates(bb.meters) <- c("lon", "lat")
   sp::proj4string(bb.meters) <- sp::CRS(sp::proj4string(bcu))
@@ -38,9 +38,9 @@ get_left_right_tiles <- function(bcus, bcu_name, bcu_ext, tile_type = "bing", zo
   tile.right <- tmaptools::read_osm(bb.right, type = tile_type, zoom = zoom)
 
   tile <- list(
-      left = tile.left,
-      right = tile.right
-    )
+    left = tile.left,
+    right = tile.right
+  )
 
   return(tile)
 }

@@ -15,6 +15,6 @@ square_bbox <- function(x, ext = 1.1, output = "bbox") {
   x_range <- original_bbox[["xmax"]] - original_bbox[["xmin"]]
   y_range <- original_bbox[["ymax"]] - original_bbox[["ymin"]]
   max_range <- max(x_range, y_range)
-  max_range_ext <- max_range*ext
+  max_range_ext <- max_range * ext
   tmaptools::bb(x, width = max_range_ext, height = max_range_ext, output = output)
 }
