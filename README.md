@@ -74,4 +74,4 @@ Please note that Supplementary Figure 11 was made with QGis and annotated in Pow
 Run `analysis/Analysis BCU medians.R`.
 
 ### 2.4 Extracting pressure values for a given set of sites
-Use the function `extract_values.R` on a list of points with longitude and latitude. See ?extract.values for help.
+Use the function `extract_values.R` on a list of points with longitude and latitude. To see the documentation for this function, please load the code with `devtools::load_all()` and then look at the help file via `?extract_values`.
