@@ -14,3 +14,25 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Imports: 
+    dplyr,
+    fs,
+    ggbeeswarm,
+    ggplot2,
+    ggpubr,
+    glue,
+    here,
+    magick,
+    purrr,
+    RANN,
+    raster,
+    RColorBrewer,
+    rgeos,
+    rmarkdown,
+    scales,
+    sf,
+    sp,
+    stringr,
+    tmap,
+    tmaptools,
+    usethis
