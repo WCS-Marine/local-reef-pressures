@@ -31,7 +31,7 @@ Contains data to produce the individual report cards, one for each of the 83 Bio
 
 Contains some scripts to generate the report cards and extract the data from the data layers giving point coordinates. In particular:
 
-- `extract_values.R`. Function to extract pressure values for a set of coordinates provided by the user. This is useful if you want to know the values of the six pressures for new sites.
+- `extract_values.R`. Function to extract pressure values for a set of coordinates provided by the user. This is useful if you want to know the values of the six pressures for new sites. To see the documentation for this function, please load the code with `devtools::load_all()` and then look at the help file via `?extract_values`.
 
 ### `analysis/`
 
