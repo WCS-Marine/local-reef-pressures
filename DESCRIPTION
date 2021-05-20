@@ -1,13 +1,20 @@
 Package: localreefpressures
-Title: What the Package Does (One Line, Title Case)
+Title: Analysis of local human pressures on tropical coral reefs
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Marco",
+           family = "Andrello",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+           email = "marco.andrello@example.com",
+           comment = c(ORCID = "0000-0001-7590-2736"))
+Description: This package contains scripts and data to priduce and analyze six human
+pressures on tropical coral reefs (fishing, coastal development, industrial development,
+tourism, water pollution by sediments and nitrogen). The results of this analysis are available
+as a scientific article still under revision, but accessible as a pre-print at:
+https://www.biorxiv.org/content/10.1101/2021.04.03.438313v1.
+The package allows for recreating the datasets of the six pressures from the original single pressure
+datasets, and to analyse the datasets to replicate all the analysis appearing in the article.
+There is also a function to extract the values of the pressures at given geographic coordinates. 
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
