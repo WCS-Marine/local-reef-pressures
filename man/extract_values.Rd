@@ -41,4 +41,5 @@ data <- data.frame(
 data(allreefs)
 # Extract the values of the indicators
 extract_values(data, allreefs)
+
 }

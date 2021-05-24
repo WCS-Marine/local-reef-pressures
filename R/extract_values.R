@@ -27,6 +27,8 @@
 #' data(allreefs)
 #' # Extract the values of the indicators
 #' extract_values(data, allreefs)
+#' 
+#' @export
 extract_values <- function(data, allreefs, max.radius = 5000) {
 
   # If allreefs is sf, convert it to SpatialPolygonsDataFrame
