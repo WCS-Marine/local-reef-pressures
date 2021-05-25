@@ -24,7 +24,7 @@ Authors@R:
       person(given = "Gabby N.",
              family = "Ahmadia",
              role = "aut"))
-Description: This package contains scripts and data to priduce and analyze six human pressures on tropical coral reefs (fishing, coastal development, industrial development, tourism, water pollution by sediments and nitrogen). The results of this analysis are available as a scientific article still under revision, but accessible as a pre-print at: <https://www.biorxiv.org/content/10.1101/2021.04.03.438313v1>. The package allows for recreating the datasets of the six pressures from the original single pressure datasets, and to analyse the datasets to replicate all the analysis appearing in the article. There is also a function to extract the values of the pressures at given geographic coordinates. 
+Description: This package contains scripts and data to produce and analyze six human pressures on tropical coral reefs (fishing, coastal development, industrial development, tourism, water pollution by sediments and nitrogen). The results of this analysis are available as a scientific article still under revision, but accessible as a pre-print at: <https://www.biorxiv.org/content/10.1101/2021.04.03.438313v1>. The package allows for recreating the datasets of the six pressures from the original single pressure datasets, and to analyse the datasets to replicate all the analysis appearing in the article. There is also a function to extract the values of the pressures at given geographic coordinates. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
