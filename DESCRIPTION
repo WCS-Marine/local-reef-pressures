@@ -1,0 +1,54 @@
+Package: localreefpressures
+Title: Analysis of local human pressures on tropical coral reefs
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Marco",
+             family = "Andrello",
+             role = c("aut", "cre"),
+             email = "marco.andrello@example.com",
+             comment = c(ORCID = "0000-0001-7590-2736")),
+      person(given = "Emily",
+             family = "Darling",
+             role = "aut",
+             comment = c(ORCID = "0000-0002-1048-2838")), 
+      person(given = "Amelia",
+             family = "Wenger",
+             role = "aut",
+             comment = c(ORCID = "0000-0002-0433-6164")), 
+      person(given = "Andrés F.",
+             family = "Suárez-Castro",
+             role = "aut"),
+      person(given = "Sharla",
+             family = "Gelfand",
+             role = "aut"),
+      person(given = "Gabby N.",
+             family = "Ahmadia",
+             role = "aut"))
+Description: This package contains scripts and data to produce and analyze six human pressures on tropical coral reefs (fishing, coastal development, industrial development, tourism, water pollution by sediments and nitrogen). The results of this analysis are available as a scientific article still under revision, but accessible as a pre-print at: <https://www.biorxiv.org/content/10.1101/2021.04.03.438313v1>. The package allows for recreating the datasets of the six pressures from the original single pressure datasets, and to analyse the datasets to replicate all the analysis appearing in the article. There is also a function to extract the values of the pressures at given geographic coordinates. 
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    dplyr,
+    fs,
+    ggbeeswarm,
+    ggplot2,
+    ggpubr,
+    glue,
+    here,
+    magick,
+    purrr,
+    RANN,
+    raster,
+    RColorBrewer,
+    rgeos,
+    rmarkdown,
+    scales,
+    sf,
+    sp,
+    stringr,
+    tmap,
+    tmaptools,
+    usethis

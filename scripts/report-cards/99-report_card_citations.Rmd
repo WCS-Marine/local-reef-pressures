@@ -1,7 +1,0 @@
----
-output: github_document
----
-
-```{r results = "asis"}
-sapply(c("tmaptools", "ggpubr", "ggbeeswarm", "rmarkdown", "magick"), citation)
-```

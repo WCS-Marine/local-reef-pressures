@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^analysis$
+^BCU report cards$
+^data-raw$
+^LICENSE\.md$

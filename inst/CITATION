@@ -1,0 +1,13 @@
+citHeader("To cite localreefpressures in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "A global map of human pressures on tropical coral reefs",
+  author   = "Marco Andrello and Emily Darling and Amelia Wenger and Andrés F. Suárez-Castro and Sharla Gelfand and Gabby N. Ahmadia",
+  journal  = "BioRxiv",
+  year     = "2021",
+  url      = "https://doi.org/10.1101/2021.04.03.438313",
+  textVersion = paste(
+
+  )
+)
