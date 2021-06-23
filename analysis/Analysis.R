@@ -19,7 +19,7 @@ vthreats <- c(
 
 # Names of the six pressures plus cumulative impact score
 threat_names <- c(
-  "Fishing", "Coastal dev", "Industrial dev",
+  "Fishing", "Coastal pop", "Industrial dev",
   "Tourism", "Sediments", "Nitrogen", "Cumulative impact score"
 )
 
@@ -27,7 +27,7 @@ threat_names <- c(
 col_threats <- brewer.pal(6, "Set2")
 colors <- c(
   "Fishing" = col_threats[1],
-  "Coastal\ndevelopment" = col_threats[2],
+  "Coastal\npopulation" = col_threats[2],
   "Industr_dev" = col_threats[3],
   "Tourism" = col_threats[4],
   "Sediments" = col_threats[5],
@@ -36,7 +36,7 @@ colors <- c(
 )
 # Titles
 title.text <- c(
-  "Fishing", "Coastal\ndevelopment", "Industrial\ndevelopment",
+  "Fishing", "Coastal\npopulation", "Industrial\ndevelopment",
   "Tourism", "Sediments", "Nitrogen", "Cumulative"
 )
 

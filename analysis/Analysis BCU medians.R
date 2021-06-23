@@ -13,7 +13,7 @@ library(grid)
 load(here("data", "allreefs.RData"))
 
 # Names of the six pressures plus cumulative impact score
-v.threats.new <- c("fishing", "coast_dev", "industr_dev", "tourism", "sediments", "nitrogen")
+v.threats.new <- c("fishing", "coast_pop", "industr_dev", "tourism", "sediments", "nitrogen")
 
 # Names of the six pressure plus cumulative impact score in the columns of allreefs
 vthreats <- c(
@@ -44,13 +44,13 @@ names(glob.median) <- vthreats
 data <- allreefs
 data <- data[data$is.bcu == "BCUs", ]
 
-# Calculate median pressure per BCU, for all size pressures plus th ecumulative impact score
+# Calculate median pressure per BCU, for all size pressures plus the cumulative impact score
 data %>%
   dplyr::select(grav_NC, pop_count, num_ports, reef_value, sediment, nutrient, cumul_score, BCU_name, Region) %>%
   dplyr::group_by(BCU_name) %>%
   dplyr::summarise(
     fishing = median(grav_NC, na.rm = T),
-    coast_dev = median(pop_count, na.rm = T),
+    coast_pop = median(pop_count, na.rm = T),
     industr_dev = median(num_ports, na.rm = T),
     tourism = median(reef_value, na.rm = T),
     sediments = median(sediment, na.rm = T),
@@ -61,7 +61,7 @@ data %>%
 ehe
 ehe$Region <- factor(ehe$Region)
 
-# Calculate top presure per BCU
+# Calculate top pressure per BCU
 top_threat <- apply(as.data.frame(ehe)[, v.threats.new], 1, which.max)
 table(v.threats.new[top_threat]) / sum(table(v.threats.new[top_threat]))
 
@@ -100,13 +100,13 @@ ggplot2::theme_update(
   axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 7),
   axis.text.y = element_text(angle = 0, hjust = 1, vjust = 0.5, size = 7)
 )
-title.text <- c("Fishing", "Coastal\ndevelopment", "Industrial\ndevelopment", "Tourism", "Sediments", "Nitrogen", "Cumulative")
+title.text <- c("Fishing", "Coastal\npopulation", "Industrial\ndevelopment", "Tourism", "Sediments", "Nitrogen", "Cumulative")
 
 # Set colors for individual threats
 col_threats <- RColorBrewer::brewer.pal(6, "Set2")
 colors <- c(
   "Fishing" = col_threats[1],
-  "Coastal\ndevelopment" = col_threats[2],
+  "Coastal\npopulation" = col_threats[2],
   "Industr_dev" = col_threats[3],
   "Tourism" = col_threats[4],
   "Sediments" = col_threats[5],
@@ -147,8 +147,8 @@ ehe.arranged$Region_wrap <- stringr::str_wrap(ehe.arranged$Region, width = 11)
 a <- ehe.arranged
 sf::st_geometry(a) <- NULL
 a %>%
-  dplyr::select(BCU_name, fishing, coast_dev, industr_dev, tourism, sediments, nitrogen, x.order, Region, Region_wrap) %>%
-  tidyr::pivot_longer(c(fishing, coast_dev, industr_dev, tourism, sediments, nitrogen), names_to = "threat", values_to = "percentile") -> a1
+  dplyr::select(BCU_name, fishing, coast_pop, industr_dev, tourism, sediments, nitrogen, x.order, Region, Region_wrap) %>%
+  tidyr::pivot_longer(c(fishing, coast_pop, industr_dev, tourism, sediments, nitrogen), names_to = "threat", values_to = "percentile") -> a1
 
 # Code threat as a factor
 a1$threat <- factor(a1$threat, levels = unique(a1$threat))

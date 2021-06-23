@@ -17,7 +17,7 @@ load(here::here("data", "allreefs.RData"))
 
 # Names of the six pressures plus cumulative impact score
 threat_names <- c(
-  "Fishing", "Coastal dev", "Industrial dev",
+  "Fishing", "Coastal pop", "Industrial dev",
   "Tourism", "Sediments", "Nitrogen", "Cumulative impact score"
 )
 
