@@ -1,4 +1,4 @@
-# Code to plot Figure S10 (Regional comparisons of median pressure of BCU) and Figure 5 (median pressure for each BCU)
+# Code to plot Figure S10 (Regional comparisons of median pressure of refugia) and Figure S13 (median pressure for each refugium)
 # Marco Andrello
 # 30/04/2021
 
@@ -40,11 +40,11 @@ for (i in 1:length(vthreats)) {
 }
 names(glob.median) <- vthreats
 
-# Retain only BCUs
+# Retain only refugia
 data <- allreefs
-data <- data[data$is.bcu == "BCUs", ]
+data <- data[data$is.bcu == "refugia", ]
 
-# Calculate median pressure per BCU, for all size pressures plus the cumulative impact score
+# Calculate median pressure per refugium, for all size pressures plus the cumulative impact score
 data %>%
   dplyr::select(grav_NC, pop_count, num_ports, reef_value, sediment, nutrient, cumul_score, BCU_name, Region) %>%
   dplyr::group_by(BCU_name) %>%
@@ -61,7 +61,7 @@ data %>%
 ehe
 ehe$Region <- factor(ehe$Region)
 
-# Calculate top pressure per BCU
+# Calculate top pressure per refugium
 top_threat <- apply(as.data.frame(ehe)[, v.threats.new], 1, which.max)
 table(v.threats.new[top_threat]) / sum(table(v.threats.new[top_threat]))
 
@@ -79,21 +79,22 @@ for (i in 1:83) {
 # Add second top pressure to the ehe layer: number and name
 ehe$second.threat <- second.threat
 
-# Prepare and save a csv and RData file containing top pressure info per BCU
+# Prepare and save a csv and RData file containing top pressure info per refugium
 top_threats_table <- as.data.frame(ehe)[, c(1:9, 11:13)]
-save(top_threats_table, file = "TopThreat_RawValuePrc_BCUMedians_2021_02_10.RData")
-write.csv(top_threats_table, file = "TopThreat_RawValuePrc_BCUMedians_2021_02_10.csv")
+save(top_threats_table, file = "TopThreat_RawValuePrc_BCUMedians_2021_06_23.RData")
+write.csv(top_threats_table, file = "TopThreat_RawValuePrc_BCUMedians_2021_06_23.csv")
+
 
 # Adding "cumulative to the name of pressures
 v.threats.new[7] <- "cumulative"
 
-# Chi-square : observed top pressure (in BCUs) vs expected (in all reefs)
+# Chi-square : observed top pressure (in refugia) vs expected (in all reefs)
 exp.tt <- table(allreefs$top_threat)
 obs.tt <- table(factor(top_threats_table$top_threat, levels = c(1:6)))
 chisq.test(rbind(exp.tt, obs.tt))
 
 
-# FIGURE S10. Boxplot of MEDIAN BCU percentiles by region
+# FIGURE S10. Boxplot of MEDIAN refugium percentiles by region
 ggplot2::theme_update(
   plot.title = element_text(hjust = 0.5, size = 10),
   plot.margin = margin(0.2, 0.2, 0.2, 0.2, "cm"),
@@ -134,8 +135,8 @@ for (i in 1:length(v.threats.new)) {
 }
 # Then compose the figures in PowerPoint
 
-# For Figure 5:
-# Arrange BCU by region
+# For Figure S13:
+# Arrange refugia by region
 ehe.arranged <- ehe %>%
   dplyr::arrange(Region) %>%
   dplyr::mutate(x.order = c(1:83))
@@ -143,7 +144,7 @@ ehe.arranged <- ehe %>%
 # Wrap region names
 ehe.arranged$Region_wrap <- stringr::str_wrap(ehe.arranged$Region, width = 11)
 
-# Pivot threats: create dataframe with six rows per BCU, containing the percentile of each pressure per BCU
+# Pivot threats: create dataframe with six rows per refugium, containing the percentile of each pressure per refugium
 a <- ehe.arranged
 sf::st_geometry(a) <- NULL
 a %>%
@@ -153,12 +154,12 @@ a %>%
 # Code threat as a factor
 a1$threat <- factor(a1$threat, levels = unique(a1$threat))
 
-# Plot Figure 5 (right panel): dotplot
+# Plot Figure S13 (right panel): dotplot
 theme_update(
   axis.text.y = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 7),
   strip.text.y = element_text(angle = 0, size = 7)
 )
-png("Figure 5_right.png", width = 10, height = 20, units = "cm", res = 600)
+png("Figure S13_right.png", width = 10, height = 20, units = "cm", res = 600)
 p <- ggplot2::ggplot(a1, aes(y = BCU_name)) +
   ggplot2::geom_point(aes(x = percentile, colour = threat)) +
   ggplot2::scale_color_brewer(palette = "Set2") +
@@ -171,13 +172,13 @@ p <- ggplot2::ggplot(a1, aes(y = BCU_name)) +
 print(p)
 dev.off()
 
-# Plot Figure 5 (left panel): Barplot cumulative impact
+# Plot Figure S13 (left panel): Barplot cumulative impact
 a %>% dplyr::select(BCU_name, cumulative, x.order, Region, Region_wrap) -> a2
 theme_update(
   axis.text.y = element_blank(),
   strip.text.y = element_blank()
 )
-png("Figure 5_left.png", width = 10, height = 20, units = "cm", res = 300)
+png("Figure S13_left.png", width = 10, height = 20, units = "cm", res = 300)
 ggplot2::ggplot(a2, aes(y = BCU_name)) +
   ggplot2::geom_col(aes(x = cumulative)) +
   ggplot2::geom_vline(aes(xintercept = glob.median[7]), linetype = "dashed", size = 0.25, show.legend = F) +

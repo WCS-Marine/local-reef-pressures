@@ -231,8 +231,6 @@ allreefs_withBCU <- left_join(allreefs, bcus, by = "OBJECTID")
 # Make a column saying whether the reef cell is in a BCU or not
 allreefs_withBCU$is.bcu <- "non-refugia"
 allreefs_withBCU$is.bcu[!is.na(allreefs_withBCU$ReefName)] <- "refugia"
-# allreefs$is.bcu <- "non-refugia"
-# allreefs$is.bcu[!is.na(allreefs$BCU_name)] <- "refugia"
 
 # Change the name of column ReefName to BCU_name
 allreefs_withBCU <- dplyr::mutate(allreefs_withBCU, BCU_name = ReefName)

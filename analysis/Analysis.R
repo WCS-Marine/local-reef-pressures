@@ -72,7 +72,7 @@ table(data$top_threat) / sum(table(data$top_threat))
 
 
 # FIGURE 3. Individual threats: regional comparisons
-for (i in 1:7) {
+for (i in 2:2) {
   if (i < 7) indicator <- vthreats[i] else indicator <- "cumul_score"
   png(paste0("Boxplot_", indicator, ".png"), width = 10, height = 4, units = "cm", res = 300)
   a <- ggplot2::ggplot(data, aes(y = reorder(Region, !!sym(indicator), FUN = median, na.rm = T), x = !!sym(indicator))) +
@@ -88,8 +88,8 @@ rm(a, i, indicator)
 
 
 
-# FIGURE 4. Density distribution of pressure percentiles in BCUs vs non-BCUs
-# Retain only pressure percentiles and stack all pressure + BCU/non-BCUs data in the same dataframe
+# FIGURE 4 (top). Density distribution of pressure percentiles in refugia vs non-refugia
+# Retain only pressure percentiles and stack all pressure + refugia/non-refugia data in the same dataframe
 data1 <- as.data.frame(data)[, c("is.bcu", vthreats[1:6])]
 data2 <- prettyR::rep_n_stack(data1, to.stack = vthreats[1:6], stack.names = c("indicator", "value"))
 
@@ -99,22 +99,16 @@ data2$indicator <- factor(data2$indicator, levels = vthreats[1:6])
 # Add title text (pretty name for pressures)
 data2$title.text <- factor(title.text[data2$indicator], levels = title.text[1:6])
 
-# Plot Figure 4
+# Plot Figure 4 top
 ggplot2::theme_update(axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 7)) # ,
 # axis.text.y = element_blank())
-png(paste0("Figure 4.png"), width = 18.5, height = 13, units = "cm", res = 300)
+png(paste0("Figure 4_top.png"), width = 18.5, height = 13, units = "cm", res = 300)
 a <- ggplot2::ggplot(data2, aes(x = value, fill = is.bcu)) +
   ggplot2::geom_density(na.rm = T, alpha = 0.5) +
   ggplot2::facet_wrap(vars(title.text), scales = "free_y") +
   ggplot2::scale_fill_brewer(name = "", type = "qual")
 print(a)
 dev.off()
-# wilcox.test(data$grav_NC~data$is.bcu)
-# wilcox.test(data$pop_count~data$is.bcu)
-# wilcox.test(data$num_ports~data$is.bcu)
-# wilcox.test(data$reef_value~data$is.bcu)
-# wilcox.test(data$sediment~data$is.bcu)
-# wilcox.test(data$nutrient~data$is.bcu)
 rm(data1, data2, a)
 
 
@@ -179,21 +173,21 @@ a.plot <- ggplot2::ggplot(a, aes_string(x = "value", y = "threat", fill = "threa
 print(a.plot)
 dev.off()
 
-# Summarise the statsitics of each pressure when it is top-ranked
+# Summarise the statistics of each pressure when it is top-ranked
 tapply(a$value, a$threat, summary)
 rm(a, a.plot, i)
 
 
-# FIGURE S9. Comparison of frequency of occurrence of top pressures in BCUs vs non-BCUs
+# FIGURE 4 (bottom). Comparison of frequency of occurrence of top pressures in refugia vs non-refugia
 ggplot2::theme_update(
   axis.text.y = element_text(hjust = 1, vjust = 0.5, size = 7),
   axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 7)
 )
 
-# Calculate the frequency of occurrence of each pressure as top ranked in BCU vs non BCUs
+# Calculate the frequency of occurrence of each pressure as top ranked in refugia vs non refugia
 ta.bcu <- as.data.frame(table(data$is.bcu,
   data$top_threat,
-  dnn = c("BCU", "threat")
+  dnn = c("refugia", "threat")
 ))
 
 # Add pressure names as factors
@@ -201,28 +195,30 @@ ta.bcu$top_threat <- threat_names[ta.bcu$threat]
 ta.bcu$top_threat <- factor(ta.bcu$top_threat, levels = threat_names)
 ta.bcu
 
-# Plot Figure S9
-png(paste0("Figure S9.png"), width = 10, height = 3.5, units = "cm", res = 300)
-a <- ggplot2::ggplot(ta.bcu, aes_string(y = "BCU", x = "Freq", fill = "top_threat")) +
+# Plot Figure 4 (bottom)
+png(paste0("Figure 4_bottom.png"), width = 10, height = 3.5, units = "cm", res = 300)
+a <- ggplot2::ggplot(ta.bcu, aes_string(y = "refugia", x = "Freq", fill = "top_threat")) +
   ggplot2::geom_col(position = position_fill(reverse = T)) +
   ggplot2::scale_fill_manual(values = col_threats, name = "")
 print(a)
 dev.off()
 
-# Chi-square tests to compare the frequency of occurrence of each pressure as top-ranked in BCUs vs non-BCUs
-nonBCU.tt <- table(data$top_threat[data$is.bcu == "non BCUs"])
-BCU.tt <- table(data$top_threat[data$is.bcu == "BCUs"])
+# In power point, compose with Figure_4_top to create Figure 4
+
+# Chi-square tests to compare the frequency of occurrence of each pressure as top-ranked in refugia vs non-refugia
+nonBCU.tt <- table(data$top_threat[data$is.bcu == "non-refugia"])
+BCU.tt <- table(data$top_threat[data$is.bcu == "refugia"])
 chisq.test(rbind(nonBCU.tt, BCU.tt))
 rm(ta.bcu, a, nonBCU.tt, BCU.tt)
 
 
 
-# # Correlation among pressures
-# corrgram::corrgram(as.data.frame(data)[,vthreats[c(1,2,4,5,6)]],
-#          upper.panel=panel.cor,
-#          lower.panel = panel.pts, cor.method="spearman")
-#
-#
-# corrgram::corrgram(as.data.frame(data)[,paste0(vthreats[c(1,2,4,5,6)],"_raw")],
-#          upper.panel=panel.cor,
-#          lower.panel = panel.pts, cor.method="spearman")
+# FIGURE S9 - Correlation among pressures
+png(paste0("Figure S9.png"), width = 12, height = 10, units = "cm", res = 300)
+data_corr <- as.data.frame(data)[,vthreats[c(1:6)]]
+names(data_corr) <- threat_names[1:6]
+corrgram::corrgram(data_corr,
+         upper.panel=panel.cor,
+         lower.panel = NULL, cor.method="spearman")
+dev.off()
+
