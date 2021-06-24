@@ -222,3 +222,45 @@ corrgram::corrgram(data_corr,
          lower.panel = NULL, cor.method="spearman")
 dev.off()
 
+
+
+# FIGURE S14 - Density distribution of pressure raw values
+# Retain only pressure raw values
+vthreats_raw <- paste0(vthreats[1:6],"_raw")
+data1 <- as.data.frame(data)[, c("OBJECTID",vthreats_raw)]
+
+# Update graphics layout
+ggplot2::theme_update(axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 7),
+                      # axis.title = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 7),
+                      axis.title = element_blank())
+
+# Loop on the six pressures
+for (i.threat in 1 : 6) {
+  indicator <- vthreats_raw[i.threat]
+  # Ratin only the values of that indicator
+  data_indicator <- data1[,c("OBJECTID",indicator)]
+  
+  # Set the transformation: identiy (for num_ports) or log10(x+1) for all the others
+  if (indicator == "num_ports_raw") {
+    data_indicator$value <- data_indicator[,2]
+    transformation <- "identity"
+  } else {
+    data_indicator$value <- data_indicator[,2]+1
+    transformation <- "log10"
+  }
+  
+  # Calculate quantiles
+  quantiles <- quantile(data_indicator$value,seq(0.1, 0.9, 0.2),na.rm=T)
+  
+  # Plot density distribution with quantiles
+  png(paste0("Figure S14_",indicator,".png"), width = 6, height = 6, units = "cm", res = 300)
+  a <- ggplot(data_indicator, aes(x=value)) +
+    geom_density(na.rm = T) +
+    scale_x_continuous(trans=transformation) +
+    geom_vline(xintercept=quantiles, colour=c("red","purple","blue","purple","red"), linetype=2,alpha=0.5) +
+    ggtitle(title.text[i.threat])
+  print(a)
+  dev.off()
+}
+
+

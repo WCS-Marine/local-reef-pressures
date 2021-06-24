@@ -37,7 +37,7 @@ Contains some scripts to generate the report cards and extract the data from the
 
 Contains all the scripts needed to reproduce the results and the figures of the article.
 
-`Analysis.R`. Code to perform all the analysis of the article and to draw Figure 3 (Individual pressures: regional comparisons), Figure 4 (Density distribution of pressure percentiles and frequency of occurrence of top pressures in refugia vs non-refugia), Figure S7 (Comparison of frequency of occurrence of top pressures between regions), Figure S8 (Pressure intensity when top-ranked) and Figure S9 (Correlation among pressures) of the article
+`Analysis.R`. Code to perform all the analysis of the article and to draw Figure 3 (Individual pressures: regional comparisons), Figure 4 (Density distribution of pressure percentiles and frequency of occurrence of top pressures in refugia vs non-refugia), Figure S7 (Comparison of frequency of occurrence of top pressures between regions), Figure S8 (Pressure intensity when top-ranked), Figure S9 (Correlation among pressures) and Figure S14 (Density distribution of pressure raw values) of the article
 
 `Analysis BCU medians.R`. Code to plot Figure S10 (Regional comparisons of median pressure of refugia) and Figure S13 (median pressure for each refugia) of the article
 
@@ -68,6 +68,7 @@ Supplementary Figure 9 | `analysis/Analysis.R`
 Supplementary Figure 10 | `analysis/Analysis BCU medians.R`
 Supplementary Figure 12 | `data-raw/Read_layers.R`
 Supplementary Figure 13 | `analysis/Analysis BCU medians.R`
+Supplementary Figure 14 | `analysis/Analysis.R`
 
 Please note that Supplementary Figure 11 was made with QGis and annotated in Power Point, there is no R code to produce it
 
