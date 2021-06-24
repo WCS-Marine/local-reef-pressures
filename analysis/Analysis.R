@@ -231,16 +231,18 @@ data1 <- as.data.frame(data)[, c("OBJECTID",vthreats_raw)]
 
 # Update graphics layout
 ggplot2::theme_update(axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 7),
-                      # axis.title = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 7),
                       axis.title = element_blank())
 
 # Loop on the six pressures
 for (i.threat in 1 : 6) {
+  
+  # Define pressure name
   indicator <- vthreats_raw[i.threat]
-  # Ratin only the values of that indicator
+  
+  # Retain only the values of that pressure
   data_indicator <- data1[,c("OBJECTID",indicator)]
   
-  # Set the transformation: identiy (for num_ports) or log10(x+1) for all the others
+  # Set the transformation: identity (for num_ports) or log10(x+1) for all the others
   if (indicator == "num_ports_raw") {
     data_indicator$value <- data_indicator[,2]
     transformation <- "identity"
