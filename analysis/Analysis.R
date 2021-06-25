@@ -234,7 +234,7 @@ ggplot2::theme_update(axis.text.x = element_text(angle = 0, hjust = 0.5, vjust =
                       axis.title = element_blank())
 
 # Loop on the six pressures
-quantiles <- array(NA,dim=c(6,5))
+quantiles <- array(NA,dim=c(6,6))
 for (i.threat in 1 : 6) {
   
   # Define pressure name
@@ -253,21 +253,25 @@ for (i.threat in 1 : 6) {
   }
   
   # Calculate quantiles
-  quantiles[i.threat,] <- quantile(data_indicator$value,seq(0.1, 0.9, 0.2),na.rm=T)
+  quantiles_ithreat <- quantile(data_indicator$value,seq(0.1, 0.9, 0.2),na.rm=T)
   
   # # Plot density distribution with quantiles
   # png(paste0("Figure S14_",indicator,".png"), width = 6, height = 6, units = "cm", res = 300)
   # a <- ggplot(data_indicator, aes(x=value)) +
   #   geom_density(na.rm = T) +
   #   scale_x_continuous(trans=transformation) +
-  #   geom_vline(xintercept=quantiles[i.threat,], colour=c("red","purple","blue","purple","red"), linetype=2,alpha=0.5) +
+  #   geom_vline(xintercept=quantiles_ithreat, colour=c("red","purple","blue","purple","red"), linetype=2,alpha=0.5) +
   #   ggtitle(title.text[i.threat])
   # print(a)
   # dev.off()
   
-  # Remove 1 to get quantiles in the original scale
-  if (i.threat != 3) quantiles[i.threat,] <- quantiles[i.threat,] - 1
+  # Calculate quantiles in the original scale
+  quantiles[i.threat,] <- quantile(data_indicator[,2],
+                                   c(0.1,0.3,0.5,0.7,0.9,1),
+                                   na.rm=T)
 }
-colnames(quantiles) <- c("10%","30%","50%","70%","90%")
+colnames(quantiles) <- c("10%","30%","50%","70%","90%","100%")
 rownames(quantiles) <- title.text[1:6]
+rownames(quantiles)[2] <- "Coastal population"
+rownames(quantiles)[3] <- "Industrial development"
 round(quantiles,2)
