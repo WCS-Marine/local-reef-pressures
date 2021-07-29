@@ -1,5 +1,7 @@
-# Code to plot Figure 1 (map of top pressures), Figure 2 (map of cumulative impact score)
-# and Figure S1 to S6 (individual pressure maps)
+# Code to
+# - draw Figure 1 (map of top pressures)
+# - draw Figure 2 (map of cumulative impact score)
+# - Figure S3 to S8 (individual pressure maps)
 # Marco Andrello
 # 03/02/2021
 
@@ -247,7 +249,7 @@ file.remove(paste0("plots/", dir(here::here("plots"))))
 
 
 #############################################################################################
-#  FIGURE 2 (CUMULATIVE SCORE) AND SUPPLEMENTARY FIGURES 1 to 6 (INDIVIDUAL PRESSURES)
+#  FIGURE 2 (CUMULATIVE SCORE) AND SUPPLEMENTARY FIGURES 3 to 8 (INDIVIDUAL PRESSURES)
 #############################################################################################
 
 fs::dir_create(here::here("plots")) # Create plots folder if it doesn't exist
@@ -404,7 +406,7 @@ for (i.threat in 1:7) {
 
   # Plot final figure
   if (i.threat < 7) {
-    file_name <- paste0("Figure S", i.threat, ".png")
+    file_name <- paste0("Figure S", (i.threat+2), ".png")
   } else {
     file_name <- "Figure 2.png"
   }

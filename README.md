@@ -15,17 +15,28 @@ Contains the individual report cards (pdf), one for each of the 83 refugia (aka 
 
 Contains the original data layers.
 
-`data-raw/Read_layers.R` reads the original data layers, performs the spatial processing and saves the results in the `data/allreefs` layer. You do not need to run this script if you are only interested in the final results or if you want to extract values for new sites.
+`data-raw/Read_layers.R` Code to
+
+- read the original data layers, perform the spatial processing and save the results in the `data/allreefs` layer.
+- draw Figure S14 (Sensitivity of coastal population to buffer size)
+
+You do not need to run this script if you are only interested in the final results or if you want to extract values for new sites.
 
 ### `data/`
 
-Contains the final GIS layers of the 6 local reef pressures and the global climatic scores of Beyer et al. (2018), in three different formats: ESRI Shapefile (`.shp`, to open with ArcGIS), `.GPKG` (to open with QGis) and `.RData` (with R). Type `data(allreefs)` to load the dataset.
+Contains the final GIS layers of the 6 local reef pressures and the global climatic scores of Beyer et al. (2018), in three different formats:
+
+- ESRI Shapefile (`.shp`, to open with ArcGIS)
+- `.GPKG` (to open with QGis)
+- `.RData` (with R)
+
+In R, type `data(allreefs)` to load the dataset.
 
 `key.xlsx` contains correspondence between field names of the RData and GPKG files, on one hand, the the ESRI file, on the other hand
 
 #### `data/report-cards/`:
 
-Contains data to produce the individual report cards, one for each of the 83 refugia (aka Bioclimatic Units: BCUs).
+Contains data to produce the individual report cards, one for each of the 83 refugia.
 
 ### `R/`
 
@@ -37,11 +48,29 @@ Contains some scripts to generate the report cards and extract the data from the
 
 Contains all the scripts needed to reproduce the results and the figures of the article.
 
-`Analysis.R`. Code to perform all the analysis of the article and to draw Figure 3 (Individual pressures: regional comparisons), Figure 4 (Density distribution of pressure percentiles and frequency of occurrence of top pressures in refugia vs non-refugia), Figure S7 (Comparison of frequency of occurrence of top pressures between regions), Figure S8 (Pressure intensity when top-ranked), Figure S9 (Correlation among pressures) and Figure S14 (Density distribution of pressure raw values) of the article
+`Analysis.R`. Code to:
 
-`Analysis BCU medians.R`. Code to plot Figure S10 (Regional comparisons of median pressure of refugia) and Figure S13 (median pressure for each refugia) of the article
+- perform all the analyses of the article
+- draw Figure 3 (Individual pressures: regional comparisons)
+- draw Figure 4 (Density distribution of pressure percentiles and frequency of occurrence of top pressures in refugia vs non-refugia)
+- draw Figure S1 (Correlation among pressures)
+- draw Figure S2 (Density distribution of pressure raw values)
+- draw Figure S10 (Comparison of frequency of occurrence of top pressures between regions)
+- draw Figure S11 (Pressure intensity when top-ranked)
 
-`Plot Maps.R`. Code to plot Figure 1 (map of top pressures), Figure 2 (map of cumulative impact score) and Figures S1 to S6 (map of individual pressures) of the article
+
+`Analysis BCU medians.R`. Code to:
+
+- calculate top pressure for each refugium
+- draw Figure S12 (Median pressure for each refugium)
+- draw Figure S13 (Regional comparisons of median pressure of refugia)
+
+
+`Plot Maps.R`. Code to
+
+- draw Figure 1 (map of top pressures)
+- draw Figure 2 (map of cumulative impact score)
+- Figure S3 to S8 (individual pressure maps)
 
 `analysis/report-cards/` contains the code to produce the report cards, which are saved in `BCU Report cards/`.
 
@@ -60,17 +89,17 @@ Figure 1 | `analysis/Plot Maps.R` (first part)
 Figure 2 | `analysis/Plot Maps.R` (second part)
 Figure 3 | `analysis/Analysis.R`
 Figure 4 | `analysis/Analysis.R`
-Figure 5 | `analysis/Analysis BCU medians.R`
-Supplementary Figure 1 to 6 | `analysis/Plot Maps.R` (second part)
-Supplementary Figure 7 | `analysis/Analysis.R`
-Supplementary Figure 8 | `analysis/Analysis.R`
-Supplementary Figure 9 | `analysis/Analysis.R`
-Supplementary Figure 10 | `analysis/Analysis BCU medians.R`
-Supplementary Figure 12 | `data-raw/Read_layers.R`
+Supplementary Figure 1 | `analysis/Analysis.R`
+Supplementary Figure 2 | `analysis/Analysis.R`
+Supplementary Figure 3 to 8 | `analysis/Plot Maps.R` (second part)
+Supplementary Figure 10 | `analysis/Analysis.R`
+Supplementary Figure 11 | `analysis/Analysis.R`
+Supplementary Figure 12 | `analysis/Analysis BCU medians.R`
 Supplementary Figure 13 | `analysis/Analysis BCU medians.R`
-Supplementary Figure 14 | `analysis/Analysis.R`
+Supplementary Figure 14 | `data-raw/Read_layers.R`
 
-Please note that Supplementary Figure 11 was made with QGis and annotated in Power Point, there is no R code to produce it
+
+Please note that Supplementary Figure 9 was made with QGis and annotated in Power Point, there is no R code to produce it
 
 ### 2.3 Getting the list of climatic refugia with their top and second-top pressure
 Run `analysis/Analysis BCU medians.R`.
