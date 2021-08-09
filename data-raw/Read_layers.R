@@ -1,8 +1,9 @@
 # Read layers
-# Reads the original data layers, performs the spatial processing and
-# saves the results in the `data/allreefs` layer.
-# You do not need to run this script if you are only interested in
-# the final results or if you want to extract values for new sites.
+# Code to
+# - read the original data layers, perform the spatial processing and save the results in the `data/allreefs` layer.
+# - draw Figure S14 (Sensitivity of coastal population to buffer size)
+# You do not need to run this script if you are only interested in the final results or if you want to extract values for new sites.
+
 
 library(raster)
 library(rgdal)
@@ -74,7 +75,7 @@ rm(grav, grav_NC, is, i.reef)
 
 
 
-# 2. COASTAL DEVELOPMENT: POPULATION COUNT
+# 2. COASTAL POPULATION: POPULATION COUNT
 # The original data layer is available from the CIESIN website
 # https://doi.org/10.7927/H4PN93PB
 # Note that downloading the data requires registration
@@ -125,6 +126,8 @@ rm(ports, is)
 # 4. TOURISM: REEF VALUE
 # The original data layer was available upon request by emailing oceanwealth@tnc.org (See the following link under FAQs)
 # https://oceanwealth.org/resources/atlas-of-ocean-wealth/
+
+# 4a Spending
 a <- raster::raster(here::here("data-raw", "tourism", "reef_value.tif"))
 
 # Convert raster object to point shapefile
@@ -141,6 +144,26 @@ rm(a)
 reef_value <- IntersectByTile(allreefs, p, step = 1e6)
 allreefs$reef_value <- reef_value
 rm(p, reef_value)
+
+
+# # 4b Visitation
+# a <- raster::raster(here::here("data-raw", "tourism", "cr_visit.tif"))
+# 
+# # Convert raster object to point shapefile
+# p <- raster::rasterToPoints(a, spatial = T)
+# names(p) <- "values"
+# # rgdal::writeOGR(p, here::here("data"), "visit", "ESRI Shapefile")
+# 
+# # Transform the tourism layer into the project CRS
+# p <- spTransform(p, sp::CRS(new_proj))
+# rm(a)
+# 
+# # Calculate reef value by tile (doing it on the entire SpatialPolygons might crash)
+# # And store it in the reef_value vector
+# # Use the custom function IntersectByTile.R
+# reef_visit <- IntersectByTile(allreefs, p, step = 1e6)
+# allreefs$reef_value <- reef_visit
+# rm(p, reef_value)
 
 
 
@@ -229,8 +252,8 @@ load(here::here("data-raw", "50-reefs", "bcus.RData"))
 allreefs_withBCU <- left_join(allreefs, bcus, by = "OBJECTID")
 
 # Make a column saying whether the reef cell is in a BCU or not
-allreefs_withBCU$is.bcu <- "non BCUs"
-allreefs_withBCU$is.bcu[!is.na(allreefs_withBCU$ReefName)] <- "BCUs"
+allreefs_withBCU$is.bcu <- "non-refugia"
+allreefs_withBCU$is.bcu[!is.na(allreefs_withBCU$ReefName)] <- "refugia"
 
 # Change the name of column ReefName to BCU_name
 allreefs_withBCU <- dplyr::mutate(allreefs_withBCU, BCU_name = ReefName)
@@ -309,10 +332,21 @@ rm(allreefs_withBCU, allreefs_withBCU_prc)
 save(allreefs, file = here::here("data", "allreefs.RData"))
 rgdal::writeOGR(as_Spatial(allreefs), here::here("data"), "allreefs", "ESRI Shapefile")
 sf::st_write(allreefs, dsn = paste0(getwd(), "/data/allreefs.gpkg"), driver = "GPKG")
+# allspending <- allreefs
+# save(allspending, file = here::here("data", "allspending.RData"))
+# rgdal::writeOGR(as_Spatial(allspending), here::here("data"), "allspending", "ESRI Shapefile")
+# sf::st_write(allspending, dsn = paste0(getwd(), "/data/allspending.gpkg"), driver = "GPKG")
 
 
 
-# SENSITIVITY ANALYSIS OF THE COASTAL DEVELOPMENT LAYER TO BUFFER SIZE
+
+
+#################################################################################
+
+# Figure S14
+# Sensitivity analysis of the coastal population layer to buffer size
+
+
 # Keep only useful columns and Reconvert allreefs back to SpatialPolygonsDataFrame
 allreefs %>%
   select("OBJECTID", "pop_count_raw") %>%
@@ -381,4 +415,6 @@ corrgram(pop_count,
   upper.panel = panel.cor,
   cor.method = "spearman"
 )
-# Then saved as Figure S12
+# Then saved as Figure S14
+
+
