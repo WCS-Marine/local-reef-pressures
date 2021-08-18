@@ -28,6 +28,7 @@ Contains the final GIS layers of the 6 local reef pressures and the global clima
 
 - ESRI Shapefile (`.shp`, to open with ArcGIS)
 - `.GPKG` (to open with QGis)
+- `.sql` (in `.zip`, to open with a PostGIS database)
 - `.RData` (with R)
 
 In R, type `data(allreefs)` to load the dataset.
