@@ -54,8 +54,8 @@ Contains all the scripts needed to reproduce the results and the figures of the 
 - perform all the analyses of the article
 - draw Figure 3 (Individual pressures: regional comparisons)
 - draw Figure 4 (Density distribution of pressure percentiles and frequency of occurrence of top pressures in refugia vs non-refugia)
-- draw Figure S1 (Correlation among pressures)
-- draw Figure S2 (Density distribution of pressure raw values)
+- draw Figure S1 (Density distribution of pressure raw values)
+- draw Figure S2 (Correlation among pressures)
 - draw Figure S10 (Comparison of frequency of occurrence of top pressures between regions)
 - draw Figure S11 (Pressure intensity when top-ranked)
 
