@@ -1,6 +1,6 @@
 library(sf)
 
-# Transforming the Mercator Pacific Centred into the "standard" WGS84 creatres problems with some polygons
+# Transforming the Mercator Pacific Centred into the "standard" WGS84 creates problems with some polygons
 
 # The problem comes from polygons touching the 180 degree line (the antimeridian)
 # In Pacific-centred Mercator, the x coordinate of the 180 degree meridian is 3339585
