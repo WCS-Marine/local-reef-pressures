@@ -176,7 +176,7 @@ tmap::tmap_save(top_threats_legend, filename = here::here(glue::glue("plots/topt
 rm(reefs_for_legend)
 
 # Construct plot using magick
-plot_global <- magick::image_read_pdf(here::here("plots/topthreat_global.pdf"), density = 600)
+plot_global <- magick::image_read_pdf(here::here("plots/topthreat_global.pdf"), density = 900)
 
 # Set up list to store the geographical panels
 panel_list <- vector("list", length = length(panels))
@@ -184,7 +184,7 @@ names(panel_list) <- panels
 
 for (i in names(panel_list)) {
   # Read panels in, in order intended, and save them in the list
-  panel_list[[i]] <- magick::image_read_pdf(here::here(glue::glue("plots/topthreat_panel_{i}.pdf")), density = 600)
+  panel_list[[i]] <- magick::image_read_pdf(here::here(glue::glue("plots/topthreat_panel_{i}.pdf")), density = 900)
 
   # Add name of the region in the panel map
   panel_list[[i]] <- magick::image_annotate(panel_list[[i]], i,
@@ -193,7 +193,7 @@ for (i in names(panel_list)) {
 }
 
 # Read legend
-legend <- magick::image_read_pdf(here::here("plots/topthreat_legend.pdf"), density = 600)
+legend <- magick::image_read_pdf(here::here("plots/topthreat_legend.pdf"), density = 900)
 
 # Create a blank image
 # Height is 2 * panels + global panel + legend
@@ -237,10 +237,10 @@ legend_width_offset <- plot_width / 2 - legend_width / 2
 plot_image <- magick::image_composite(plot_image, legend, offset = glue::glue("+{legend_width_offset}+{legend_height_offset}"))
 
 # Plot final figure
-magick::image_write(plot_image, here::here("Figure 1.png"))
+image_write(plot_image, here("Figure 1.png"))
 
 # Remove working files (empty "plots" folder)
-file.remove(paste0("plots/", dir(here::here("plots"))))
+file.remove(paste0("plots/", dir(here("plots"))))
 
 
 #############################################################################################
@@ -353,7 +353,7 @@ for (i.threat in 1:7) {
 
 
   # Construct plot using magick
-  plot_global <- magick::image_read_pdf(here::here(glue::glue("plots/{vthreats[i.threat]}_global.pdf")), density = 600)
+  plot_global <- magick::image_read_pdf(here::here(glue::glue("plots/{vthreats[i.threat]}_global.pdf")), density = 900)
 
   # Set up list to store the geographical panels
   panel_list <- vector("list", length = length(panels))
@@ -361,7 +361,7 @@ for (i.threat in 1:7) {
 
   for (i in names(panel_list)) {
     # Read panels in, in order intended, and save them in the list
-    panel_list[[i]] <- magick::image_read_pdf(here::here(glue::glue("plots/{vthreats[i.threat]}_panel_{i}.pdf")), density = 600)
+    panel_list[[i]] <- magick::image_read_pdf(here::here(glue::glue("plots/{vthreats[i.threat]}_panel_{i}.pdf")), density = 900)
 
     # Add name of the region in the panel map
     panel_list[[i]] <- magick::image_annotate(panel_list[[i]], i,
@@ -369,7 +369,7 @@ for (i.threat in 1:7) {
     )
   }
 
-  legend <- magick::image_read_pdf(here::here(glue::glue("plots/{vthreats[i.threat]}_legend.pdf")), density = 600)
+  legend <- magick::image_read_pdf(here::here(glue::glue("plots/{vthreats[i.threat]}_legend.pdf")), density = 900)
 
   # Create a blank image
   panel_height <- magick::image_info(panel_list[[1]])[["height"]]

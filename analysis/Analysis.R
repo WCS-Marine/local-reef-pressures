@@ -4,8 +4,8 @@
 # - perform all the analyses of the article
 # - draw Figure 3 (Individual pressures: regional comparisons)
 # - draw Figure 4 (Density distribution of pressure percentiles and frequency of occurrence of top pressures in refugia vs non-refugia)
-# - draw Figure S1 (Correlation among pressures)
-# - draw Figure S2 (Density distribution of pressure raw values)
+# - draw Figure S1 (Density distribution of pressure raw values)
+# - draw Figure S2 (Correlation among pressures)
 # - draw Figure S10 (Comparison of frequency of occurrence of top pressures between regions)
 # - draw Figure S11 (Pressure intensity when top-ranked)
 
@@ -173,23 +173,10 @@ dev.off()
 
 
 
-#######################################################
-
-# FIGURE S1 - Correlation among pressures
-
-png(paste0("Figure S1.png"), width = 12, height = 10, units = "cm", res = 300)
-data_corr <- as.data.frame(data)[,vthreats[c(1:6)]]
-names(data_corr) <- threat_names[1:6]
-corrgram::corrgram(data_corr,
-                   upper.panel=panel.cor,
-                   lower.panel = NULL, cor.method="spearman")
-dev.off()
-
-
 
 #######################################################
 
-# FIGURE S2 - Density distribution of pressure raw values
+# FIGURE S1 - Density distribution of pressure raw values
 
 # Retain only pressure raw values
 vthreats_raw <- paste0(vthreats[1:6],"_raw")
@@ -222,7 +209,7 @@ for (i.threat in 1 : 6) {
   quantiles_ithreat <- quantile(data_indicator$value,seq(0.1, 0.9, 0.2),na.rm=T)
   
   # Plot density distribution with quantiles
-  png(paste0("Figure S2_",indicator,".png"), width = 6, height = 6, units = "cm", res = 300)
+  png(paste0("Figure S1_",indicator,".png"), width = 6, height = 6, units = "cm", res = 300)
   a <- ggplot(data_indicator, aes(x=value)) +
     geom_density(na.rm = T) +
     scale_x_continuous(trans=transformation) +
@@ -242,6 +229,23 @@ rownames(quantiles)[2] <- "Coastal population"
 rownames(quantiles)[3] <- "Industrial development"
 round(quantiles,2)
 
+# Composed in power point and saved as Figure S1
+
+
+
+#######################################################
+
+# FIGURE S2 - Correlation among pressures
+
+png(paste0("Figure S2.png"), width = 12, height = 10, units = "cm", res = 300)
+data_corr <- as.data.frame(data)[,vthreats[c(1:6)]]
+names(data_corr) <- threat_names[1:6]
+corrgram::corrgram(data_corr,
+                   upper.panel=panel.cor,
+                   lower.panel = NULL, cor.method="spearman")
+dev.off()
+rm(data_corr)
+
 
 
 #######################################################
@@ -258,7 +262,7 @@ ta <- as.data.frame(table(data$Region,
 ta$top_threat <- threat_names[ta$threat]
 ta$top_threat <- factor(ta$top_threat, levels = threat_names)
 
-# Plot Figure S7
+# Plot Figure S10
 png(paste0("Figure S10.png"), width = 10, height = 8, units = "cm", res = 300)
 a <- ggplot2::ggplot(ta, aes_string(y = "Region", x = "Freq", fill = "top_threat")) +
   ggplot2::geom_col(position = position_fill(reverse = T)) +
@@ -278,6 +282,7 @@ data.frame(
   water.pollution = as.numeric(ta$Freq.rel[ta$threat == 5] + ta$Freq.rel[ta$threat == 6])
 )
 rm(a, ta)
+
 
 
 #######################################################

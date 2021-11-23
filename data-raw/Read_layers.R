@@ -126,33 +126,15 @@ rm(ports, is)
 # 4. TOURISM: REEF VALUE
 # The original data layer was available upon request by emailing oceanwealth@tnc.org (See the following link under FAQs)
 # https://oceanwealth.org/resources/atlas-of-ocean-wealth/
+# There are two layers: a "spending" value and a "visitation" value
+# We use the visitation value
 
-# 4a Spending
-a <- raster::raster(here::here("data-raw", "tourism", "reef_value.tif"))
-
-# Convert raster object to point shapefile
-p <- raster::rasterToPoints(a, spatial = T)
-names(p) <- "values"
-
-# Transform the tourism layer into the project CRS
-p <- spTransform(p, sp::CRS(new_proj))
-rm(a)
-
-# Calculate reef value by tile (doing it on the entire SpatialPolygons might crash)
-# And store it in the reef_value vector
-# Use the custom function IntersectByTile.R
-reef_value <- IntersectByTile(allreefs, p, step = 1e6)
-allreefs$reef_value <- reef_value
-rm(p, reef_value)
-
-
-# # 4b Visitation
-# a <- raster::raster(here::here("data-raw", "tourism", "cr_visit.tif"))
+# # 4a Spending
+# a <- raster::raster(here::here("data-raw", "tourism", "reef_value.tif"))
 # 
 # # Convert raster object to point shapefile
 # p <- raster::rasterToPoints(a, spatial = T)
 # names(p) <- "values"
-# # rgdal::writeOGR(p, here::here("data"), "visit", "ESRI Shapefile")
 # 
 # # Transform the tourism layer into the project CRS
 # p <- spTransform(p, sp::CRS(new_proj))
@@ -161,9 +143,29 @@ rm(p, reef_value)
 # # Calculate reef value by tile (doing it on the entire SpatialPolygons might crash)
 # # And store it in the reef_value vector
 # # Use the custom function IntersectByTile.R
-# reef_visit <- IntersectByTile(allreefs, p, step = 1e6)
-# allreefs$reef_value <- reef_visit
+# reef_value <- IntersectByTile(allreefs, p, step = 1e6)
+# allreefs$reef_value <- reef_value
 # rm(p, reef_value)
+
+
+# 4b Visitation
+a <- raster::raster(here::here("data-raw", "tourism", "cr_visit.tif"))
+
+# Convert raster object to point shapefile
+p <- raster::rasterToPoints(a, spatial = T)
+names(p) <- "values"
+# rgdal::writeOGR(p, here::here("data"), "visit", "ESRI Shapefile")
+
+# Transform the tourism layer into the project CRS
+p <- spTransform(p, sp::CRS(new_proj))
+rm(a)
+
+# Calculate reef value by tile (doing it on the entire SpatialPolygons might crash)
+# And store it in the reef_value vector
+# Use the custom function IntersectByTile.R
+reef_visit <- IntersectByTile(allreefs, p, step = 1e6)
+allreefs$reef_value <- reef_visit
+rm(p, reef_value)
 
 
 
@@ -303,17 +305,17 @@ names(vweights) <- vthreats
 # Calculate the cumulative impact score as a weighted mean of the six pressures (percentiles)
 cumul_score <- matrixStats::rowWeightedMeans(as.matrix(threats), w = vweights, na.rm = T)
 
-# Calculate the cumulative impact score as a unweighted mean for comparison
+# Calculate the cumulative impact score as a unweighed mean 
 cumul_score_uw <- rowMeans(threats, na.rm = T)
 
-# Compare wighted and unweighted mean and see that they are very strongly correlated
+# Compare weighed and unweighed mean and see that they are very strongly correlated
 plot(cumul_score, cumul_score_uw)
 hist(cumul_score)
 hist(cumul_score_uw)
 cor.test(cumul_score, cumul_score_uw, method = "spearman")
 
-# Store the cumulative impact score in the allreefs_with_BCU_prc layer
-allreefs_withBCU_prc$cumul_score <- cumul_score
+# Store the unweighed cumulative impact score in the allreefs_with_BCU_prc layer
+allreefs_withBCU_prc$cumul_score <- cumul_score_uw
 rm(cumul_score_uw)
 
 # Calculate top threat
@@ -332,12 +334,6 @@ rm(allreefs_withBCU, allreefs_withBCU_prc)
 save(allreefs, file = here::here("data", "allreefs.RData"))
 rgdal::writeOGR(as_Spatial(allreefs), here::here("data"), "allreefs", "ESRI Shapefile")
 sf::st_write(allreefs, dsn = paste0(getwd(), "/data/allreefs.gpkg"), driver = "GPKG")
-# allspending <- allreefs
-# save(allspending, file = here::here("data", "allspending.RData"))
-# rgdal::writeOGR(as_Spatial(allspending), here::here("data"), "allspending", "ESRI Shapefile")
-# sf::st_write(allspending, dsn = paste0(getwd(), "/data/allspending.gpkg"), driver = "GPKG")
-
-
 
 
 

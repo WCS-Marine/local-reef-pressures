@@ -129,7 +129,7 @@ breaks <- list(
   grav_NC = c(0, 10^(-1:6)),
   pop_count = c(0, 10^(2:7)),
   num_ports = 0:6,
-  reef_value = c(0, 2.5 * 10^(0:5)),
+  reef_value = c(0, 5 * 10^(0:5)),
   sediment = c(0, 10^(2:5)),
   nutrient = c(0, 10^(-2:5))
 )

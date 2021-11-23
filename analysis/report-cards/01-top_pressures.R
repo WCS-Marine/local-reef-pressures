@@ -8,7 +8,7 @@ library(stringr)
 load(here::here("data", "allreefs.RData"))
 
 bcus_raw <- allreefs %>%
-  filter(is.bcu == "BCUs")
+  filter(!is.na(BCU_name))
 
 all_reefs_raw <- allreefs
 

@@ -91,8 +91,8 @@ ehe$second.threat <- second.threat
 
 # Prepare and save a csv and RData file containing top pressure info per refugium
 top_threats_table <- as.data.frame(ehe)[, c(1:9, 11:13)]
-save(top_threats_table, file = "TopThreat_RawValuePrc_BCUMedians_2021_06_23.RData")
-write.csv(top_threats_table, file = "TopThreat_RawValuePrc_BCUMedians_2021_06_23.csv")
+save(top_threats_table, file = "TopThreat_RawValuePrc_BCUMedians_2021_10_13.RData")
+write.csv(top_threats_table, file = "TopThreat_RawValuePrc_BCUMedians_2021_10_13.csv")
 # write.csv(top_threats_table, file = "TopThreat_visitation_2021_07_12.csv")
 
 # Adding "cumulative to the name of pressures
