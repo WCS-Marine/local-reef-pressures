@@ -1,7 +1,8 @@
 # Code to
 # - draw Figure 1 (map of top pressures)
 # - draw Figure 2 (map of cumulative impact score)
-# - Figure S3 to S8 (individual pressure maps)
+# - Figure S2 to S7 (individual pressure maps)
+
 # Marco Andrello
 # 03/02/2021
 
@@ -249,7 +250,7 @@ file.remove(paste0("plots/", dir(here("plots"))))
 
 
 #############################################################################################
-#  FIGURE 2 (CUMULATIVE SCORE) AND SUPPLEMENTARY FIGURES 3 to 8 (INDIVIDUAL PRESSURES)
+#  FIGURE 2 (CUMULATIVE SCORE) AND SUPPLEMENTARY FIGURES 2 to 7 (INDIVIDUAL PRESSURES)
 #############################################################################################
 
 fs::dir_create(here::here("plots")) # Create plots folder if it doesn't exist
@@ -405,8 +406,12 @@ for (i.threat in 1:7) {
   plot_image <- magick::image_composite(plot_image, legend, offset = glue::glue("+{legend_width_offset}+{legend_height_offset}"))
 
   # Plot final figure
+  
+  # threat order: fishing, coast_pop, ports, tourism, sediment nutrients
+  # Supplementary figure order: sediments, nutrients, fishing, coast_pop, tourism, ports
+  SFig_threat_corresp <- c(4,5,7,6,2,3) # gives the supplementary figure number of each threat
   if (i.threat < 7) {
-    file_name <- paste0("Figure S", (i.threat+2), ".png")
+    file_name <- paste0("Figure S", SFig_threat_corresp[i.threat], ".png")
   } else {
     file_name <- "Figure 2.png"
   }

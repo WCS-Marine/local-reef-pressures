@@ -1,7 +1,7 @@
 # Code to:
 # - calculate top pressure for each refugium
-# - draw Figure S12 (median pressure for each refugium)
-# - draw Figure S13 (Regional comparisons of median pressure of refugia)
+# - draw Figure S11 (Median pressure for each refugium)
+# - draw Figure S12 (Regional comparisons of median pressure of refugia)
 
 # Marco Andrello
 # 30/04/2021
@@ -102,7 +102,7 @@ v.threats.new[7] <- "cumulative"
 
 #########################################################################
 
-# Figure S12 (median pressure for each refugium)
+# Figure S11 (median pressure for each refugium)
 
 # Arrange refugia by region
 ehe.arranged <- ehe %>%
@@ -122,13 +122,13 @@ a %>%
 # Code threat as a factor
 a1$threat <- factor(a1$threat, levels = unique(a1$threat))
 
-# Plot Figure S12 (right panel): dotplot
+# Plot Figure S11 (right panel): dotplot
 theme_update(
   axis.text.y = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 7),
   strip.text.y = element_text(angle = 0, size = 7)
 )
 
-png("Figure S12_right.png", width = 10, height = 20, units = "cm", res = 600)
+png("Figure S11_right.png", width = 10, height = 20, units = "cm", res = 600)
 p <- ggplot2::ggplot(a1, aes(y = BCU_name)) +
   ggplot2::geom_point(aes(x = percentile, colour = threat)) +
   ggplot2::scale_color_brewer(palette = "Set2") +
@@ -141,13 +141,13 @@ p <- ggplot2::ggplot(a1, aes(y = BCU_name)) +
 print(p)
 dev.off()
 
-# Plot Figure S12 (left panel): Barplot cumulative impact
+# Plot Figure S11 (left panel): Barplot cumulative impact
 a %>% dplyr::select(BCU_name, cumulative, x.order, Region, Region_wrap) -> a2
 theme_update(
   axis.text.y = element_blank(),
   strip.text.y = element_blank()
 )
-png("Figure S12_left.png", width = 10, height = 20, units = "cm", res = 300)
+png("Figure S11_left.png", width = 10, height = 20, units = "cm", res = 300)
 ggplot2::ggplot(a2, aes(y = BCU_name)) +
   ggplot2::geom_col(aes(x = cumulative)) +
   ggplot2::geom_vline(aes(xintercept = glob.median[7]), linetype = "dashed", size = 0.25, show.legend = F) +
@@ -165,7 +165,7 @@ dev.off()
 
 #######################################################################
 
-# FIGURE S13. Boxplot of MEDIAN refugium percentiles by region
+# FIGURE S12. Boxplot of MEDIAN refugium percentiles by region
 
 ggplot2::theme_update(
   plot.title = element_text(hjust = 0.5, size = 10),
@@ -193,7 +193,7 @@ for (i in 1:length(v.threats.new)) {
   indicator <- v.threats.new[i]
 
   # Plot individual figure
-  png(paste0("Figure_S13_", indicator, ".png"), width = 10, height = 4, units = "cm", res = 300)
+  png(paste0("Figure_S12_", indicator, ".png"), width = 10, height = 4, units = "cm", res = 300)
   a <-
     
     # # This plots regions ordered by their median value:

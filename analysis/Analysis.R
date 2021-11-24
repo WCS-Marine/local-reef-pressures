@@ -5,9 +5,9 @@
 # - draw Figure 3 (Individual pressures: regional comparisons)
 # - draw Figure 4 (Density distribution of pressure percentiles and frequency of occurrence of top pressures in refugia vs non-refugia)
 # - draw Figure S1 (Density distribution of pressure raw values)
-# - draw Figure S2 (Correlation among pressures)
-# - draw Figure S10 (Comparison of frequency of occurrence of top pressures between regions)
-# - draw Figure S11 (Pressure intensity when top-ranked)
+# - draw Figure S9 (Comparison of frequency of occurrence of top pressures between regions)
+# - draw Figure S10 (Pressure intensity when top-ranked)
+# - draw Figure S14 (Correlation among pressures)
 
 rm(list = ls())
 
@@ -235,9 +235,9 @@ round(quantiles,2)
 
 #######################################################
 
-# FIGURE S2 - Correlation among pressures
+# FIGURE S14 - Correlation among pressures
 
-png(paste0("Figure S2.png"), width = 12, height = 10, units = "cm", res = 300)
+png(paste0("Figure S14.png"), width = 12, height = 10, units = "cm", res = 300)
 data_corr <- as.data.frame(data)[,vthreats[c(1:6)]]
 names(data_corr) <- threat_names[1:6]
 corrgram::corrgram(data_corr,
@@ -250,7 +250,7 @@ rm(data_corr)
 
 #######################################################
 
-# FIGURE S10. Comparison of frequency of occurrence of top pressures between regions
+# FIGURE S9. Comparison of frequency of occurrence of top pressures between regions
 
 ggplot2::theme_update(axis.text.y = element_text(hjust = 1, vjust = 0.5, size = 7))
 
@@ -262,8 +262,8 @@ ta <- as.data.frame(table(data$Region,
 ta$top_threat <- threat_names[ta$threat]
 ta$top_threat <- factor(ta$top_threat, levels = threat_names)
 
-# Plot Figure S10
-png(paste0("Figure S10.png"), width = 10, height = 8, units = "cm", res = 300)
+# Plot Figure S9
+png(paste0("Figure S9.png"), width = 10, height = 8, units = "cm", res = 300)
 a <- ggplot2::ggplot(ta, aes_string(y = "Region", x = "Freq", fill = "top_threat")) +
   ggplot2::geom_col(position = position_fill(reverse = T)) +
   ggplot2::scale_fill_manual(values = col_threats, name = "")
@@ -293,7 +293,7 @@ rm(a, ta)
 
 #######################################################
 
-# FIGURE S11. Pressure intensity when top-ranked
+# FIGURE S10. Pressure intensity when top-ranked
 
 # Build a dataframe where each reef cell has the value of the threat that is top-ranked
 a <- data.frame(
@@ -314,7 +314,7 @@ a$threat <- factor(a$threat, levels=c("grav_NC","pop_count","num_ports","reef_va
 
 # Boxplots of the pressure percentiles that are top ranked
 ggplot2::theme_update(axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 0.5, size = 7))
-png(paste0("Figure S11.png"), width = 10, height = 5, units = "cm", res = 300)
+png(paste0("Figure S10.png"), width = 10, height = 5, units = "cm", res = 300)
 a.plot <- 
   ggplot2::ggplot(a, aes_string(x = "value", y = "threat", fill = "threat")) +
   ggplot2::geom_boxplot(size = 0.1, outlier.size = 0.1, show.legend = F) +

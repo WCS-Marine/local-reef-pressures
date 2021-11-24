@@ -38,3 +38,5 @@ m2<-m+tm_shape(allreefs) +
     palette = "OrRd"
   )
 tmap_save(m2, filename = "sednut.pdf", width = 18.25, height = 4, units = "cm")
+
+# Then cropped and annotated in power point

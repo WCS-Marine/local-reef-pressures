@@ -1,7 +1,7 @@
 # Read layers
 # Code to
 # - read the original data layers, perform the spatial processing and save the results in the `data/allreefs` layer.
-# - draw Figure S14 (Sensitivity of coastal population to buffer size)
+# - draw Figure S13 (Sensitivity of coastal population to buffer size)
 # You do not need to run this script if you are only interested in the final results or if you want to extract values for new sites.
 
 
@@ -339,7 +339,7 @@ sf::st_write(allreefs, dsn = paste0(getwd(), "/data/allreefs.gpkg"), driver = "G
 
 #################################################################################
 
-# Figure S14
+# Figure S13
 # Sensitivity analysis of the coastal population layer to buffer size
 
 
@@ -411,6 +411,6 @@ corrgram(pop_count,
   upper.panel = panel.cor,
   cor.method = "spearman"
 )
-# Then saved as Figure S14
+# Then saved as Figure S13
 
 
