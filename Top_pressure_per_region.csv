@@ -1,0 +1,67 @@
+"","Region","num_pixel","pressure","count","frequency"
+"1","Australia",6289,"Fishing",3117,0.495627285737001
+"2","Caribbean-Atlantic",6687,"Fishing",2346,0.350829968595783
+"3","Central Indian Ocean",2049,"Fishing",776,0.378721327476818
+"4","Eastern Tropical Pacific",253,"Fishing",50,0.197628458498024
+"5","Melanesia",8255,"Fishing",1891,0.229073288915809
+"6","Micronesia",2233,"Fishing",828,0.370801612180923
+"7","Middle East and North Africa",3514,"Fishing",1673,0.47609561752988
+"8","North Pacific Ocean",598,"Fishing",125,0.209030100334448
+"9","Polynesia",2872,"Fishing",741,0.258008356545961
+"10","Southeast Asia",19176,"Fishing",4588,0.239257405089695
+"11","Western Indian Ocean",2670,"Fishing",706,0.264419475655431
+"12","Australia",6289,"Coastal pop",285,0.0453172205438066
+"13","Caribbean-Atlantic",6687,"Coastal pop",479,0.0716315238522506
+"14","Central Indian Ocean",2049,"Coastal pop",372,0.181551976573939
+"15","Eastern Tropical Pacific",253,"Coastal pop",31,0.122529644268775
+"16","Melanesia",8255,"Coastal pop",1807,0.218897637795276
+"17","Micronesia",2233,"Coastal pop",1215,0.544111061352441
+"18","Middle East and North Africa",3514,"Coastal pop",218,0.0620375640295959
+"19","North Pacific Ocean",598,"Coastal pop",78,0.130434782608696
+"20","Polynesia",2872,"Coastal pop",964,0.335654596100279
+"21","Southeast Asia",19176,"Coastal pop",4697,0.24494159365874
+"22","Western Indian Ocean",2670,"Coastal pop",595,0.222846441947566
+"23","Australia",6289,"Industrial dev",36,0.005724280489744
+"24","Caribbean-Atlantic",6687,"Industrial dev",422,0.0631075220577239
+"25","Central Indian Ocean",2049,"Industrial dev",42,0.020497803806735
+"26","Eastern Tropical Pacific",253,"Industrial dev",4,0.0158102766798419
+"27","Melanesia",8255,"Industrial dev",156,0.0188976377952756
+"28","Micronesia",2233,"Industrial dev",42,0.0188087774294671
+"29","Middle East and North Africa",3514,"Industrial dev",132,0.0375640295959021
+"30","North Pacific Ocean",598,"Industrial dev",39,0.0652173913043478
+"31","Polynesia",2872,"Industrial dev",80,0.0278551532033426
+"32","Southeast Asia",19176,"Industrial dev",392,0.0204422194409679
+"33","Western Indian Ocean",2670,"Industrial dev",78,0.0292134831460674
+"34","Australia",6289,"Tourism",1058,0.168230243281921
+"35","Caribbean-Atlantic",6687,"Tourism",1884,0.281740690892777
+"36","Central Indian Ocean",2049,"Tourism",608,0.296730112249878
+"37","Eastern Tropical Pacific",253,"Tourism",88,0.347826086956522
+"38","Melanesia",8255,"Tourism",444,0.0537855844942459
+"39","Micronesia",2233,"Tourism",116,0.051948051948052
+"40","Middle East and North Africa",3514,"Tourism",601,0.171030165054069
+"41","North Pacific Ocean",598,"Tourism",280,0.468227424749164
+"42","Polynesia",2872,"Tourism",247,0.0860027855153203
+"43","Southeast Asia",19176,"Tourism",2493,0.130006257822278
+"44","Western Indian Ocean",2670,"Tourism",152,0.0569288389513109
+"45","Australia",6289,"Sediments",1013,0.161074892669741
+"46","Caribbean-Atlantic",6687,"Sediments",451,0.0674442949005533
+"47","Central Indian Ocean",2049,"Sediments",31,0.0151293313811615
+"48","Eastern Tropical Pacific",253,"Sediments",51,0.201581027667984
+"49","Melanesia",8255,"Sediments",3247,0.393337371290127
+"50","Micronesia",2233,"Sediments",32,0.0143304970891178
+"51","Middle East and North Africa",3514,"Sediments",477,0.135742743312464
+"52","North Pacific Ocean",598,"Sediments",19,0.0317725752508361
+"53","Polynesia",2872,"Sediments",708,0.246518105849582
+"54","Southeast Asia",19176,"Sediments",2323,0.121141009595327
+"55","Western Indian Ocean",2670,"Sediments",815,0.305243445692884
+"56","Australia",6289,"Nitrogen",780,0.124026077277787
+"57","Caribbean-Atlantic",6687,"Nitrogen",1105,0.165245999700912
+"58","Central Indian Ocean",2049,"Nitrogen",220,0.107369448511469
+"59","Eastern Tropical Pacific",253,"Nitrogen",29,0.114624505928854
+"60","Melanesia",8255,"Nitrogen",710,0.0860084797092671
+"61","Micronesia",2233,"Nitrogen",0,0
+"62","Middle East and North Africa",3514,"Nitrogen",413,0.117529880478088
+"63","North Pacific Ocean",598,"Nitrogen",57,0.0953177257525084
+"64","Polynesia",2872,"Nitrogen",132,0.0459610027855153
+"65","Southeast Asia",19176,"Nitrogen",4683,0.244211514392991
+"66","Western Indian Ocean",2670,"Nitrogen",324,0.121348314606742

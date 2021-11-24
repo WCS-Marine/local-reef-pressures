@@ -281,6 +281,12 @@ data.frame(
   Region = levels(ta$Region),
   water.pollution = as.numeric(ta$Freq.rel[ta$threat == 5] + ta$Freq.rel[ta$threat == 6])
 )
+
+# Format table for csv file
+ta <- ta[,c(1,5,4,3,6)]
+names(ta) <- c("Region","num_pixel","pressure","count","frequency")
+summary(ta)
+write.csv(ta,file="Top_pressure_per_region.csv")
 rm(a, ta)
 
 
