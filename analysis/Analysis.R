@@ -8,7 +8,7 @@
 # - draw Figure S9 (Comparison of frequency of occurrence of top pressures between regions)
 # - draw Figure S10 (Pressure intensity when top-ranked)
 # - draw Figure S14 (Correlation among pressures)
-# - calculate statistics per EEZ
+
 
 rm(list = ls())
 
@@ -330,11 +330,4 @@ tapply(a$value, a$threat, summary)
 rm(a, a.plot, i)
 
 
-#######################################################
 
-# Calculate statistics per EEZ
-# Download 	Maritime Boundaries v11: World EEZ v11
-# from https://www.marineregions.org/downloads.php
-eez <- read_sf(here("data-raw","EEZ","eez_v11.gpkg"))
-
-# .... left join, etc.
