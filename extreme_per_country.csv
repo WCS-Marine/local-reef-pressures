@@ -1,0 +1,853 @@
+"","eez","n.reef","pressure","extreme_count","extreme_fraction"
+"1","American Samoa",36,"Fishing",0,0
+"2","American Samoa",36,"Coastal population",15,0.416666666666667
+"3","American Samoa",36,"Industrial development",6,0.166666666666667
+"4","American Samoa",36,"Tourism",13,0.361111111111111
+"5","American Samoa",36,"Sediments",21,0.583333333333333
+"6","American Samoa",36,"Nutrients",0,0
+"7","Andaman and Nicobar",357,"Fishing",54,0.151260504201681
+"8","Andaman and Nicobar",357,"Coastal population",118,0.330532212885154
+"9","Andaman and Nicobar",357,"Industrial development",0,0
+"10","Andaman and Nicobar",357,"Tourism",21,0.0588235294117647
+"11","Andaman and Nicobar",357,"Sediments",24,0.0672268907563025
+"12","Andaman and Nicobar",357,"Nutrients",70,0.196078431372549
+"13","Anguilla",18,"Fishing",4,0.222222222222222
+"14","Anguilla",18,"Coastal population",9,0.5
+"15","Anguilla",18,"Industrial development",4,0.222222222222222
+"16","Anguilla",18,"Tourism",14,0.777777777777778
+"17","Anguilla",18,"Sediments",0,0
+"18","Anguilla",18,"Nutrients",0,0
+"19","Antigua and Barbuda",32,"Fishing",14,0.4375
+"20","Antigua and Barbuda",32,"Coastal population",12,0.375
+"21","Antigua and Barbuda",32,"Industrial development",3,0.09375
+"22","Antigua and Barbuda",32,"Tourism",27,0.84375
+"23","Antigua and Barbuda",32,"Sediments",12,0.375
+"24","Antigua and Barbuda",32,"Nutrients",0,0
+"25","Aruba",18,"Fishing",18,1
+"26","Aruba",18,"Coastal population",17,0.944444444444444
+"27","Aruba",18,"Industrial development",11,0.611111111111111
+"28","Aruba",18,"Tourism",16,0.888888888888889
+"29","Aruba",18,"Sediments",0,0
+"30","Aruba",18,"Nutrients",0,0
+"31","Ascension",1,"Fishing",0,0
+"32","Ascension",1,"Coastal population",0,0
+"33","Ascension",1,"Industrial development",0,0
+"34","Ascension",1,"Tourism",0,0
+"35","Ascension",1,"Sediments",0,0
+"36","Ascension",1,"Nutrients",0,0
+"37","Australia",6214,"Fishing",228,0.0366913421306727
+"38","Australia",6214,"Coastal population",84,0.0135178628902478
+"39","Australia",6214,"Industrial development",36,0.00579336981010621
+"40","Australia",6214,"Tourism",1065,0.171387190215642
+"41","Australia",6214,"Sediments",605,0.0973607981976183
+"42","Australia",6214,"Nutrients",154,0.024782748632121
+"43","Bahamas",1976,"Fishing",182,0.0921052631578947
+"44","Bahamas",1976,"Coastal population",42,0.0212550607287449
+"45","Bahamas",1976,"Industrial development",22,0.0111336032388664
+"46","Bahamas",1976,"Tourism",439,0.222165991902834
+"47","Bahamas",1976,"Sediments",0,0
+"48","Bahamas",1976,"Nutrients",24,0.0121457489878543
+"49","Bahrain",118,"Fishing",111,0.940677966101695
+"50","Bahrain",118,"Coastal population",47,0.398305084745763
+"51","Bahrain",118,"Industrial development",9,0.076271186440678
+"52","Bahrain",118,"Tourism",76,0.644067796610169
+"53","Bahrain",118,"Sediments",0,0
+"54","Bahrain",118,"Nutrients",34,0.288135593220339
+"55","Bangladesh",3,"Fishing",2,0.666666666666667
+"56","Bangladesh",3,"Coastal population",3,1
+"57","Bangladesh",3,"Industrial development",0,0
+"58","Bangladesh",3,"Tourism",2,0.666666666666667
+"59","Bangladesh",3,"Sediments",2,0.666666666666667
+"60","Bangladesh",3,"Nutrients",3,1
+"61","Barbados",18,"Fishing",17,0.944444444444444
+"62","Barbados",18,"Coastal population",17,0.944444444444444
+"63","Barbados",18,"Industrial development",2,0.111111111111111
+"64","Barbados",18,"Tourism",14,0.777777777777778
+"65","Barbados",18,"Sediments",13,0.722222222222222
+"66","Barbados",18,"Nutrients",13,0.722222222222222
+"67","Bassas da India",10,"Fishing",0,0
+"68","Bassas da India",10,"Coastal population",0,0
+"69","Bassas da India",10,"Industrial development",0,0
+"70","Bassas da India",10,"Tourism",0,0
+"71","Bassas da India",10,"Sediments",0,0
+"72","Bassas da India",10,"Nutrients",0,0
+"73","Belize",271,"Fishing",76,0.280442804428044
+"74","Belize",271,"Coastal population",3,0.011070110701107
+"75","Belize",271,"Industrial development",4,0.014760147601476
+"76","Belize",271,"Tourism",183,0.675276752767528
+"77","Belize",271,"Sediments",57,0.210332103321033
+"78","Belize",271,"Nutrients",127,0.468634686346863
+"79","Bermuda",60,"Fishing",8,0.133333333333333
+"80","Bermuda",60,"Coastal population",20,0.333333333333333
+"81","Bermuda",60,"Industrial development",18,0.3
+"82","Bermuda",60,"Tourism",50,0.833333333333333
+"83","Bermuda",60,"Sediments",0,0
+"84","Bermuda",60,"Nutrients",0,0
+"85","Bonaire",21,"Fishing",3,0.142857142857143
+"86","Bonaire",21,"Coastal population",16,0.761904761904762
+"87","Bonaire",21,"Industrial development",9,0.428571428571429
+"88","Bonaire",21,"Tourism",20,0.952380952380952
+"89","Bonaire",21,"Sediments",0,0
+"90","Bonaire",21,"Nutrients",0,0
+"91","Brazil",301,"Fishing",189,0.627906976744186
+"92","Brazil",301,"Coastal population",160,0.53156146179402
+"93","Brazil",301,"Industrial development",14,0.0465116279069767
+"94","Brazil",301,"Tourism",202,0.67109634551495
+"95","Brazil",301,"Sediments",170,0.564784053156146
+"96","Brazil",301,"Nutrients",218,0.724252491694352
+"97","British Virgin Islands",52,"Fishing",16,0.307692307692308
+"98","British Virgin Islands",52,"Coastal population",21,0.403846153846154
+"99","British Virgin Islands",52,"Industrial development",13,0.25
+"100","British Virgin Islands",52,"Tourism",43,0.826923076923077
+"101","British Virgin Islands",52,"Sediments",6,0.115384615384615
+"102","British Virgin Islands",52,"Nutrients",0,0
+"103","Brunei",37,"Fishing",16,0.432432432432432
+"104","Brunei",37,"Coastal population",5,0.135135135135135
+"105","Brunei",37,"Industrial development",2,0.0540540540540541
+"106","Brunei",37,"Tourism",22,0.594594594594595
+"107","Brunei",37,"Sediments",3,0.0810810810810811
+"108","Brunei",37,"Nutrients",4,0.108108108108108
+"109","Cambodia",53,"Fishing",4,0.0754716981132075
+"110","Cambodia",53,"Coastal population",7,0.132075471698113
+"111","Cambodia",53,"Industrial development",0,0
+"112","Cambodia",53,"Tourism",37,0.69811320754717
+"113","Cambodia",53,"Sediments",10,0.188679245283019
+"114","Cambodia",53,"Nutrients",9,0.169811320754717
+"115","Cameroon",1,"Fishing",0,0
+"116","Cameroon",1,"Coastal population",0,0
+"117","Cameroon",1,"Industrial development",0,0
+"118","Cameroon",1,"Tourism",0,0
+"119","Cameroon",1,"Sediments",0,0
+"120","Cameroon",1,"Nutrients",0,0
+"121","Cape Verde",1,"Fishing",0,0
+"122","Cape Verde",1,"Coastal population",0,0
+"123","Cape Verde",1,"Industrial development",0,0
+"124","Cape Verde",1,"Tourism",0,0
+"125","Cape Verde",1,"Sediments",0,0
+"126","Cape Verde",1,"Nutrients",0,0
+"127","Cayman Islands",43,"Fishing",13,0.302325581395349
+"128","Cayman Islands",43,"Coastal population",13,0.302325581395349
+"129","Cayman Islands",43,"Industrial development",9,0.209302325581395
+"130","Cayman Islands",43,"Tourism",39,0.906976744186046
+"131","Cayman Islands",43,"Sediments",0,0
+"132","Cayman Islands",43,"Nutrients",0,0
+"133","Chagos Archipelago",500,"Fishing",0,0
+"134","Chagos Archipelago",500,"Coastal population",0,0
+"135","Chagos Archipelago",500,"Industrial development",0,0
+"136","Chagos Archipelago",500,"Tourism",0,0
+"137","Chagos Archipelago",500,"Sediments",0,0
+"138","Chagos Archipelago",500,"Nutrients",0,0
+"139","China",366,"Fishing",75,0.204918032786885
+"140","China",366,"Coastal population",139,0.379781420765027
+"141","China",366,"Industrial development",7,0.0191256830601093
+"142","China",366,"Tourism",48,0.131147540983607
+"143","China",366,"Sediments",108,0.295081967213115
+"144","China",366,"Nutrients",127,0.346994535519126
+"145","Christmas Island",14,"Fishing",3,0.214285714285714
+"146","Christmas Island",14,"Coastal population",0,0
+"147","Christmas Island",14,"Industrial development",6,0.428571428571429
+"148","Christmas Island",14,"Tourism",0,0
+"149","Christmas Island",14,"Sediments",0,0
+"150","Christmas Island",14,"Nutrients",0,0
+"151","Clipperton Island",4,"Fishing",0,0
+"152","Clipperton Island",4,"Coastal population",0,0
+"153","Clipperton Island",4,"Industrial development",0,0
+"154","Clipperton Island",4,"Tourism",0,0
+"155","Clipperton Island",4,"Sediments",0,0
+"156","Clipperton Island",4,"Nutrients",0,0
+"157","Cocos Islands",19,"Fishing",0,0
+"158","Cocos Islands",19,"Coastal population",0,0
+"159","Cocos Islands",19,"Industrial development",0,0
+"160","Cocos Islands",19,"Tourism",0,0
+"161","Cocos Islands",19,"Sediments",0,0
+"162","Cocos Islands",19,"Nutrients",0,0
+"163","Collectivity of Saint Martin",7,"Fishing",0,0
+"164","Collectivity of Saint Martin",7,"Coastal population",7,1
+"165","Collectivity of Saint Martin",7,"Industrial development",0,0
+"166","Collectivity of Saint Martin",7,"Tourism",5,0.714285714285714
+"167","Collectivity of Saint Martin",7,"Sediments",0,0
+"168","Collectivity of Saint Martin",7,"Nutrients",0,0
+"169","Colombia",169,"Fishing",116,0.686390532544379
+"170","Colombia",169,"Coastal population",61,0.36094674556213
+"171","Colombia",169,"Industrial development",4,0.0236686390532544
+"172","Colombia",169,"Tourism",110,0.650887573964497
+"173","Colombia",169,"Sediments",47,0.27810650887574
+"174","Colombia",169,"Nutrients",92,0.544378698224852
+"175","Comores",86,"Fishing",35,0.406976744186047
+"176","Comores",86,"Coastal population",77,0.895348837209302
+"177","Comores",86,"Industrial development",0,0
+"178","Comores",86,"Tourism",12,0.13953488372093
+"179","Comores",86,"Sediments",53,0.616279069767442
+"180","Comores",86,"Nutrients",0,0
+"181","Cook Islands",123,"Fishing",0,0
+"182","Cook Islands",123,"Coastal population",9,0.0731707317073171
+"183","Cook Islands",123,"Industrial development",0,0
+"184","Cook Islands",123,"Tourism",16,0.130081300813008
+"185","Cook Islands",123,"Sediments",15,0.121951219512195
+"186","Cook Islands",123,"Nutrients",0,0
+"187","Costa Rica",63,"Fishing",35,0.555555555555556
+"188","Costa Rica",63,"Coastal population",21,0.333333333333333
+"189","Costa Rica",63,"Industrial development",6,0.0952380952380952
+"190","Costa Rica",63,"Tourism",51,0.80952380952381
+"191","Costa Rica",63,"Sediments",41,0.650793650793651
+"192","Costa Rica",63,"Nutrients",39,0.619047619047619
+"193","Cuba",1090,"Fishing",799,0.73302752293578
+"194","Cuba",1090,"Coastal population",274,0.251376146788991
+"195","Cuba",1090,"Industrial development",59,0.0541284403669725
+"196","Cuba",1090,"Tourism",239,0.219266055045872
+"197","Cuba",1090,"Sediments",323,0.296330275229358
+"198","Cuba",1090,"Nutrients",592,0.543119266055046
+"199","Curaçao",30,"Fishing",30,1
+"200","Curaçao",30,"Coastal population",24,0.8
+"201","Curaçao",30,"Industrial development",13,0.433333333333333
+"202","Curaçao",30,"Tourism",30,1
+"203","Curaçao",30,"Sediments",0,0
+"204","Curaçao",30,"Nutrients",0,0
+"205","Djibouti",71,"Fishing",51,0.71830985915493
+"206","Djibouti",71,"Coastal population",25,0.352112676056338
+"207","Djibouti",71,"Industrial development",6,0.0845070422535211
+"208","Djibouti",71,"Tourism",2,0.028169014084507
+"209","Djibouti",71,"Sediments",45,0.633802816901408
+"210","Djibouti",71,"Nutrients",0,0
+"211","Dominica",22,"Fishing",15,0.681818181818182
+"212","Dominica",22,"Coastal population",16,0.727272727272727
+"213","Dominica",22,"Industrial development",6,0.272727272727273
+"214","Dominica",22,"Tourism",16,0.727272727272727
+"215","Dominica",22,"Sediments",13,0.590909090909091
+"216","Dominica",22,"Nutrients",2,0.0909090909090909
+"217","Dominican Republic",212,"Fishing",160,0.754716981132076
+"218","Dominican Republic",212,"Coastal population",145,0.683962264150943
+"219","Dominican Republic",212,"Industrial development",25,0.117924528301887
+"220","Dominican Republic",212,"Tourism",176,0.830188679245283
+"221","Dominican Republic",212,"Sediments",140,0.660377358490566
+"222","Dominican Republic",212,"Nutrients",157,0.740566037735849
+"223","East Timor",69,"Fishing",38,0.550724637681159
+"224","East Timor",69,"Coastal population",42,0.608695652173913
+"225","East Timor",69,"Industrial development",4,0.0579710144927536
+"226","East Timor",69,"Tourism",23,0.333333333333333
+"227","East Timor",69,"Sediments",40,0.579710144927536
+"228","East Timor",69,"Nutrients",10,0.144927536231884
+"229","Easter Island",1,"Fishing",0,0
+"230","Easter Island",1,"Coastal population",0,0
+"231","Easter Island",1,"Industrial development",0,0
+"232","Easter Island",1,"Tourism",0,0
+"233","Easter Island",1,"Sediments",0,0
+"234","Easter Island",1,"Nutrients",0,0
+"235","Egypt",514,"Fishing",186,0.361867704280156
+"236","Egypt",514,"Coastal population",40,0.0778210116731518
+"237","Egypt",514,"Industrial development",57,0.110894941634241
+"238","Egypt",514,"Tourism",359,0.698443579766537
+"239","Egypt",514,"Sediments",19,0.0369649805447471
+"240","Egypt",514,"Nutrients",19,0.0369649805447471
+"241","El Salvador",3,"Fishing",0,0
+"242","El Salvador",3,"Coastal population",2,0.666666666666667
+"243","El Salvador",3,"Industrial development",0,0
+"244","El Salvador",3,"Tourism",0,0
+"245","El Salvador",3,"Sediments",0,0
+"246","El Salvador",3,"Nutrients",0,0
+"247","Equatorial Guinea",3,"Fishing",0,0
+"248","Equatorial Guinea",3,"Coastal population",2,0.666666666666667
+"249","Equatorial Guinea",3,"Industrial development",0,0
+"250","Equatorial Guinea",3,"Tourism",0,0
+"251","Equatorial Guinea",3,"Sediments",0,0
+"252","Equatorial Guinea",3,"Nutrients",0,0
+"253","Eritrea",441,"Fishing",306,0.693877551020408
+"254","Eritrea",441,"Coastal population",63,0.142857142857143
+"255","Eritrea",441,"Industrial development",7,0.0158730158730159
+"256","Eritrea",441,"Tourism",5,0.0113378684807256
+"257","Eritrea",441,"Sediments",111,0.251700680272109
+"258","Eritrea",441,"Nutrients",6,0.0136054421768707
+"259","Europa Island",7,"Fishing",0,0
+"260","Europa Island",7,"Coastal population",0,0
+"261","Europa Island",7,"Industrial development",0,0
+"262","Europa Island",7,"Tourism",0,0
+"263","Europa Island",7,"Sediments",0,0
+"264","Europa Island",7,"Nutrients",0,0
+"265","Federal Republic of Somalia",105,"Fishing",94,0.895238095238095
+"266","Federal Republic of Somalia",105,"Coastal population",38,0.361904761904762
+"267","Federal Republic of Somalia",105,"Industrial development",4,0.0380952380952381
+"268","Federal Republic of Somalia",105,"Tourism",0,0
+"269","Federal Republic of Somalia",105,"Sediments",36,0.342857142857143
+"270","Federal Republic of Somalia",105,"Nutrients",6,0.0571428571428571
+"271","Fiji",1451,"Fishing",115,0.0792556857339766
+"272","Fiji",1451,"Coastal population",113,0.0778773259820813
+"273","Fiji",1451,"Industrial development",18,0.0124052377670572
+"274","Fiji",1451,"Tourism",273,0.188146106133701
+"275","Fiji",1451,"Sediments",391,0.26946933149552
+"276","Fiji",1451,"Nutrients",229,0.157822191592006
+"277","French Guiana",1,"Fishing",0,0
+"278","French Guiana",1,"Coastal population",0,0
+"279","French Guiana",1,"Industrial development",0,0
+"280","French Guiana",1,"Tourism",0,0
+"281","French Guiana",1,"Sediments",0,0
+"282","French Guiana",1,"Nutrients",0,0
+"283","French Polynesia",1266,"Fishing",39,0.0308056872037915
+"284","French Polynesia",1266,"Coastal population",80,0.0631911532385466
+"285","French Polynesia",1266,"Industrial development",10,0.00789889415481832
+"286","French Polynesia",1266,"Tourism",114,0.0900473933649289
+"287","French Polynesia",1266,"Sediments",55,0.0434439178515008
+"288","French Polynesia",1266,"Nutrients",8,0.00631911532385466
+"289","Galapagos",74,"Fishing",0,0
+"290","Galapagos",74,"Coastal population",7,0.0945945945945946
+"291","Galapagos",74,"Industrial development",0,0
+"292","Galapagos",74,"Tourism",47,0.635135135135135
+"293","Galapagos",74,"Sediments",18,0.243243243243243
+"294","Galapagos",74,"Nutrients",33,0.445945945945946
+"295","Ghana",1,"Fishing",0,0
+"296","Ghana",1,"Coastal population",0,0
+"297","Ghana",1,"Industrial development",0,0
+"298","Ghana",1,"Tourism",0,0
+"299","Ghana",1,"Sediments",0,0
+"300","Ghana",1,"Nutrients",0,0
+"301","Gilbert Islands",269,"Fishing",33,0.122676579925651
+"302","Gilbert Islands",269,"Coastal population",25,0.0929368029739777
+"303","Gilbert Islands",269,"Industrial development",12,0.0446096654275093
+"304","Gilbert Islands",269,"Tourism",0,0
+"305","Gilbert Islands",269,"Sediments",0,0
+"306","Gilbert Islands",269,"Nutrients",0,0
+"307","Glorioso Islands",26,"Fishing",0,0
+"308","Glorioso Islands",26,"Coastal population",0,0
+"309","Glorioso Islands",26,"Industrial development",0,0
+"310","Glorioso Islands",26,"Tourism",0,0
+"311","Glorioso Islands",26,"Sediments",0,0
+"312","Glorioso Islands",26,"Nutrients",0,0
+"313","Grenada",28,"Fishing",6,0.214285714285714
+"314","Grenada",28,"Coastal population",22,0.785714285714286
+"315","Grenada",28,"Industrial development",2,0.0714285714285714
+"316","Grenada",28,"Tourism",25,0.892857142857143
+"317","Grenada",28,"Sediments",15,0.535714285714286
+"318","Grenada",28,"Nutrients",0,0
+"319","Guadeloupe",61,"Fishing",6,0.0983606557377049
+"320","Guadeloupe",61,"Coastal population",45,0.737704918032787
+"321","Guadeloupe",61,"Industrial development",4,0.0655737704918033
+"322","Guadeloupe",61,"Tourism",43,0.704918032786885
+"323","Guadeloupe",61,"Sediments",19,0.311475409836066
+"324","Guadeloupe",61,"Nutrients",0,0
+"325","Guam",52,"Fishing",0,0
+"326","Guam",52,"Coastal population",21,0.403846153846154
+"327","Guam",52,"Industrial development",4,0.0769230769230769
+"328","Guam",52,"Tourism",28,0.538461538461538
+"329","Guam",52,"Sediments",0,0
+"330","Guam",52,"Nutrients",0,0
+"331","Haiti",220,"Fishing",189,0.859090909090909
+"332","Haiti",220,"Coastal population",204,0.927272727272727
+"333","Haiti",220,"Industrial development",34,0.154545454545455
+"334","Haiti",220,"Tourism",82,0.372727272727273
+"335","Haiti",220,"Sediments",169,0.768181818181818
+"336","Haiti",220,"Nutrients",17,0.0772727272727273
+"337","Hawaii",497,"Fishing",94,0.189134808853119
+"338","Hawaii",497,"Coastal population",105,0.211267605633803
+"339","Hawaii",497,"Industrial development",35,0.0704225352112676
+"340","Hawaii",497,"Tourism",125,0.251509054325956
+"341","Hawaii",497,"Sediments",124,0.249496981891348
+"342","Hawaii",497,"Nutrients",131,0.263581488933602
+"343","High Seas",23,"Fishing",0,0
+"344","High Seas",23,"Coastal population",0,0
+"345","High Seas",23,"Industrial development",0,0
+"346","High Seas",23,"Tourism",0,0
+"347","High Seas",23,"Sediments",0,0
+"348","High Seas",23,"Nutrients",0,0
+"349","Honduras",212,"Fishing",40,0.188679245283019
+"350","Honduras",212,"Coastal population",37,0.174528301886792
+"351","Honduras",212,"Industrial development",8,0.0377358490566038
+"352","Honduras",212,"Tourism",55,0.259433962264151
+"353","Honduras",212,"Sediments",20,0.0943396226415094
+"354","Honduras",212,"Nutrients",30,0.141509433962264
+"355","Howland and Baker islands",5,"Fishing",0,0
+"356","Howland and Baker islands",5,"Coastal population",0,0
+"357","Howland and Baker islands",5,"Industrial development",0,0
+"358","Howland and Baker islands",5,"Tourism",0,0
+"359","Howland and Baker islands",5,"Sediments",0,0
+"360","Howland and Baker islands",5,"Nutrients",0,0
+"361","Ile Tromelin",4,"Fishing",0,0
+"362","Ile Tromelin",4,"Coastal population",0,0
+"363","Ile Tromelin",4,"Industrial development",0,0
+"364","Ile Tromelin",4,"Tourism",0,0
+"365","Ile Tromelin",4,"Sediments",0,0
+"366","Ile Tromelin",4,"Nutrients",0,0
+"367","India",404,"Fishing",253,0.626237623762376
+"368","India",404,"Coastal population",261,0.646039603960396
+"369","India",404,"Industrial development",46,0.113861386138614
+"370","India",404,"Tourism",69,0.170792079207921
+"371","India",404,"Sediments",194,0.48019801980198
+"372","India",404,"Nutrients",243,0.601485148514851
+"373","Indonesia",10516,"Fishing",2583,0.245625713198935
+"374","Indonesia",10516,"Coastal population",4239,0.403100038037277
+"375","Indonesia",10516,"Industrial development",179,0.0170216812476227
+"376","Indonesia",10516,"Tourism",2978,0.283187523773298
+"377","Indonesia",10516,"Sediments",3825,0.363731456827691
+"378","Indonesia",10516,"Nutrients",4551,0.432769113731457
+"379","Iran",100,"Fishing",28,0.28
+"380","Iran",100,"Coastal population",50,0.5
+"381","Iran",100,"Industrial development",4,0.04
+"382","Iran",100,"Tourism",60,0.6
+"383","Iran",100,"Sediments",29,0.29
+"384","Iran",100,"Nutrients",23,0.23
+"385","Israel",1,"Fishing",0,0
+"386","Israel",1,"Coastal population",1,1
+"387","Israel",1,"Industrial development",1,1
+"388","Israel",1,"Tourism",1,1
+"389","Israel",1,"Sediments",0,0
+"390","Israel",1,"Nutrients",0,0
+"391","Jamaica",160,"Fishing",82,0.5125
+"392","Jamaica",160,"Coastal population",108,0.675
+"393","Jamaica",160,"Industrial development",34,0.2125
+"394","Jamaica",160,"Tourism",104,0.65
+"395","Jamaica",160,"Sediments",88,0.55
+"396","Jamaica",160,"Nutrients",80,0.5
+"397","Japan",460,"Fishing",240,0.521739130434783
+"398","Japan",460,"Coastal population",197,0.428260869565217
+"399","Japan",460,"Industrial development",18,0.0391304347826087
+"400","Japan",460,"Tourism",323,0.702173913043478
+"401","Japan",460,"Sediments",135,0.293478260869565
+"402","Japan",460,"Nutrients",188,0.408695652173913
+"403","Jarvis Island",2,"Fishing",0,0
+"404","Jarvis Island",2,"Coastal population",0,0
+"405","Jarvis Island",2,"Industrial development",0,0
+"406","Jarvis Island",2,"Tourism",0,0
+"407","Jarvis Island",2,"Sediments",0,0
+"408","Jarvis Island",2,"Nutrients",0,0
+"409","Johnston Atoll",11,"Fishing",0,0
+"410","Johnston Atoll",11,"Coastal population",0,0
+"411","Johnston Atoll",11,"Industrial development",8,0.727272727272727
+"412","Johnston Atoll",11,"Tourism",0,0
+"413","Johnston Atoll",11,"Sediments",0,0
+"414","Johnston Atoll",11,"Nutrients",0,0
+"415","Jordan",4,"Fishing",0,0
+"416","Jordan",4,"Coastal population",4,1
+"417","Jordan",4,"Industrial development",4,1
+"418","Jordan",4,"Tourism",4,1
+"419","Jordan",4,"Sediments",0,0
+"420","Jordan",4,"Nutrients",0,0
+"421","Juan de Nova Island",7,"Fishing",0,0
+"422","Juan de Nova Island",7,"Coastal population",0,0
+"423","Juan de Nova Island",7,"Industrial development",0,0
+"424","Juan de Nova Island",7,"Tourism",0,0
+"425","Juan de Nova Island",7,"Sediments",0,0
+"426","Juan de Nova Island",7,"Nutrients",0,0
+"427","Kenya",131,"Fishing",93,0.709923664122137
+"428","Kenya",131,"Coastal population",77,0.587786259541985
+"429","Kenya",131,"Industrial development",9,0.0687022900763359
+"430","Kenya",131,"Tourism",61,0.465648854961832
+"431","Kenya",131,"Sediments",85,0.648854961832061
+"432","Kenya",131,"Nutrients",114,0.870229007633588
+"433","Kuwait",27,"Fishing",7,0.259259259259259
+"434","Kuwait",27,"Coastal population",8,0.296296296296296
+"435","Kuwait",27,"Industrial development",4,0.148148148148148
+"436","Kuwait",27,"Tourism",10,0.37037037037037
+"437","Kuwait",27,"Sediments",0,0
+"438","Kuwait",27,"Nutrients",0,0
+"439","Line Group",77,"Fishing",0,0
+"440","Line Group",77,"Coastal population",7,0.0909090909090909
+"441","Line Group",77,"Industrial development",3,0.038961038961039
+"442","Line Group",77,"Tourism",0,0
+"443","Line Group",77,"Sediments",0,0
+"444","Line Group",77,"Nutrients",0,0
+"445","Madagascar",862,"Fishing",224,0.259860788863109
+"446","Madagascar",862,"Coastal population",227,0.263341067285383
+"447","Madagascar",862,"Industrial development",31,0.0359628770301624
+"448","Madagascar",862,"Tourism",47,0.0545243619489559
+"449","Madagascar",862,"Sediments",524,0.607888631090487
+"450","Madagascar",862,"Nutrients",466,0.540603248259861
+"451","Malaysia",747,"Fishing",242,0.323962516733601
+"452","Malaysia",747,"Coastal population",208,0.278447121820616
+"453","Malaysia",747,"Industrial development",34,0.0455153949129853
+"454","Malaysia",747,"Tourism",321,0.429718875502008
+"455","Malaysia",747,"Sediments",181,0.242302543507363
+"456","Malaysia",747,"Nutrients",317,0.424364123159304
+"457","Maldives",1024,"Fishing",86,0.083984375
+"458","Maldives",1024,"Coastal population",110,0.107421875
+"459","Maldives",1024,"Industrial development",6,0.005859375
+"460","Maldives",1024,"Tourism",503,0.4912109375
+"461","Maldives",1024,"Sediments",0,0
+"462","Maldives",1024,"Nutrients",0,0
+"463","Marshall Islands",816,"Fishing",16,0.0196078431372549
+"464","Marshall Islands",816,"Coastal population",20,0.0245098039215686
+"465","Marshall Islands",816,"Industrial development",7,0.00857843137254902
+"466","Marshall Islands",816,"Tourism",5,0.00612745098039216
+"467","Marshall Islands",816,"Sediments",0,0
+"468","Marshall Islands",816,"Nutrients",0,0
+"469","Martinique",36,"Fishing",32,0.888888888888889
+"470","Martinique",36,"Coastal population",29,0.805555555555556
+"471","Martinique",36,"Industrial development",12,0.333333333333333
+"472","Martinique",36,"Tourism",29,0.805555555555556
+"473","Martinique",36,"Sediments",27,0.75
+"474","Martinique",36,"Nutrients",0,0
+"475","Mayotte",79,"Fishing",64,0.810126582278481
+"476","Mayotte",79,"Coastal population",38,0.481012658227848
+"477","Mayotte",79,"Industrial development",0,0
+"478","Mayotte",79,"Tourism",27,0.341772151898734
+"479","Mayotte",79,"Sediments",0,0
+"480","Mayotte",79,"Nutrients",0,0
+"481","Mexico",311,"Fishing",67,0.215434083601286
+"482","Mexico",311,"Coastal population",51,0.163987138263666
+"483","Mexico",311,"Industrial development",15,0.0482315112540193
+"484","Mexico",311,"Tourism",163,0.52411575562701
+"485","Mexico",311,"Sediments",43,0.138263665594855
+"486","Mexico",311,"Nutrients",121,0.389067524115756
+"487","Micronesia",968,"Fishing",0,0
+"488","Micronesia",968,"Coastal population",57,0.0588842975206612
+"489","Micronesia",968,"Industrial development",12,0.012396694214876
+"490","Micronesia",968,"Tourism",39,0.0402892561983471
+"491","Micronesia",968,"Sediments",0,0
+"492","Micronesia",968,"Nutrients",0,0
+"493","Montserrat",9,"Fishing",0,0
+"494","Montserrat",9,"Coastal population",6,0.666666666666667
+"495","Montserrat",9,"Industrial development",7,0.777777777777778
+"496","Montserrat",9,"Tourism",6,0.666666666666667
+"497","Montserrat",9,"Sediments",6,0.666666666666667
+"498","Montserrat",9,"Nutrients",0,0
+"499","Mozambique",430,"Fishing",82,0.190697674418605
+"500","Mozambique",430,"Coastal population",133,0.309302325581395
+"501","Mozambique",430,"Industrial development",8,0.0186046511627907
+"502","Mozambique",430,"Tourism",142,0.330232558139535
+"503","Mozambique",430,"Sediments",247,0.574418604651163
+"504","Mozambique",430,"Nutrients",303,0.704651162790698
+"505","Myanmar",451,"Fishing",37,0.082039911308204
+"506","Myanmar",451,"Coastal population",134,0.297117516629712
+"507","Myanmar",451,"Industrial development",0,0
+"508","Myanmar",451,"Tourism",9,0.0199556541019956
+"509","Myanmar",451,"Sediments",97,0.215077605321508
+"510","Myanmar",451,"Nutrients",120,0.266075388026608
+"511","Nauru",5,"Fishing",5,1
+"512","Nauru",5,"Coastal population",5,1
+"513","Nauru",5,"Industrial development",5,1
+"514","Nauru",5,"Tourism",0,0
+"515","Nauru",5,"Sediments",0,0
+"516","Nauru",5,"Nutrients",0,0
+"517","Navassa Island",6,"Fishing",0,0
+"518","Navassa Island",6,"Coastal population",0,0
+"519","Navassa Island",6,"Industrial development",0,0
+"520","Navassa Island",6,"Tourism",0,0
+"521","Navassa Island",6,"Sediments",0,0
+"522","Navassa Island",6,"Nutrients",0,0
+"523","New Caledonia",1440,"Fishing",155,0.107638888888889
+"524","New Caledonia",1440,"Coastal population",21,0.0145833333333333
+"525","New Caledonia",1440,"Industrial development",25,0.0173611111111111
+"526","New Caledonia",1440,"Tourism",137,0.0951388888888889
+"527","New Caledonia",1440,"Sediments",409,0.284027777777778
+"528","New Caledonia",1440,"Nutrients",64,0.0444444444444444
+"529","New Zealand",3,"Fishing",0,0
+"530","New Zealand",3,"Coastal population",0,0
+"531","New Zealand",3,"Industrial development",0,0
+"532","New Zealand",3,"Tourism",0,0
+"533","New Zealand",3,"Sediments",0,0
+"534","New Zealand",3,"Nutrients",0,0
+"535","Nicaragua",193,"Fishing",0,0
+"536","Nicaragua",193,"Coastal population",6,0.0310880829015544
+"537","Nicaragua",193,"Industrial development",0,0
+"538","Nicaragua",193,"Tourism",11,0.0569948186528497
+"539","Nicaragua",193,"Sediments",14,0.0725388601036269
+"540","Nicaragua",193,"Nutrients",25,0.129533678756477
+"541","Niue",19,"Fishing",8,0.421052631578947
+"542","Niue",19,"Coastal population",0,0
+"543","Niue",19,"Industrial development",0,0
+"544","Niue",19,"Tourism",6,0.315789473684211
+"545","Niue",19,"Sediments",8,0.421052631578947
+"546","Niue",19,"Nutrients",0,0
+"547","Northern Mariana Islands",73,"Fishing",9,0.123287671232877
+"548","Northern Mariana Islands",73,"Coastal population",22,0.301369863013699
+"549","Northern Mariana Islands",73,"Industrial development",20,0.273972602739726
+"550","Northern Mariana Islands",73,"Tourism",41,0.561643835616438
+"551","Northern Mariana Islands",73,"Sediments",0,0
+"552","Northern Mariana Islands",73,"Nutrients",0,0
+"553","Oecusse",6,"Fishing",0,0
+"554","Oecusse",6,"Coastal population",5,0.833333333333333
+"555","Oecusse",6,"Industrial development",0,0
+"556","Oecusse",6,"Tourism",1,0.166666666666667
+"557","Oecusse",6,"Sediments",6,1
+"558","Oecusse",6,"Nutrients",6,1
+"559","Oman",162,"Fishing",44,0.271604938271605
+"560","Oman",162,"Coastal population",27,0.166666666666667
+"561","Oman",162,"Industrial development",11,0.0679012345679012
+"562","Oman",162,"Tourism",67,0.41358024691358
+"563","Oman",162,"Sediments",67,0.41358024691358
+"564","Oman",162,"Nutrients",30,0.185185185185185
+"565","Palau",168,"Fishing",2,0.0119047619047619
+"566","Palau",168,"Coastal population",12,0.0714285714285714
+"567","Palau",168,"Industrial development",0,0
+"568","Palau",168,"Tourism",65,0.386904761904762
+"569","Palau",168,"Sediments",0,0
+"570","Palau",168,"Nutrients",0,0
+"571","Palmyra Atoll",17,"Fishing",0,0
+"572","Palmyra Atoll",17,"Coastal population",0,0
+"573","Palmyra Atoll",17,"Industrial development",0,0
+"574","Palmyra Atoll",17,"Tourism",0,0
+"575","Palmyra Atoll",17,"Sediments",0,0
+"576","Palmyra Atoll",17,"Nutrients",0,0
+"577","Panama",313,"Fishing",130,0.415335463258786
+"578","Panama",313,"Coastal population",53,0.169329073482428
+"579","Panama",313,"Industrial development",17,0.0543130990415335
+"580","Panama",313,"Tourism",96,0.306709265175719
+"581","Panama",313,"Sediments",101,0.322683706070288
+"582","Panama",313,"Nutrients",42,0.134185303514377
+"583","Papua New Guinea",3570,"Fishing",242,0.0677871148459384
+"584","Papua New Guinea",3570,"Coastal population",287,0.0803921568627451
+"585","Papua New Guinea",3570,"Industrial development",59,0.0165266106442577
+"586","Papua New Guinea",3570,"Tourism",60,0.0168067226890756
+"587","Papua New Guinea",3570,"Sediments",715,0.200280112044818
+"588","Papua New Guinea",3570,"Nutrients",288,0.080672268907563
+"589","Philippines",5659,"Fishing",2625,0.463862873299169
+"590","Philippines",5659,"Coastal population",3127,0.552571125640573
+"591","Philippines",5659,"Industrial development",157,0.0277434175649408
+"592","Philippines",5659,"Tourism",2277,0.402367909524651
+"593","Philippines",5659,"Sediments",2217,0.391765329563527
+"594","Philippines",5659,"Nutrients",2561,0.452553454673971
+"595","Phoenix Group",37,"Fishing",0,0
+"596","Phoenix Group",37,"Coastal population",0,0
+"597","Phoenix Group",37,"Industrial development",0,0
+"598","Phoenix Group",37,"Tourism",0,0
+"599","Phoenix Group",37,"Sediments",0,0
+"600","Phoenix Group",37,"Nutrients",0,0
+"601","Pitcairn",15,"Fishing",2,0.133333333333333
+"602","Pitcairn",15,"Coastal population",0,0
+"603","Pitcairn",15,"Industrial development",0,0
+"604","Pitcairn",15,"Tourism",0,0
+"605","Pitcairn",15,"Sediments",0,0
+"606","Pitcairn",15,"Nutrients",0,0
+"607","Puerto Rico",155,"Fishing",136,0.87741935483871
+"608","Puerto Rico",155,"Coastal population",92,0.593548387096774
+"609","Puerto Rico",155,"Industrial development",26,0.167741935483871
+"610","Puerto Rico",155,"Tourism",140,0.903225806451613
+"611","Puerto Rico",155,"Sediments",98,0.632258064516129
+"612","Puerto Rico",155,"Nutrients",0,0
+"613","Qatar",110,"Fishing",92,0.836363636363636
+"614","Qatar",110,"Coastal population",11,0.1
+"615","Qatar",110,"Industrial development",4,0.0363636363636364
+"616","Qatar",110,"Tourism",28,0.254545454545455
+"617","Qatar",110,"Sediments",0,0
+"618","Qatar",110,"Nutrients",51,0.463636363636364
+"619","Quitasueño Bank",25,"Fishing",0,0
+"620","Quitasueño Bank",25,"Coastal population",0,0
+"621","Quitasueño Bank",25,"Industrial development",0,0
+"622","Quitasueño Bank",25,"Tourism",0,0
+"623","Quitasueño Bank",25,"Sediments",0,0
+"624","Quitasueño Bank",25,"Nutrients",0,0
+"625","Republic of Mauritius",128,"Fishing",55,0.4296875
+"626","Republic of Mauritius",128,"Coastal population",62,0.484375
+"627","Republic of Mauritius",128,"Industrial development",3,0.0234375
+"628","Republic of Mauritius",128,"Tourism",57,0.4453125
+"629","Republic of Mauritius",128,"Sediments",0,0
+"630","Republic of Mauritius",128,"Nutrients",0,0
+"631","Réunion",13,"Fishing",11,0.846153846153846
+"632","Réunion",13,"Coastal population",12,0.923076923076923
+"633","Réunion",13,"Industrial development",1,0.0769230769230769
+"634","Réunion",13,"Tourism",10,0.769230769230769
+"635","Réunion",13,"Sediments",0,0
+"636","Réunion",13,"Nutrients",0,0
+"637","Saba",28,"Fishing",0,0
+"638","Saba",28,"Coastal population",0,0
+"639","Saba",28,"Industrial development",0,0
+"640","Saba",28,"Tourism",8,0.285714285714286
+"641","Saba",28,"Sediments",0,0
+"642","Saba",28,"Nutrients",0,0
+"643","Saint-Barthélemy",11,"Fishing",0,0
+"644","Saint-Barthélemy",11,"Coastal population",6,0.545454545454545
+"645","Saint-Barthélemy",11,"Industrial development",4,0.363636363636364
+"646","Saint-Barthélemy",11,"Tourism",10,0.909090909090909
+"647","Saint-Barthélemy",11,"Sediments",0,0
+"648","Saint-Barthélemy",11,"Nutrients",0,0
+"649","Saint Kitts and Nevis",24,"Fishing",17,0.708333333333333
+"650","Saint Kitts and Nevis",24,"Coastal population",24,1
+"651","Saint Kitts and Nevis",24,"Industrial development",9,0.375
+"652","Saint Kitts and Nevis",24,"Tourism",23,0.958333333333333
+"653","Saint Kitts and Nevis",24,"Sediments",20,0.833333333333333
+"654","Saint Kitts and Nevis",24,"Nutrients",0,0
+"655","Saint Lucia",19,"Fishing",17,0.894736842105263
+"656","Saint Lucia",19,"Coastal population",19,1
+"657","Saint Lucia",19,"Industrial development",6,0.315789473684211
+"658","Saint Lucia",19,"Tourism",17,0.894736842105263
+"659","Saint Lucia",19,"Sediments",19,1
+"660","Saint Lucia",19,"Nutrients",8,0.421052631578947
+"661","Saint Vincent and the Grenadines",29,"Fishing",10,0.344827586206897
+"662","Saint Vincent and the Grenadines",29,"Coastal population",10,0.344827586206897
+"663","Saint Vincent and the Grenadines",29,"Industrial development",6,0.206896551724138
+"664","Saint Vincent and the Grenadines",29,"Tourism",26,0.896551724137931
+"665","Saint Vincent and the Grenadines",29,"Sediments",2,0.0689655172413793
+"666","Saint Vincent and the Grenadines",29,"Nutrients",0,0
+"667","Samoa",88,"Fishing",44,0.5
+"668","Samoa",88,"Coastal population",53,0.602272727272727
+"669","Samoa",88,"Industrial development",5,0.0568181818181818
+"670","Samoa",88,"Tourism",50,0.568181818181818
+"671","Samoa",88,"Sediments",58,0.659090909090909
+"672","Samoa",88,"Nutrients",0,0
+"673","Sao Tome and Principe",1,"Fishing",0,0
+"674","Sao Tome and Principe",1,"Coastal population",0,0
+"675","Sao Tome and Principe",1,"Industrial development",0,0
+"676","Sao Tome and Principe",1,"Tourism",0,0
+"677","Sao Tome and Principe",1,"Sediments",0,0
+"678","Sao Tome and Principe",1,"Nutrients",0,0
+"679","Saudi Arabia",1082,"Fishing",520,0.480591497227357
+"680","Saudi Arabia",1082,"Coastal population",144,0.133086876155268
+"681","Saudi Arabia",1082,"Industrial development",21,0.0194085027726433
+"682","Saudi Arabia",1082,"Tourism",333,0.307763401109057
+"683","Saudi Arabia",1082,"Sediments",251,0.231977818853974
+"684","Saudi Arabia",1082,"Nutrients",514,0.475046210720887
+"685","Senkaku Islands",12,"Fishing",9,0.75
+"686","Senkaku Islands",12,"Coastal population",0,0
+"687","Senkaku Islands",12,"Industrial development",0,0
+"688","Senkaku Islands",12,"Tourism",0,0
+"689","Senkaku Islands",12,"Sediments",0,0
+"690","Senkaku Islands",12,"Nutrients",0,0
+"691","Serrana Bank",22,"Fishing",0,0
+"692","Serrana Bank",22,"Coastal population",0,0
+"693","Serrana Bank",22,"Industrial development",0,0
+"694","Serrana Bank",22,"Tourism",0,0
+"695","Serrana Bank",22,"Sediments",0,0
+"696","Serrana Bank",22,"Nutrients",0,0
+"697","Seychelles",273,"Fishing",15,0.0549450549450549
+"698","Seychelles",273,"Coastal population",25,0.0915750915750916
+"699","Seychelles",273,"Industrial development",8,0.0293040293040293
+"700","Seychelles",273,"Tourism",51,0.186813186813187
+"701","Seychelles",273,"Sediments",0,0
+"702","Seychelles",273,"Nutrients",0,0
+"703","Singapore",12,"Fishing",11,0.916666666666667
+"704","Singapore",12,"Coastal population",9,0.75
+"705","Singapore",12,"Industrial development",5,0.416666666666667
+"706","Singapore",12,"Tourism",7,0.583333333333333
+"707","Singapore",12,"Sediments",5,0.416666666666667
+"708","Singapore",12,"Nutrients",11,0.916666666666667
+"709","Sint-Eustatius",8,"Fishing",0,0
+"710","Sint-Eustatius",8,"Coastal population",4,0.5
+"711","Sint-Eustatius",8,"Industrial development",0,0
+"712","Sint-Eustatius",8,"Tourism",4,0.5
+"713","Sint-Eustatius",8,"Sediments",0,0
+"714","Sint-Eustatius",8,"Nutrients",0,0
+"715","Sint-Maarten",4,"Fishing",0,0
+"716","Sint-Maarten",4,"Coastal population",4,1
+"717","Sint-Maarten",4,"Industrial development",0,0
+"718","Sint-Maarten",4,"Tourism",3,0.75
+"719","Sint-Maarten",4,"Sediments",0,0
+"720","Sint-Maarten",4,"Nutrients",0,0
+"721","Solomon Islands",1462,"Fishing",24,0.0164158686730506
+"722","Solomon Islands",1462,"Coastal population",175,0.119699042407661
+"723","Solomon Islands",1462,"Industrial development",50,0.0341997264021888
+"724","Solomon Islands",1462,"Tourism",20,0.0136798905608755
+"725","Solomon Islands",1462,"Sediments",262,0.179206566347469
+"726","Solomon Islands",1462,"Nutrients",0,0
+"727","South Africa",11,"Fishing",3,0.272727272727273
+"728","South Africa",11,"Coastal population",4,0.363636363636364
+"729","South Africa",11,"Industrial development",0,0
+"730","South Africa",11,"Tourism",3,0.272727272727273
+"731","South Africa",11,"Sediments",1,0.0909090909090909
+"732","South Africa",11,"Nutrients",4,0.363636363636364
+"733","Sri Lanka",118,"Fishing",53,0.449152542372881
+"734","Sri Lanka",118,"Coastal population",74,0.627118644067797
+"735","Sri Lanka",118,"Industrial development",7,0.0593220338983051
+"736","Sri Lanka",118,"Tourism",22,0.186440677966102
+"737","Sri Lanka",118,"Sediments",61,0.516949152542373
+"738","Sri Lanka",118,"Nutrients",104,0.88135593220339
+"739","Sudan",370,"Fishing",206,0.556756756756757
+"740","Sudan",370,"Coastal population",15,0.0405405405405405
+"741","Sudan",370,"Industrial development",5,0.0135135135135135
+"742","Sudan",370,"Tourism",43,0.116216216216216
+"743","Sudan",370,"Sediments",98,0.264864864864865
+"744","Sudan",370,"Nutrients",0,0
+"745","Taiwan",153,"Fishing",142,0.928104575163399
+"746","Taiwan",153,"Coastal population",74,0.483660130718954
+"747","Taiwan",153,"Industrial development",0,0
+"748","Taiwan",153,"Tourism",105,0.686274509803922
+"749","Taiwan",153,"Sediments",47,0.30718954248366
+"750","Taiwan",153,"Nutrients",60,0.392156862745098
+"751","Tanzania",523,"Fishing",392,0.749521988527725
+"752","Tanzania",523,"Coastal population",286,0.546845124282983
+"753","Tanzania",523,"Industrial development",32,0.0611854684512428
+"754","Tanzania",523,"Tourism",113,0.216061185468451
+"755","Tanzania",523,"Sediments",268,0.512428298279159
+"756","Tanzania",523,"Nutrients",418,0.799235181644359
+"757","Thailand",314,"Fishing",122,0.388535031847134
+"758","Thailand",314,"Coastal population",129,0.410828025477707
+"759","Thailand",314,"Industrial development",18,0.0573248407643312
+"760","Thailand",314,"Tourism",195,0.621019108280255
+"761","Thailand",314,"Sediments",129,0.410828025477707
+"762","Thailand",314,"Nutrients",185,0.589171974522293
+"763","Tokelau",23,"Fishing",0,0
+"764","Tokelau",23,"Coastal population",0,0
+"765","Tokelau",23,"Industrial development",0,0
+"766","Tokelau",23,"Tourism",0,0
+"767","Tokelau",23,"Sediments",0,0
+"768","Tokelau",23,"Nutrients",0,0
+"769","Tonga",323,"Fishing",26,0.0804953560371517
+"770","Tonga",323,"Coastal population",27,0.0835913312693498
+"771","Tonga",323,"Industrial development",12,0.0371517027863777
+"772","Tonga",323,"Tourism",39,0.120743034055728
+"773","Tonga",323,"Sediments",26,0.0804953560371517
+"774","Tonga",323,"Nutrients",21,0.065015479876161
+"775","Trindade",4,"Fishing",0,0
+"776","Trindade",4,"Coastal population",0,0
+"777","Trindade",4,"Industrial development",0,0
+"778","Trindade",4,"Tourism",0,0
+"779","Trindade",4,"Sediments",0,0
+"780","Trindade",4,"Nutrients",0,0
+"781","Trinidad and Tobago",27,"Fishing",0,0
+"782","Trinidad and Tobago",27,"Coastal population",23,0.851851851851852
+"783","Trinidad and Tobago",27,"Industrial development",0,0
+"784","Trinidad and Tobago",27,"Tourism",22,0.814814814814815
+"785","Trinidad and Tobago",27,"Sediments",2,0.0740740740740741
+"786","Trinidad and Tobago",27,"Nutrients",11,0.407407407407407
+"787","Turks and Caicos Islands",102,"Fishing",2,0.0196078431372549
+"788","Turks and Caicos Islands",102,"Coastal population",19,0.186274509803922
+"789","Turks and Caicos Islands",102,"Industrial development",14,0.137254901960784
+"790","Turks and Caicos Islands",102,"Tourism",83,0.813725490196078
+"791","Turks and Caicos Islands",102,"Sediments",0,0
+"792","Turks and Caicos Islands",102,"Nutrients",0,0
+"793","Tuvalu",200,"Fishing",7,0.035
+"794","Tuvalu",200,"Coastal population",6,0.03
+"795","Tuvalu",200,"Industrial development",3,0.015
+"796","Tuvalu",200,"Tourism",0,0
+"797","Tuvalu",200,"Sediments",0,0
+"798","Tuvalu",200,"Nutrients",0,0
+"799","United Arab Emirates",233,"Fishing",173,0.742489270386266
+"800","United Arab Emirates",233,"Coastal population",34,0.145922746781116
+"801","United Arab Emirates",233,"Industrial development",9,0.0386266094420601
+"802","United Arab Emirates",233,"Tourism",45,0.1931330472103
+"803","United Arab Emirates",233,"Sediments",15,0.0643776824034335
+"804","United Arab Emirates",233,"Nutrients",66,0.283261802575107
+"805","United States",224,"Fishing",30,0.133928571428571
+"806","United States",224,"Coastal population",60,0.267857142857143
+"807","United States",224,"Industrial development",13,0.0580357142857143
+"808","United States",224,"Tourism",161,0.71875
+"809","United States",224,"Sediments",13,0.0580357142857143
+"810","United States",224,"Nutrients",72,0.321428571428571
+"811","United States Virgin Islands",57,"Fishing",23,0.403508771929825
+"812","United States Virgin Islands",57,"Coastal population",35,0.614035087719298
+"813","United States Virgin Islands",57,"Industrial development",23,0.403508771929825
+"814","United States Virgin Islands",57,"Tourism",41,0.719298245614035
+"815","United States Virgin Islands",57,"Sediments",0,0
+"816","United States Virgin Islands",57,"Nutrients",0,0
+"817","Vanuatu",480,"Fishing",28,0.0583333333333333
+"818","Vanuatu",480,"Coastal population",79,0.164583333333333
+"819","Vanuatu",480,"Industrial development",6,0.0125
+"820","Vanuatu",480,"Tourism",55,0.114583333333333
+"821","Vanuatu",480,"Sediments",152,0.316666666666667
+"822","Vanuatu",480,"Nutrients",0,0
+"823","Venezuela",158,"Fishing",100,0.632911392405063
+"824","Venezuela",158,"Coastal population",46,0.291139240506329
+"825","Venezuela",158,"Industrial development",6,0.0379746835443038
+"826","Venezuela",158,"Tourism",101,0.639240506329114
+"827","Venezuela",158,"Sediments",42,0.265822784810127
+"828","Venezuela",158,"Nutrients",65,0.411392405063291
+"829","Vietnam",317,"Fishing",159,0.501577287066246
+"830","Vietnam",317,"Coastal population",193,0.608832807570978
+"831","Vietnam",317,"Industrial development",9,0.028391167192429
+"832","Vietnam",317,"Tourism",98,0.309148264984227
+"833","Vietnam",317,"Sediments",160,0.504731861198738
+"834","Vietnam",317,"Nutrients",172,0.542586750788643
+"835","Wake Island",7,"Fishing",0,0
+"836","Wake Island",7,"Coastal population",0,0
+"837","Wake Island",7,"Industrial development",6,0.857142857142857
+"838","Wake Island",7,"Tourism",0,0
+"839","Wake Island",7,"Sediments",0,0
+"840","Wake Island",7,"Nutrients",0,0
+"841","Wallis and Futuna",123,"Fishing",6,0.0487804878048781
+"842","Wallis and Futuna",123,"Coastal population",13,0.105691056910569
+"843","Wallis and Futuna",123,"Industrial development",0,0
+"844","Wallis and Futuna",123,"Tourism",0,0
+"845","Wallis and Futuna",123,"Sediments",1,0.00813008130081301
+"846","Wallis and Futuna",123,"Nutrients",0,0
+"847","Yemen",254,"Fishing",137,0.539370078740158
+"848","Yemen",254,"Coastal population",99,0.389763779527559
+"849","Yemen",254,"Industrial development",14,0.0551181102362205
+"850","Yemen",254,"Tourism",1,0.00393700787401575
+"851","Yemen",254,"Sediments",121,0.476377952755905
+"852","Yemen",254,"Nutrients",111,0.437007874015748
