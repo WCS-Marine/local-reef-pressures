@@ -1,8 +1,8 @@
 # local-reef-pressures
 A global mapping analysis of 6 local reef potential pressure layers
 
-Results from this analysis are available as a scientific article still under revision, but accessible as a pre-print at:
-https://www.biorxiv.org/content/10.1101/2021.04.03.438313v1
+Results from this analysis are available as a scientific article:
+Andrello, M., Darling, E. S., Wenger, A., Suárez-Castro, A. F., Gelfand, S., & Ahmadia, G. N. (2022). A global map of human pressures on tropical coral reefs. Conservation Letters, Early view, e12858. https://doi.org/10.1111/conl.12858
 
 
 ## 1. List of the contents of this repository
