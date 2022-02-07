@@ -67,6 +67,11 @@ Contains all the scripts needed to reproduce the results and the figures of the 
 - draw Figure S12 (Regional comparisons of median pressure of refugia)
 
 
+`Post-treatment.R`. Code to:
+
+- change top threat from number conding (e.g. "1") to string coding ("Fishing")
+
+
 `Plot Maps.R`. Code to
 
 - draw Figure 1 (map of top pressures)
